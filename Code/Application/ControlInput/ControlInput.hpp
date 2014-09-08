@@ -2,21 +2,15 @@
 
 #include "Framework.hpp"
 
-
-
 class ControlInput : public ApplicationModule{
-	using ApplicationModule::ApplicationModule;
-
 	public:
-
-
+		ControlInput(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
 		APP_Attitude_I attitude;
+
 	protected:
-		void init(void);
 		void run(void);
 
 	private:
-
 		void handle_internal_message(void);
 		void handle_switch(float state);
 		void handle_clicker(float state);

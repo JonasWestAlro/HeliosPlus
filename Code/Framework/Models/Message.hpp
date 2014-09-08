@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Framework.hpp"
+#include "MessageTypes.hpp"
 
 
 class Message{
@@ -50,17 +51,13 @@ class Message{
 		}
 
 		void set_byte_array(uint8_t* bytearray){
-			uint8_t i;
-
-			for(i=0; i<6; i++){
+			for(uint8_t i=0; i<6; i++){
 				data[i] = bytearray[i];
 			}
 		}
 
 		void get_byte_array(uint8_t* bytearray){
-			uint8_t i;
-
-			for(i=0; i<6; i++){
+			for(uint8_t i=0; i<6; i++){
 				bytearray[i] = data[i];
 			}
 		}

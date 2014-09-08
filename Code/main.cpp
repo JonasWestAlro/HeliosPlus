@@ -24,13 +24,16 @@ uint8_t 	EEPROM::table_counter = 0;
 
 
 int main(void){
-	//Create Application modules ------------------------------------------::
-	Communication 		communication("Communication", 			configMINIMAL_STACK_SIZE * 10, 1, 1000);
-	ControlInput 		control_input("ControlInput", 			configMINIMAL_STACK_SIZE, 1, 1000);
-	FlightControl 		flight_control("FlightControl", 		configMINIMAL_STACK_SIZE, 1, 1000);
-	FlightDynamics 		flight_dynamics("FlightDynamics", 		configMINIMAL_STACK_SIZE, 1, 1000);
-	FlightNavigation 	flight_navigation("FlightNavigations", 	configMINIMAL_STACK_SIZE, 1, 1000);
-	SystemStatus 		system_status("SystemStatus", 			configMINIMAL_STACK_SIZE, 1, 1000);
+	//Create Application modules ------------------------------------------:
+	Communication 		communication("Communication", 			configMINIMAL_STACK_SIZE * 10, 	1, 1000);
+	ControlInput 		control_input("ControlInput", 			configMINIMAL_STACK_SIZE, 		1, 1000);
+	FlightControl 		flight_control("FlightControl", 		configMINIMAL_STACK_SIZE, 		1, 1000);
+	FlightDynamics 		flight_dynamics("FlightDynamics", 		configMINIMAL_STACK_SIZE, 		1, 1000);
+	FlightNavigation 	flight_navigation("FlightNavigations", 	configMINIMAL_STACK_SIZE, 		1, 1000);
+
+	SystemStatus 		system_status("SystemStatus", 			configMINIMAL_STACK_SIZE, 		1, 1000,
+									  &communication, &control_input, &flight_control, &flight_dynamics, &flight_navigation);
+
 
 	//Create Drivers:
 	MPU9150 mpu9150;
@@ -45,7 +48,7 @@ int main(void){
 
 
 	//Bind HAL Interfaces ------------------------------------------::
-	flight_dynamics.accelerometer = &mpu9150;
+	flight_dynamics.set_accelerometer(&mpu9150);
 
 
 	//Check that EEPROM table is not changed:

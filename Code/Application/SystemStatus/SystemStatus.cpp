@@ -1,12 +1,22 @@
 #include "SystemStatus.hpp"
 
-void SystemStatus::init(){
+
+SystemStatus::SystemStatus(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size,
+						   Communication* communication, ControlInput* controlinput, FlightControl* flightcontrol,
+						   FlightDynamics* flightdynamics, FlightNavigation* flightnavigation)
+: ApplicationModule(name, stackSize, priority, eeprom_size),
+  m_Communication(communication),
+  m_ControlInput(controlinput),
+  m_FlightControl(flightcontrol),
+  m_FlightDynamics(flightdynamics),
+  m_FlightNavigation(flightnavigation)
+{
+	// Initializer code goes here
 	messenger.subscribe(REQUEST_SHIFT_OF_CONTROL);
 }
 
 void SystemStatus::SystemStatus::run(void)
 {
-	init();
 	Message msg;
 
 	while(1){
@@ -28,7 +38,7 @@ void SystemStatus::handle_message(Message& msg){
 			//We'll acknowledge the shift:
 
 			messenger.send_to(msg.sender, Message(SHIFT_OF_CONTROL_ACK, (uint8_t)ACK));
-			messenger.respond(msg,  Message(SHIFT_OF_CONTROL_ACK, (uint8_t)ACK));
+			messenger.respond(msg, Message(SHIFT_OF_CONTROL_ACK, (uint8_t)ACK));
 
 			break;
 		case CALIBRATE_GYROSCOPE:

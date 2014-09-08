@@ -3,16 +3,14 @@
 #include "Framework.hpp"
 
 class FlightControl : public ApplicationModule{
-	using ApplicationModule::ApplicationModule;
-
 	public:
+		FlightControl(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
 		APP_Attitude_I attitude;
 
 	protected:
-		void init(void);
 		void run(void);
 
 	private:
-		uint8_t dummy;
+
 };
 

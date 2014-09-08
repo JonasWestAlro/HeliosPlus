@@ -2,7 +2,12 @@
 
 #include "Globals.hpp"
 
-void Communication::init(){
+
+Communication::Communication(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size)
+: ApplicationModule(name, stackSize, priority, eeprom_size)
+{
+	// Initializer code goes here
+
 
 	// m_UART.init(GENERIC_UART_TYPE_USART3_PB10_PB11, 230400);
 
@@ -16,11 +21,9 @@ void Communication::init(){
 	GPIOInitStruct.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_Init(GPIOE, &GPIOInitStruct);
 	GPIO_SetBits(GPIOE,GPIO_Pin_1);*/
-
 }
 
 void Communication::run(void){
-	init();
 	Message msg;
 	while(1)
 	{

@@ -4,19 +4,16 @@
 
 
 class FlightDynamics : public ApplicationModule{
-	using ApplicationModule::ApplicationModule;
 	public:
-
-
-		HAL_Accelerometer_I* accelerometer;
+		FlightDynamics(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
 		void set_accelerometer(HAL_Accelerometer_I* acc){accelerometer = acc;}
 
-
 	protected:
-		void init(void);
 		void run(void);
 
 	private:
+		HAL_Accelerometer_I* accelerometer;
+
 		struct EEPROM_Structure{
 			AccelerometerCalibration accelerometer_calibration;
 		};

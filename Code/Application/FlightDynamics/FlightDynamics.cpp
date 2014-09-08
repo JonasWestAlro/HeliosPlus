@@ -1,6 +1,11 @@
 #include "FlightDynamics.hpp"
 
-void FlightDynamics::init(void){
+
+FlightDynamics::FlightDynamics(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size)
+: ApplicationModule(name, stackSize, priority, eeprom_size)
+{
+	// Initializer code goes here
+
 	messenger.subscribe(CALIBRATE_GYROSCOPE);
 	messenger.subscribe(CALIBRATE_ACCELEROMETER);
 
@@ -8,7 +13,6 @@ void FlightDynamics::init(void){
 }
 
 void FlightDynamics::run(void){
-	init();
 	Message msg;
 
 	while(1){

@@ -1,8 +1,10 @@
 #include "Application/ControlInput/ControlInput.hpp"
 
 
-void ControlInput::init(void){
-
+ControlInput::ControlInput(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size)
+: ApplicationModule(name, stackSize, priority, eeprom_size)
+{
+	// Init here
 }
 
 void ControlInput::run(void)
