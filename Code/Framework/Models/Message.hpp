@@ -2,6 +2,7 @@
 
 #include "Framework.hpp"
 
+
 class Message{
 	public:
 	   /********************************************
@@ -76,11 +77,11 @@ class Message{
 	   /********************************************
 		* 			  MESSAGE DATA					*
 		********************************************/
-		Messenger* 	 sender;
-		Messenger* 	 receiver;
-		MessageType	 		 message_type;
-		uint8_t 			 data[6];
-		void*				 ptr;
+		Messenger* 	 	sender;
+		Messenger* 	 	receiver;
+		MessageType	 	message_type;
+		uint8_t 		data[6];
+		void*			ptr;
 	private:
 
 };

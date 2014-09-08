@@ -2,7 +2,6 @@
 
 #include "Framework.hpp"
 
-
 class Messenger{
 	public:
 		Messenger():

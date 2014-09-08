@@ -16,10 +16,12 @@ public:
 
 	bool save(void* data, uint32_t size){
 		//TODO-JWA: Implement this function..
+		return true;
 	}
 
 	bool load(void* data, uint32_t size){
 		//TODO-JWA: Implement this function..
+		return true;
 	}
 
 	//HAL_EEPROM_I* eeprom_driver;

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "MessageQueue.hpp"
-#include "MessageTypes.hpp"
 #include "Framework.hpp"
 
 class MessageDistribution {

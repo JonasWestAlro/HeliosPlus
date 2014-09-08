@@ -55,7 +55,7 @@ void Communication::run(void){
  *    PRIVATE FUNCTIONS          *
  ********************************/
 void Communication::handle_message(Message& msg){
-int i;
+int i = 0;
 
 	switch(msg.message_type){
 		case SHIFT_OF_CONTROL_ACK:

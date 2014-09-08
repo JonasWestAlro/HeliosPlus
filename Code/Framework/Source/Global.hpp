@@ -34,10 +34,12 @@ public:
 
 	bool save(){
 		//Use portable EEPROM driver to save..
+		return true;
 	}
 
 	bool load(){
 		//Use portable EEPROM driver to load..
+		return true;
 	}
 
 	static uint16_t get_no_globals(){

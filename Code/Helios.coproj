@@ -34,9 +34,9 @@
           <Define name="STM32F4XX"/>
           <Define name="USE_STDPERIPH_DRIVER"/>
           <Define name="__ASSEMBLY__"/>
-          <Define name="SUPPORT_CPLUSPLUS"/>
           <Define name="__FPU_USED"/>
           <Define name="SYSTEM_LIB"/>
+          <Define name="SUPPORT_CPLUSPLUS"/>
         </DefinedSymbols>
       </Compile>
       <Link useDefault="0">
@@ -49,9 +49,9 @@
         <Option name="Library" value="Use base C Library"/>
         <Option name="UserEditLinker" value="-lstdc++; "/>
         <LinkedLibraries>
-          <Libset dir="..\..\..\..\..\program files (x86)\gnu tools arm embedded\4.8 2014q2\arm-none-eabi\lib\armv7e-m\fpu\" libs="nosys"/>
-          <Libset dir="..\..\..\..\..\program files (x86)\gnu tools arm embedded\4.8 2014q2\arm-none-eabi\lib\armv7e-m\fpu\" libs="supc++"/>
-          <Libset dir="..\..\..\..\..\program files (x86)\gnu tools arm embedded\4.8 2014q2\arm-none-eabi\lib\armv7e-m\fpu\" libs="stdc++"/>
+          <Libset dir="c:\program files (x86)\gnu tools arm embedded\4.8 2014q2\arm-none-eabi\lib\armv7e-m\fpu\" libs="nosys"/>
+          <Libset dir="c:\program files (x86)\gnu tools arm embedded\4.8 2014q2\arm-none-eabi\lib\armv7e-m\fpu\" libs="stdc++"/>
+          <Libset dir="c:\program files (x86)\gnu tools arm embedded\4.8 2014q2\arm-none-eabi\lib\armv7e-m\fpu\" libs="supc++"/>
         </LinkedLibraries>
         <MemoryAreas debugInFlashNotRAM="1">
           <Memory name="IROM1" type="ReadOnly" size="0x00080000" startValue="0x08000000"/>
@@ -144,9 +144,9 @@
     <File name="Utilities/MAVLink/common/mavlink_msg_file_transfer_res.h" path="Utilities/MAVLink/common/mavlink_msg_file_transfer_res.h" type="1"/>
     <File name="Framework/HAL_Interfaces" path="" type="2"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_nav_controller_output.h" path="Utilities/MAVLink/common/mavlink_msg_nav_controller_output.h" type="1"/>
+    <File name="Framework/Source/Portable/RTOS/MessageQueue.hpp" path="Framework/Source/Portable/RTOS/MessageQueue.hpp" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_mission_request.h" path="Utilities/MAVLink/common/mavlink_msg_mission_request.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_sys_status.h" path="Utilities/MAVLink/common/mavlink_msg_sys_status.h" type="1"/>
-    <File name="Framework/Source/Portable/RTOS/MessageQueue.hpp" path="Framework/Source/Portable/RTOS/MessageQueue.hpp" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_roll_pitch_yaw_speed_thrust_setpoint.h" path="Utilities/MAVLink/common/mavlink_msg_roll_pitch_yaw_speed_thrust_setpoint.h" type="1"/>
     <File name="Framework/Source/MessageDistribution.hpp" path="Framework/Source/MessageDistribution.hpp" type="1"/>
     <File name="Framework/Source/Portable" path="" type="2"/>
@@ -157,16 +157,16 @@
     <File name="Utilities/MAVLink/common/mavlink_msg_safety_set_allowed_area.h" path="Utilities/MAVLink/common/mavlink_msg_safety_set_allowed_area.h" type="1"/>
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/RTOSHooks.h" path="Framework/Source/Portable/RTOS/FreeRTOS/RTOSHooks.h" type="1"/>
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/Include/FreeRTOS.h" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/include/FreeRTOS.h" type="1"/>
-    <File name="Utilities/MAVLink/common/mavlink_msg_request_data_stream.h" path="Utilities/MAVLink/common/mavlink_msg_request_data_stream.h" type="1"/>
     <File name="System/cmsis_lib/include/stm32f4xx_usart.h" path="cmsis_lib/include/stm32f4xx_usart.h" type="1"/>
+    <File name="Utilities/MAVLink/common/mavlink_msg_request_data_stream.h" path="Utilities/MAVLink/common/mavlink_msg_request_data_stream.h" type="1"/>
     <File name="System" path="" type="2"/>
-    <File name="Utilities/MAVLink/common/mavlink_msg_hil_controls.h" path="Utilities/MAVLink/common/mavlink_msg_hil_controls.h" type="1"/>
     <File name="Framework/Models/Message.hpp" path="Framework/Models/Message.hpp" type="1"/>
+    <File name="Utilities/MAVLink/common/mavlink_msg_hil_controls.h" path="Utilities/MAVLink/common/mavlink_msg_hil_controls.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_mission_write_partial_list.h" path="Utilities/MAVLink/common/mavlink_msg_mission_write_partial_list.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_debug.h" path="Utilities/MAVLink/common/mavlink_msg_debug.h" type="1"/>
     <File name="Application/FlightControl" path="" type="2"/>
-    <File name="Application/FlightControl/FlightControl.hpp" path="Application/FlightControl/FlightControl.hpp" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_rc_channels_scaled.h" path="Utilities/MAVLink/common/mavlink_msg_rc_channels_scaled.h" type="1"/>
+    <File name="Application/FlightControl/FlightControl.hpp" path="Application/FlightControl/FlightControl.hpp" type="1"/>
     <File name="Utilities/MAVLink/common/common.h" path="Utilities/MAVLink/common/common.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_system_time.h" path="Utilities/MAVLink/common/mavlink_msg_system_time.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_servo_output_raw.h" path="Utilities/MAVLink/common/mavlink_msg_servo_output_raw.h" type="1"/>
@@ -182,8 +182,8 @@
     <File name="Utilities/MAVLink/common" path="" type="2"/>
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/Include/task.h" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/include/task.h" type="1"/>
     <File name="Application/FlightControl/NavigationController.cpp" path="Application/FlightControl/NavigationController.cpp" type="1"/>
-    <File name="Utilities/MAVLink/common/mavlink_msg_log_request_end.h" path="Utilities/MAVLink/common/mavlink_msg_log_request_end.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_named_value_int.h" path="Utilities/MAVLink/common/mavlink_msg_named_value_int.h" type="1"/>
+    <File name="Utilities/MAVLink/common/mavlink_msg_log_request_end.h" path="Utilities/MAVLink/common/mavlink_msg_log_request_end.h" type="1"/>
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/timers.c" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/timers.c" type="1"/>
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/RTOSHooks.c" path="Framework/Source/Portable/RTOS/FreeRTOS/RTOSHooks.c" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_hil_optical_flow.h" path="Utilities/MAVLink/common/mavlink_msg_hil_optical_flow.h" type="1"/>
@@ -200,13 +200,13 @@
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/Include/timers.h" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/include/timers.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_set_gps_global_origin.h" path="Utilities/MAVLink/common/mavlink_msg_set_gps_global_origin.h" type="1"/>
     <File name="Application/Communication/CommandHandle.cpp" path="Application/Communication/CommandHandle.cpp" type="1"/>
-    <File name="Utilities/MAVLink/common/mavlink_msg_set_local_position_setpoint.h" path="Utilities/MAVLink/common/mavlink_msg_set_local_position_setpoint.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_param_value.h" path="Utilities/MAVLink/common/mavlink_msg_param_value.h" type="1"/>
+    <File name="Utilities/MAVLink/common/mavlink_msg_set_local_position_setpoint.h" path="Utilities/MAVLink/common/mavlink_msg_set_local_position_setpoint.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_change_operator_control_ack.h" path="Utilities/MAVLink/common/mavlink_msg_change_operator_control_ack.h" type="1"/>
     <File name="Application/Communication/CommandHandle.hpp" path="Application/Communication/CommandHandle.hpp" type="1"/>
+    <File name="Utilities/MAVLink/common/mavlink_msg_attitude.h" path="Utilities/MAVLink/common/mavlink_msg_attitude.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_rc_channels_override.h" path="Utilities/MAVLink/common/mavlink_msg_rc_channels_override.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_set_global_position_setpoint_int.h" path="Utilities/MAVLink/common/mavlink_msg_set_global_position_setpoint_int.h" type="1"/>
-    <File name="Utilities/MAVLink/common/mavlink_msg_attitude.h" path="Utilities/MAVLink/common/mavlink_msg_attitude.h" type="1"/>
     <File name="Utilities/MAVLink" path="" type="2"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_gps_raw_int.h" path="Utilities/MAVLink/common/mavlink_msg_gps_raw_int.h" type="1"/>
     <File name="System/syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
@@ -254,12 +254,12 @@
     <File name="Application/SystemStatus/SystemStatus.cpp" path="Application/SystemStatus/SystemStatus.cpp" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_log_request_list.h" path="Utilities/MAVLink/common/mavlink_msg_log_request_list.h" type="1"/>
     <File name="LibraryHacks.cpp" path="LibraryHacks.cpp" type="1"/>
-    <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/tasks.c" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/tasks.c" type="1"/>
     <File name="HAL/Generics/GenericUART.hpp" path="HAL/Generics/GenericUART.hpp" type="1"/>
+    <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/tasks.c" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/tasks.c" type="1"/>
     <File name="Framework/Source/Portable/RTOS/Mutex.hpp" path="Framework/Source/Portable/RTOS/Mutex.hpp" type="1"/>
     <File name="Utilities/MAVLink/checksum.h" path="Utilities/MAVLink/checksum.h" type="1"/>
-    <File name="System/cmsis_lib/source/stm32f4xx_usart.c" path="cmsis_lib/source/stm32f4xx_usart.c" type="1"/>
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/Portable/heap_3.c" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/portable/MemMang/heap_3.c" type="1"/>
+    <File name="System/cmsis_lib/source/stm32f4xx_usart.c" path="cmsis_lib/source/stm32f4xx_usart.c" type="1"/>
     <File name="Utilities" path="" type="2"/>
     <File name="System/cmsis" path="" type="2"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_local_position_setpoint.h" path="Utilities/MAVLink/common/mavlink_msg_local_position_setpoint.h" type="1"/>
@@ -267,20 +267,20 @@
     <File name="Utilities/MAVLink/common/mavlink_msg_attitude_quaternion.h" path="Utilities/MAVLink/common/mavlink_msg_attitude_quaternion.h" type="1"/>
     <File name="System/cmsis_lib/source/stm32f4xx_gpio.c" path="cmsis_lib/source/stm32f4xx_gpio.c" type="1"/>
     <File name="System/cmsis_boot/startup" path="" type="2"/>
-    <File name="System/cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
     <File name="main.cpp" path="main.cpp" type="1"/>
+    <File name="System/cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_mission_ack.h" path="Utilities/MAVLink/common/mavlink_msg_mission_ack.h" type="1"/>
     <File name="System/cmsis_lib/include" path="" type="2"/>
     <File name="Framework/Source/Portable/RTOS/RTOS.hpp" path="Framework/Source/Portable/RTOS/RTOS.hpp" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_manual_control.h" path="Utilities/MAVLink/common/mavlink_msg_manual_control.h" type="1"/>
+    <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/Include/portable.h" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/include/portable.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_mission_request_partial_list.h" path="Utilities/MAVLink/common/mavlink_msg_mission_request_partial_list.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_command_ack.h" path="Utilities/MAVLink/common/mavlink_msg_command_ack.h" type="1"/>
-    <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/Include/portable.h" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/include/portable.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_data_stream.h" path="Utilities/MAVLink/common/mavlink_msg_data_stream.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_highres_imu.h" path="Utilities/MAVLink/common/mavlink_msg_highres_imu.h" type="1"/>
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/Portable" path="" type="2"/>
-    <File name="Utilities/MAVLink/common/mavlink_msg_sim_state.h" path="Utilities/MAVLink/common/mavlink_msg_sim_state.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_scaled_pressure.h" path="Utilities/MAVLink/common/mavlink_msg_scaled_pressure.h" type="1"/>
+    <File name="Utilities/MAVLink/common/mavlink_msg_sim_state.h" path="Utilities/MAVLink/common/mavlink_msg_sim_state.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_radio_status.h" path="Utilities/MAVLink/common/mavlink_msg_radio_status.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_set_roll_pitch_yaw_speed_thrust.h" path="Utilities/MAVLink/common/mavlink_msg_set_roll_pitch_yaw_speed_thrust.h" type="1"/>
     <File name="HAL/MPU9150.hpp" path="HAL/MPU9150.hpp" type="1"/>
@@ -311,8 +311,8 @@
     <File name="Utilities/MAVLink/common/mavlink_msg_hil_rc_inputs_raw.h" path="Utilities/MAVLink/common/mavlink_msg_hil_rc_inputs_raw.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_set_quad_swarm_roll_pitch_yaw_thrust.h" path="Utilities/MAVLink/common/mavlink_msg_set_quad_swarm_roll_pitch_yaw_thrust.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_global_position_setpoint_int.h" path="Utilities/MAVLink/common/mavlink_msg_global_position_setpoint_int.h" type="1"/>
-    <File name="Utilities/MAVLink/common/mavlink_msg_change_operator_control.h" path="Utilities/MAVLink/common/mavlink_msg_change_operator_control.h" type="1"/>
     <File name="Application/FlightControl/AttitudeController.hpp" path="Application/FlightControl/AttitudeController.hpp" type="1"/>
+    <File name="Utilities/MAVLink/common/mavlink_msg_change_operator_control.h" path="Utilities/MAVLink/common/mavlink_msg_change_operator_control.h" type="1"/>
     <File name="Framework/Source/Messenger.hpp" path="Framework/Source/Messenger.hpp" type="1"/>
     <File name="Framework/Source/Utilities" path="" type="2"/>
     <File name="Framework/HAL_Interfaces/HAL_Accelerometer_I.hpp" path="Framework/HAL_Interfaces/HAL_Accelerometer_I.hpp" type="1"/>
@@ -325,8 +325,8 @@
     <File name="Utilities/MAVLink/common/mavlink_msg_param_request_list.h" path="Utilities/MAVLink/common/mavlink_msg_param_request_list.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_log_data.h" path="Utilities/MAVLink/common/mavlink_msg_log_data.h" type="1"/>
     <File name="Application/Communication/Communication.hpp" path="Application/Communication/Communication.hpp" type="1"/>
-    <File name="Framework/APP_Interfaces/APP_Attitude_I.hpp" path="Framework/APP_Interfaces/APP_Attitude_I.hpp" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_set_mode.h" path="Utilities/MAVLink/common/mavlink_msg_set_mode.h" type="1"/>
+    <File name="Framework/APP_Interfaces/APP_Attitude_I.hpp" path="Framework/APP_Interfaces/APP_Attitude_I.hpp" type="1"/>
     <File name="System/cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
     <File name="Framework/MessageTypes.hpp" path="Framework/MessageTypes.hpp" type="1"/>
     <File name="Framework/Source/Portable/RTOS/FreeRTOS/source/Include/semphr.h" path="Framework/Source/Portable/RTOS/FreeRTOS/Source/include/semphr.h" type="1"/>
