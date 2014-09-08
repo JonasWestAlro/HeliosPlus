@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench version="2.0">
+<workbenchAdvisor/>
+<window>
+<fastViewData fastViewLocation="1024">
+<orientation position="512" view="org.eclipse.debug.ui.ExpressionView"/>
+<orientation position="512" view="org.coocox.codebugger.trace.ui.traceview"/>
+<orientation position="512" view="org.eclipse.debug.ui.VariableView"/>
+</fastViewData>
+<perspectiveBar/>
+<page focus="true" label="Workspace - CooCox CoBuilder">
+<editors>
+<editorArea activeWorkbook="org.eclipse.ui.internal.EditorStack@1307c28">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="1"/>
+<part id="0"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
+<part id="9"/>
+<part id="10"/>
+<part id="11"/>
+<part id="12"/>
+<part id="13"/>
+<part id="14"/>
+<part id="15"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.internal.EditorStack@1307c28" ratio="0.4512947" ratioLeft="732" ratioRight="890" relationship="2" relative="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+</presentation>
+</folder>
+</info>
+</editorArea>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="FlightDynamics.cpp" partName="FlightDynamics.cpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/FlightDynamics/FlightDynamics.cpp" title="FlightDynamics.cpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/FlightDynamics/FlightDynamics.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Application/FlightDynamics/FlightDynamics.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="16" selectionOffset="175" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.cpp" partName="main.cpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/main.cpp" title="main.cpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/main.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/main.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="4" selectionOffset="1216" selectionTopPixel="60"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Messenger.hpp" partName="Messenger.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/Messenger.hpp" title="Messenger.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/Messenger.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Source/Messenger.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Globals.hpp" partName="Globals.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Globals.hpp" title="Globals.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Globals.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Globals.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1176" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ApplicationModule.hpp" partName="ApplicationModule.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/ApplicationModule.hpp" title="ApplicationModule.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/ApplicationModule.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Source/ApplicationModule.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="9" selectionOffset="321" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Framework.hpp" partName="Framework.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/Framework.hpp" title="Framework.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/Framework.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Source/Framework.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="67" selectionOffset="602" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="FlightDynamics.hpp" partName="FlightDynamics.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/FlightDynamics/FlightDynamics.hpp" title="FlightDynamics.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/FlightDynamics/FlightDynamics.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Application/FlightDynamics/FlightDynamics.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="510" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ControlInput.hpp" partName="ControlInput.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/ControlInput/ControlInput.hpp" title="ControlInput.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/ControlInput/ControlInput.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Application/ControlInput/ControlInput.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="85" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ControlInput.cpp" partName="ControlInput.cpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/ControlInput/ControlInput.cpp" title="ControlInput.cpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/ControlInput/ControlInput.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Application/ControlInput/ControlInput.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="5" selectionOffset="156" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="FlightControl.hpp" partName="FlightControl.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/FlightControl/FlightControl.hpp" title="FlightControl.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/FlightControl/FlightControl.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Application/FlightControl/FlightControl.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="8" selectionOffset="168" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="FlightControl.cpp" partName="FlightControl.cpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/FlightControl/FlightControl.cpp" title="FlightControl.cpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/FlightControl/FlightControl.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Application/FlightControl/FlightControl.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="8" selectionOffset="119" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="APP_Interface.hpp" partName="APP_Interface.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/APP_Interface.hpp" title="APP_Interface.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/APP_Interface.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Source/APP_Interface.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1203" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="MessageQueue.hpp" partName="MessageQueue.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/Portable/RTOS/MessageQueue.hpp" title="MessageQueue.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/Portable/RTOS/MessageQueue.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Source/Portable/RTOS/MessageQueue.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="86" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Communication.cpp" partName="Communication.cpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/Communication/Communication.cpp" title="Communication.cpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/Communication/Communication.cpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Application/Communication/Communication.cpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1091" selectionTopPixel="253"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="MessageTypes.hpp" partName="MessageTypes.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/MessageTypes.hpp" title="MessageTypes.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/MessageTypes.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/MessageTypes.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1258" selectionTopPixel="407"/>
+</editor>
+<editor focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="Communication.hpp" partName="Communication.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/Communication/Communication.hpp" title="Communication.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Application/Communication/Communication.hpp" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Application/Communication/Communication.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="659" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Global.hpp" partName="Global.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/Global.hpp" title="Global.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/Global.hpp" workbook="org.eclipse.ui.internal.EditorStack@1307c28">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Source/Global.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="793" selectionTopPixel="282"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="APP_Attitude_I.hpp" partName="APP_Attitude_I.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/APP_Interfaces/APP_Attitude_I.hpp" title="APP_Attitude_I.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/APP_Interfaces/APP_Attitude_I.hpp" workbook="org.eclipse.ui.internal.EditorStack@1307c28">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/APP_Interfaces/APP_Attitude_I.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="78" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="HAL_Interface.hpp" partName="HAL_Interface.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/HAL_Interface.hpp" title="HAL_Interface.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/HAL_Interface.hpp" workbook="org.eclipse.ui.internal.EditorStack@1307c28">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Source/HAL_Interface.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="75" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="HAL_Accelerometer_I.hpp" partName="HAL_Accelerometer_I.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/HAL_Interfaces/HAL_Accelerometer_I.hpp" title="HAL_Accelerometer_I.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/HAL_Interfaces/HAL_Accelerometer_I.hpp" workbook="org.eclipse.ui.internal.EditorStack@1307c28">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/HAL_Interfaces/HAL_Accelerometer_I.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="490" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="MPU9150.hpp" partName="MPU9150.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/HAL/MPU9150.hpp" title="MPU9150.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/HAL/MPU9150.hpp" workbook="org.eclipse.ui.internal.EditorStack@1307c28">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/HAL/MPU9150.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="478" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="EEPROM.hpp" partName="EEPROM.hpp" path="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/EEPROM.hpp" title="EEPROM.hpp" tooltip="C:/Users/Jonas/Desktop/Helios_c_plus_plus/Framework/Source/EEPROM.hpp" workbook="org.eclipse.ui.internal.EditorStack@1307c28">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Helios/Framework/Source/EEPROM.hpp"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="343" selectionTopPixel="0"/>
+</editor>
+</editors>
+<views>
+<view id="org.eclipse.debug.ui.ExpressionView" partName="Expressions">
+<viewState>
+<ExpressionKeySet ExpKeys="test_message,msg,Globals::angle_control_p,"/>
+</viewState>
+</view>
+<view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
+<expanded>
+<element path="/Helios"/>
+<element path="/Helios/Application"/>
+<element path="/Helios/Framework"/>
+<element path="/Helios/Framework/APP_Interfaces"/>
+<element path="/Helios/Framework/HAL_Interfaces"/>
+<element path="/Helios/HAL"/>
+</expanded>
+<selection>
+<element path="/Helios/LibraryHacks.cpp"/>
+</selection>
+</viewState>
+</view>
+<view id="org.coocox.codebugger.trace.ui.traceview" partName="Semihosting">
+<viewState/>
+</view>
+<view id="org.eclipse.debug.ui.DebugView" partName="Debug">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
+</view>
+<view id="org.eclipse.debug.ui.VariableView" partName="Variables">
+<viewState/>
+</view>
+</views>
+<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.coocox.builder.ui.PerspectiveCoBuilder" id="org.coocox.builder.perspective.CoBuilder" label="CooCox CoBuilder"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="org.coocox.component.ui.actionSet"/>
+<alwaysOnActionSet id="org.coocox.welcome.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="org.coocox.userspace.actionSet"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showMemoryAction"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.refactoring.menu"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.ShowDisassemblyAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showExpressionsAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showDebugAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showConsoleAction"/>
+<hide_menu_item_id id="org.eclipse.cdt.debug.internal.ui.actions.ToggleInstructionStepModeAction"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.source.menu"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showMemoryBrowserAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showVariablesAction"/>
+<hide_menu_item_id id="org.coocox.builder.ui.openProjectExplorerAction"/>
+<hide_menu_item_id id="org.coocox.codebugger.trace.actions.ShowTraceControlAction"/>
+<hide_menu_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
+<hide_menu_item_id id="org.coocox.codebugger.configuration.showRegistersAction"/>
+<hide_toolbar_item_id id="org.eclipse.cdt.debug.internal.ui.actions.ToggleInstructionStepModeAction"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<hide_toolbar_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
+<view id="org.coocox.builder.ui.views.ProjectView"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<fastViewBars/>
+<layout>
+<mainWindow>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@80c29c">
+<folder appearance="2" expanded="2">
+<page content="org.coocox.component.ui.ComponentView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="750" ratioRight="250" relationship="2" relative="org.eclipse.ui.internal.ViewStack@80c29c">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@d1841b" ratio="0.7270789" ratioLeft="682" ratioRight="256" relationship="4" relative="org.eclipse.ui.internal.ViewStack@80c29c">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info part="org.coocox.builder.ui.exampleView" ratio="0.14876899" ratioLeft="284" ratioRight="1625" relationship="2" relative="org.eclipse.ui.internal.ViewStack@80c29c"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@eedabc" ratio="0.7192308" ratioLeft="561" ratioRight="219" relationship="2" relative="org.coocox.builder.ui.exampleView">
+<folder appearance="2" expanded="2">
+<page content="org.coocox.component.ui.Help" label="LabelNotFound"/>
+<page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<page content="org.coocox.coassistant.view.CoAssistantView" label="LabelNotFound"/>
+<page content="org.coocox.builder.ui.MoreExampleView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.4486983" ratioLeft="293" ratioRight="360" relationship="4" relative="org.coocox.builder.ui.exampleView"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@168c350" ratio="0.36906585" ratioLeft="241" ratioRight="412" relationship="4" relative="org.eclipse.ui.internal.ViewStack@80c29c">
+<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">
+<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.coocox.codebugger.configuration.ui.Perspective" id="org.coocox.codebugger.configuration.perspective" label="CoDebugger"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<alwaysOnActionSet id="org.coocox.component.ui.actionSet"/>
+<alwaysOnActionSet id="org.coocox.welcome.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
+<alwaysOnActionSet id="org.eclipse.debug.ui.debugActionSet"/>
+<hide_menu_item_id id="org.coocox.builder.ui.newFolder"/>
+<hide_menu_item_id id="org.coocox.welcome.ui.action.repository"/>
+<hide_menu_item_id id="org.eclipse.ui.file.save"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.refactoring.menu"/>
+<hide_menu_item_id id="org.eclipse.ui.file.saveAll"/>
+<hide_menu_item_id id="org.coocox.builder.ui.rebuild"/>
+<hide_menu_item_id id="org.coocox.builder.ui.openFile"/>
+<hide_menu_item_id id="org.eclipse.ui.file.saveAs"/>
+<hide_menu_item_id id="org.coocox.builder.rcp.projectMenu"/>
+<hide_menu_item_id id="org.coocox.builder.rcp.flashMenu"/>
+<hide_menu_item_id id="org.coocox.builder.ui.debug"/>
+<hide_menu_item_id id="org.coocox.builder.ui.showHelpViewAction"/>
+<hide_menu_item_id id="org.coocox.builder.ui.newFile"/>
+<hide_menu_item_id id="org.coocox.builder.ui.actions.ConfigurationAction"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.source.menu"/>
+<hide_menu_item_id id="org.coocox.builder.ui.build"/>
+<hide_menu_item_id id="org.coocox.welcome.ui.action.welcome"/>
+<hide_menu_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.actions.TargetManageAction"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.newProject"/>
+<hide_toolbar_item_id id="org.coocox.welcome.ui.action.repository"/>
+<hide_toolbar_item_id id="org.eclipse.ui.file.save"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.rebuild"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideFlashEraseAction"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.debug"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.newFile"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.actions.ConfigurationAction"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
+<hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
+<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.debug.ui.DebugView"/>
+<view id="org.coocox.codebugger.trace.ui.traceview"/>
+<view id="org.eclipse.debug.ui.VariableView"/>
+<view id="org.eclipse.debug.ui.ExpressionView"/>
+<view id="org.coocox.builder.ui.views.ProjectView"/>
+<fastViewBars/>
+<viewLayoutRec closeable="false" id="org.eclipse.debug.ui.DebugView"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.ui.internal.ViewStack@1375575">&#x0A;<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1375575">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@14e0df1" ratio="0.6992561" ratioLeft="658" ratioRight="283" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1375575">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
+<page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<part id="1"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@f453b6" ratio="0.5" ratioLeft="956" ratioRight="956" relationship="2" relative="org.eclipse.ui.internal.ViewStack@14e0df1">&#x0A;<folder activePageID="org.eclipse.debug.ui.ExpressionView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
+<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
+<page content="org.eclipse.debug.ui.ExpressionView" label="Expressions"/>
+<page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
+<page content="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+</presentation>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@a3d651" ratio="0.75" ratioLeft="1434" ratioRight="478" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1375575">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
+<page content="org.coocox.coassistant.view.CoAssistantView_debug" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.29986054" ratioLeft="430" ratioRight="1004" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1375575"/>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory>
+<editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/main.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Framework/Source/APP_Interface.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Framework/APP_Interfaces/APP_Attitude_I.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Application/Communication/Communication.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Framework/Source/Global.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Framework/Globals.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Framework/Source/HAL_Interface.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Framework/HAL_Interfaces/HAL_Accelerometer_I.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/HAL/MPU9150.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Application/FlightDynamics/FlightDynamics.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Framework/Source/EEPROM.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Application/FlightDynamics/FlightDynamics.cpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/Application/Communication/Communication.hpp"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Helios/LibraryHacks.cpp"/>
+</editors>
+<item historyLabel="Global.hpp" index="4">
+<position info="not_deleted" x="161" y="0"/>
+</item>
+<item historyLabel="Globals.hpp" index="5">
+<position info="not_deleted" x="1179" y="0"/>
+</item>
+<item historyLabel="Global.hpp" index="4">
+<position info="not_deleted" x="508" y="4"/>
+</item>
+<item historyLabel="Communication.cpp" index="3">
+<position info="not_deleted" x="1091" y="0"/>
+</item>
+<item historyLabel="Global.hpp" index="4">
+<position info="not_deleted" x="508" y="4"/>
+</item>
+<item historyLabel="HAL_Interface.hpp" index="6">
+<position info="not_deleted" x="75" y="0"/>
+</item>
+<item historyLabel="HAL_Accelerometer_I.hpp" index="7">
+<position info="not_deleted" x="490" y="0"/>
+</item>
+<item historyLabel="MPU9150.hpp" index="8">
+<position info="not_deleted" x="115" y="0"/>
+</item>
+<item historyLabel="Communication.cpp" index="3">
+<position info="not_deleted" x="1091" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="969" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="1699" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="964" y="0"/>
+</item>
+<item historyLabel="FlightDynamics.hpp" index="9">
+<position info="not_deleted" x="52" y="14"/>
+</item>
+<item historyLabel="FlightDynamics.hpp" index="9">
+<position info="not_deleted" x="202" y="17"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="1224" y="0"/>
+</item>
+<item historyLabel="Globals.hpp" index="5">
+<position info="not_deleted" x="1179" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="1352" y="0"/>
+</item>
+<item historyLabel="APP_Attitude_I.hpp" index="2">
+<position info="not_deleted" x="78" y="0"/>
+</item>
+<item historyLabel="APP_Interface.hpp" index="1">
+<position info="not_deleted" x="1203" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="1577" y="0"/>
+</item>
+<item historyLabel="Globals.hpp" index="5">
+<position info="not_deleted" x="68" y="0"/>
+</item>
+<item historyLabel="Global.hpp" index="4">
+<position info="not_deleted" x="806" y="21"/>
+</item>
+<item historyLabel="Globals.hpp" index="5">
+<position info="not_deleted" x="70" y="5"/>
+</item>
+<item historyLabel="Global.hpp" index="4">
+<position info="not_deleted" x="793" y="12"/>
+</item>
+<item historyLabel="Globals.hpp" index="5">
+<position info="not_deleted" x="1176" y="0"/>
+</item>
+<item historyLabel="Global.hpp" index="4">
+<position info="not_deleted" x="793" y="12"/>
+</item>
+<item historyLabel="EEPROM.hpp" index="10">
+<position info="not_deleted" x="596" y="2"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="1177" y="0"/>
+</item>
+<item historyLabel="Globals.hpp" index="5">
+<position info="not_deleted" x="1176" y="0"/>
+</item>
+<item historyLabel="EEPROM.hpp" index="10">
+<position info="not_deleted" x="355" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="587" y="0"/>
+</item>
+<item historyLabel="EEPROM.hpp" index="10">
+<position info="not_deleted" x="448" y="24"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="479" y="106"/>
+</item>
+<item historyLabel="EEPROM.hpp" index="10">
+<position info="not_deleted" x="607" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="548" y="0"/>
+</item>
+<item historyLabel="EEPROM.hpp" index="10">
+<position info="not_deleted" x="506" y="0"/>
+</item>
+<item historyLabel="main.cpp" index="0">
+<position info="not_deleted" x="1216" y="4"/>
+</item>
+<item historyLabel="EEPROM.hpp" index="10">
+<position info="not_deleted" x="252" y="0"/>
+</item>
+<item historyLabel="FlightDynamics.cpp" index="11">
+<position info="not_deleted" x="222" y="0"/>
+</item>
+<item historyLabel="FlightDynamics.hpp" index="9">
+<position info="not_deleted" x="394" y="25"/>
+</item>
+<item historyLabel="EEPROM.hpp" index="10">
+<position info="not_deleted" x="334" y="4"/>
+</item>
+<item historyLabel="FlightDynamics.hpp" index="9">
+<position info="not_deleted" x="347" y="16"/>
+</item>
+<item historyLabel="EEPROM.hpp" index="10">
+<position info="not_deleted" x="343" y="0"/>
+</item>
+<item historyLabel="FlightDynamics.hpp" index="9">
+<position info="not_deleted" x="510" y="0"/>
+</item>
+<item historyLabel="Communication.hpp" index="12">
+<position info="not_deleted" x="335" y="1"/>
+</item>
+<item historyLabel="MPU9150.hpp" index="8">
+<position info="not_deleted" x="478" y="0"/>
+</item>
+<item historyLabel="Communication.hpp" index="12">
+<position info="not_deleted" x="693" y="0"/>
+</item>
+<item historyLabel="LibraryHacks.cpp" index="13">
+<position info="not_deleted" x="98" y="205"/>
+</item>
+<item historyLabel="Communication.hpp" index="12">
+<position info="not_deleted" x="659" y="0"/>
+</item>
+<item active="true" historyLabel="MPU9150.hpp" index="8">
+<position info="not_deleted" x="478" y="0"/>
+</item>
+</navigationHistory>
+<input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+</window>
+<mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="LibraryHacks.cpp" tooltip="Helios/LibraryHacks.cpp">
+<persistable path="/Helios/LibraryHacks.cpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Communication.hpp" tooltip="Helios/Application/Communication/Communication.hpp">
+<persistable path="/Helios/Application/Communication/Communication.hpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="EEPROM.hpp" tooltip="Helios/Framework/Source/EEPROM.hpp">
+<persistable path="/Helios/Framework/Source/EEPROM.hpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="MPU9150.hpp" tooltip="Helios/HAL/MPU9150.hpp">
+<persistable path="/Helios/HAL/MPU9150.hpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="HAL_Accelerometer_I.hpp" tooltip="Helios/Framework/HAL_Interfaces/HAL_Accelerometer_I.hpp">
+<persistable path="/Helios/Framework/HAL_Interfaces/HAL_Accelerometer_I.hpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="HAL_Interface.hpp" tooltip="Helios/Framework/Source/HAL_Interface.hpp">
+<persistable path="/Helios/Framework/Source/HAL_Interface.hpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="MessageTypes.hpp" tooltip="Helios/Framework/MessageTypes.hpp">
+<persistable path="/Helios/Framework/MessageTypes.hpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Message.hpp" tooltip="Helios/Framework/Models/Message.hpp">
+<persistable path="/Helios/Framework/Models/Message.hpp"/>
+</file>
+<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Messenger.hpp" tooltip="C:\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Messenger.hpp">
+<persistable path="C:\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Messenger.hpp" project="Helios"/>
+</file>
+<file factoryID="org.eclipse.cdt.ui.ExternalEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ApplicationModule.hpp" tooltip="C:\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\ApplicationModule.hpp">
+<persistable path="C:\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\ApplicationModule.hpp" project="Helios"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Communication.cpp" tooltip="Helios/Application/Communication/Communication.cpp">
+<persistable path="/Helios/Application/Communication/Communication.cpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="MessageQueue.hpp" tooltip="Helios/Framework/Source/Portable/RTOS/MessageQueue.hpp">
+<persistable path="/Helios/Framework/Source/Portable/RTOS/MessageQueue.hpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="APP_Interface.hpp" tooltip="Helios/Framework/Source/APP_Interface.hpp">
+<persistable path="/Helios/Framework/Source/APP_Interface.hpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="FlightControl.cpp" tooltip="Helios/Application/FlightControl/FlightControl.cpp">
+<persistable path="/Helios/Application/FlightControl/FlightControl.cpp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="FlightControl.hpp" tooltip="Helios/Application/FlightControl/FlightControl.hpp">
+<persistable path="/Helios/Application/FlightControl/FlightControl.hpp"/>
+</file>
+</mruList>
+</workbench>

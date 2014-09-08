@@ -1,0 +1,700 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dependencies>
+   <includePath signature="/I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\HAL_Interfaces /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\types /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus /I..\..\..\..\..\Users\Jonas\Desktop /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\HAL /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\ControlInput /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\HAL\Generics /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\SystemStatus /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightControl /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Models /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\APP_Interfaces /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightNavigation /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_boot /I..\..\..\..\..\Users\Jonas /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\Communication /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities\MAVLink /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightDynamics /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities\MAVLink\common">
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\RTOSHooks.h" lastModified="1482ced8d75">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Application\ControlInput\ControlInput.cpp" lastModified="1484eada279">
+         <include file="..\..\..\Application\ControlInput\ControlInput.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\RTOSHooks.c" lastModified="1482ce9abd0">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\RTOSHooks.h"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.hpp" lastModified="1484e83212b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cm4.h" lastModified="1484216175f">
+         <include file="..\..\..\cmsis\core_cmInstr.h"/>
+         <include file="..\..\..\cmsis\core_cmFunc.h"/>
+         <include file="..\..\..\cmsis\core_cm4_simd.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1484216435e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\Communication\CommandHandle.cpp" lastModified="148426dac0e">
+      </source>
+      <source file="..\..\..\Application\Communication\Communication.hpp" lastModified="14850e2349e">
+         <include file="..\..\..\HAL\Generics\GenericUART.hpp"/>
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\FlightControl.cpp" lastModified="14853cbc06d">
+         <include file="..\..\..\Application\FlightControl\FlightControl.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\event_groups.h" lastModified="1459410c1df">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\timers.h"/>
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.cpp" lastModified="14844cee287">
+         <include file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="148421715d6">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\HAL\Generics\GenericI2C.hpp" lastModified="14837dc8765">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h" lastModified="1482caaaf14">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\projdefs.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\FreeRTOSConfig.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\portable.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\MemMang\heap_3.c" lastModified="1459410cd97">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.cpp" lastModified="1484ea690b9">
+         <include file="..\..\..\Application\SystemStatus\SystemStatus.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Global.hpp" lastModified="1484f5edaa1">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\MessageTypes.hpp" lastModified="1484e8537ab">
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\portable.h" lastModified="14594118d4d">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\mpu_wrappers.h"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\AttitudeController.cpp" lastModified="148426e1906">
+      </source>
+      <source file="..\..\..\Application\Communication\Communication.cpp" lastModified="1485413be94">
+         <include file="..\..\..\Application\Communication\Communication.hpp"/>
+         <include file="..\..\..\Framework\Globals.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\stm32f4xx.h" lastModified="148421616ea">
+         <include file="..\..\..\cmsis\core_cm4.h"/>
+         <include file="..\..\..\cmsis_boot\system_stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_boot\stm32f4xx_conf.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="148421685ac">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\projdefs.h" lastModified="1459410c23d">
+      </source>
+      <source file="..\..\..\Framework\Source\EEPROM.hpp" lastModified="1484f51c73c">
+         <include file="..\..\..\Framework\Source\Global.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\mpu_wrappers.h" lastModified="1459410c21e">
+      </source>
+      <source file="..\..\..\HAL\Generics\GenericI2C.cpp" lastModified="14837d7360d">
+         <include file="..\..\..\HAL\Generics\GenericI2C.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\semphr.h" lastModified="1459410c2ba">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\queue.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\port.c" lastModified="1481dbc99c0">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h" lastModified="14842165220">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\event_groups.c" lastModified="1459410c579">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\timers.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\event_groups.h"/>
+      </source>
+      <source file="..\..\..\timerTest.h" lastModified="1482cb0c0a9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h" lastModified="148421627e9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.h" lastModified="1484216133b">
+      </source>
+      <source file="..\..\..\timerTest.c" lastModified="1482d439412">
+         <include file="..\..\..\timerTest.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cmInstr.h" lastModified="148421617ad">
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1484290e92f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\APP_Interfaces\APP_Attitude_I.hpp" lastModified="1484534b375">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\HAL_Interfaces\HAL_Accelerometer_I.hpp" lastModified="14850e5694e">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\timers.h" lastModified="1459410c2f8">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+      </source>
+      <source file="..\..\..\HAL\Generics\GenericUART.hpp" lastModified="148448c3ba2">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\ApplicationModule.hpp" lastModified="14853e6c845">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\syscalls\syscalls.c" lastModified="1484229727c">
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\MessageQueue.hpp" lastModified="1485044ef91">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\queue.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Framework.hpp" lastModified="1484f725ac6">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\RTOS.hpp"/>
+         <include file="..\..\..\Framework\Source\EEPROM.hpp"/>
+         <include file="..\..\..\Framework\MessageTypes.hpp"/>
+         <include file="..\..\..\Framework\Models\Message.hpp"/>
+         <include file="..\..\..\Framework\Source\MessageDistribution.hpp"/>
+         <include file="..\..\..\Framework\Source\Messenger.hpp"/>
+         <include file="..\..\..\Framework\Source\ApplicationModule.hpp"/>
+         <include file="..\..\..\Framework\Source\APP_Interface.hpp"/>
+         <include file="..\..\..\Framework\Source\Global.hpp"/>
+         <include file="..\..\..\Framework\Source\HAL_Interface.hpp"/>
+         <include file="..\..\..\Framework\APP_Interfaces\APP_Attitude_I.hpp"/>
+         <include file="..\..\..\Framework\HAL_Interfaces\HAL_Accelerometer_I.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cmFunc.h" lastModified="14842161794">
+      </source>
+      <source file="..\..\..\Framework\Globals.hpp" lastModified="1485413be64">
+         <include file="..\..\..\Framework\Source\Global.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\APP_Interface.hpp" lastModified="148540d6f47">
+      </source>
+      <source file="..\..\..\Framework\Source\Messenger.hpp" lastModified="1484eaa87a4">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h" lastModified="1484216859f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\timers.c" lastModified="1459410d1ed">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\queue.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\timers.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\stm32f4xx_conf.h" lastModified="14842165d4a">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\Task.hpp" lastModified="14849e47996">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+      </source>
+      <source file="..\..\..\HAL\Generics\GenericUART.cpp" lastModified="148448cdfa9">
+         <include file="..\..\..\HAL\Generics\GenericUART.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="1484216524e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="148421627fd">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\FlightDynamics\FlightDynamics.hpp" lastModified="1485406b189">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\HAL\MPU9150.hpp" lastModified="14850e4ccd5">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="1484216354a">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cm4_simd.h" lastModified="1484216177b">
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\FreeRTOSConfig.h" lastModified="1482cba8cc6">
+         <include file="..\..\..\timerTest.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h" lastModified="1484216434d">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\queue.h" lastModified="1459410c28b">
+      </source>
+      <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1481db79356">
+      </source>
+      <source file="..\..\..\Application\FlightControl\NavigationController.cpp" lastModified="148426e331b">
+      </source>
+      <source file="..\..\..\Framework\Source\MessageDistribution.hpp" lastModified="1484f752d03">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\MessageQueue.hpp"/>
+         <include file="..\..\..\Framework\MessageTypes.hpp"/>
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\list.c" lastModified="1459410c6f0">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\list.h"/>
+      </source>
+      <source file="..\..\..\Application\FlightDynamics\FlightDynamics.cpp" lastModified="1484f6237ba">
+         <include file="..\..\..\Application\FlightDynamics\FlightDynamics.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\list.h" lastModified="1459410c20e">
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h" lastModified="14842163538">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\queue.c" lastModified="1459410d519">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\queue.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\croutine.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\croutine.h" lastModified="1459410c1b0">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\list.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\tasks.c" lastModified="1459410dd76">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\timers.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\StackMacros.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h" lastModified="148421715bb">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\croutine.c" lastModified="1459410c172">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\croutine.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h" lastModified="1459410d21c">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\list.h"/>
+      </source>
+      <source file="..\..\..\Application\ControlInput\ControlInput.hpp" lastModified="1484eae208b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\RTOS.hpp" lastModified="14849e4cf8e">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\Mutex.hpp"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\MessageQueue.hpp"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\Task.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Models\Message.hpp" lastModified="1484e9a7302">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\StackMacros.h" lastModified="1459410c2ba">
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h" lastModified="1459410c51b">
+      </source>
+      <source file="..\..\..\Application\FlightControl\FlightControl.hpp" lastModified="14844b74fed">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp" lastModified="14844ceaa40">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\Mutex.hpp" lastModified="148454efe61">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\semphr.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\HAL_Interface.hpp" lastModified="14850df9946">
+      </source>
+   </includePath>
+   <includePath signature="/I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\types /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus /I..\..\..\..\..\Users\Jonas\Desktop /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\HAL /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\ControlInput /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\HAL\Generics /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\SystemStatus /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightControl /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Models /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\APP_Interfaces /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightNavigation /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_boot /I..\..\..\..\..\Users\Jonas /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\Communication /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities\MAVLink /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightDynamics /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities\MAVLink\common">
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\RTOSHooks.h" lastModified="1482ced8d75">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Application\ControlInput\ControlInput.cpp" lastModified="1484eada279">
+         <include file="..\..\..\Application\ControlInput\ControlInput.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\RTOSHooks.c" lastModified="1482ce9abd0">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\RTOSHooks.h"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.hpp" lastModified="1484e83212b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1484216435e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\Communication\CommandHandle.cpp" lastModified="148426dac0e">
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\event_groups.h" lastModified="1459410c1df">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\timers.h"/>
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.cpp" lastModified="14844cee287">
+         <include file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="148421715d6">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\HAL\Generics\GenericI2C.hpp" lastModified="14837dc8765">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.cpp" lastModified="1484ea690b9">
+         <include file="..\..\..\Application\SystemStatus\SystemStatus.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\AttitudeController.cpp" lastModified="148426e1906">
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="148421685ac">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\projdefs.h" lastModified="1459410c23d">
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\mpu_wrappers.h" lastModified="1459410c21e">
+      </source>
+      <source file="..\..\..\HAL\Generics\GenericI2C.cpp" lastModified="14837d7360d">
+         <include file="..\..\..\HAL\Generics\GenericI2C.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\port.c" lastModified="1481dbc99c0">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h" lastModified="14842165220">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\timerTest.h" lastModified="1482cb0c0a9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h" lastModified="148421627e9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.h" lastModified="1484216133b">
+      </source>
+      <source file="..\..\..\timerTest.c" lastModified="1482d439412">
+         <include file="..\..\..\timerTest.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1484290e92f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\timers.h" lastModified="1459410c2f8">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+      </source>
+      <source file="..\..\..\HAL\Generics\GenericUART.hpp" lastModified="148448c3ba2">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h" lastModified="1484216859f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="1484216524e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="148421627fd">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="1484216354a">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h" lastModified="1484216434d">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\queue.h" lastModified="1459410c28b">
+      </source>
+      <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1481db79356">
+      </source>
+      <source file="..\..\..\Application\FlightControl\NavigationController.cpp" lastModified="148426e331b">
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\list.h" lastModified="1459410c20e">
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h" lastModified="14842163538">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\croutine.h" lastModified="1459410c1b0">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\list.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h" lastModified="148421715bb">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\croutine.c" lastModified="1459410c172">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h"/>
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\croutine.h"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\task.h" lastModified="1459410d21c">
+         <include file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\list.h"/>
+      </source>
+      <source file="..\..\..\Application\ControlInput\ControlInput.hpp" lastModified="1484eae208b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\include\StackMacros.h" lastModified="1459410c2ba">
+      </source>
+      <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h" lastModified="1459410c51b">
+      </source>
+      <source file="..\..\..\Application\FlightControl\FlightControl.hpp" lastModified="14844b74fed">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp" lastModified="14844ceaa40">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+   </includePath>
+   <includePath signature="/I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\types /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus /I..\..\..\..\..\Users\Jonas\Desktop /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\ControlInput /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\SystemStatus /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Models /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable\GCC\ARM_CM4F /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\APP_Interfaces /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightNavigation /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\MAVLink\common /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_boot /I..\..\..\..\..\Users\Jonas /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable\GCC /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\Communication /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\MAVLink /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightDynamics">
+      <source file="..\..\..\Application\ControlInput\ControlInput.cpp" lastModified="1484eada279">
+         <include file="..\..\..\Application\ControlInput\ControlInput.hpp"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.hpp" lastModified="1484e83212b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1484216435e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\Communication\CommandHandle.cpp" lastModified="148426dac0e">
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.cpp" lastModified="14844cee287">
+         <include file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="148421715d6">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.cpp" lastModified="1484ea690b9">
+         <include file="..\..\..\Application\SystemStatus\SystemStatus.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\AttitudeController.cpp" lastModified="148426e1906">
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="148421685ac">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h" lastModified="14842165220">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\timerTest.h" lastModified="1482cb0c0a9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h" lastModified="148421627e9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.h" lastModified="1484216133b">
+      </source>
+      <source file="..\..\..\timerTest.c" lastModified="1482d439412">
+         <include file="..\..\..\timerTest.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1484290e92f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h" lastModified="1484216859f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="1484216524e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="148421627fd">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="1484216354a">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h" lastModified="1484216434d">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1481db79356">
+      </source>
+      <source file="..\..\..\Application\FlightControl\NavigationController.cpp" lastModified="148426e331b">
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h" lastModified="14842163538">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h" lastModified="148421715bb">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Application\ControlInput\ControlInput.hpp" lastModified="1484eae208b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\FlightControl.hpp" lastModified="14844b74fed">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp" lastModified="14844ceaa40">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+   </includePath>
+   <includePath signature="/I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\types /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus /I..\..\..\..\..\Users\Jonas\Desktop /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\ControlInput /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\SystemStatus /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightControl /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Models /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable\GCC\ARM_CM4F /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\APP_Interfaces /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightNavigation /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\MAVLink\common /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_boot /I..\..\..\..\..\Users\Jonas /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable\GCC /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\Communication /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\MAVLink /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightDynamics">
+      <source file="..\..\..\Application\ControlInput\ControlInput.cpp" lastModified="1484eada279">
+         <include file="..\..\..\Application\ControlInput\ControlInput.hpp"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.hpp" lastModified="1484e83212b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1484216435e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\Communication\CommandHandle.cpp" lastModified="148426dac0e">
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.cpp" lastModified="14844cee287">
+         <include file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="148421715d6">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.cpp" lastModified="1484ea690b9">
+         <include file="..\..\..\Application\SystemStatus\SystemStatus.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\AttitudeController.cpp" lastModified="148426e1906">
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="148421685ac">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h" lastModified="14842165220">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\timerTest.h" lastModified="1482cb0c0a9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h" lastModified="148421627e9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.h" lastModified="1484216133b">
+      </source>
+      <source file="..\..\..\timerTest.c" lastModified="1482d439412">
+         <include file="..\..\..\timerTest.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1484290e92f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h" lastModified="1484216859f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="1484216524e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="148421627fd">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="1484216354a">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h" lastModified="1484216434d">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1481db79356">
+      </source>
+      <source file="..\..\..\Application\FlightControl\NavigationController.cpp" lastModified="148426e331b">
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h" lastModified="14842163538">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h" lastModified="148421715bb">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Application\ControlInput\ControlInput.hpp" lastModified="1484eae208b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\FlightControl.hpp" lastModified="14844b74fed">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp" lastModified="14844ceaa40">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+   </includePath>
+   <includePath signature="/I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Types /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus /I..\..\..\..\..\Users\Jonas\Desktop /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\ControlInput /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\SystemStatus /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable\GCC\ARM_CM4F /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\APP_Interfaces /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightNavigation /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\MAVLink\common /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_boot /I..\..\..\..\..\Users\Jonas /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable\GCC /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\Communication /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\MAVLink /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\include /I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightDynamics">
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.hpp" lastModified="1484e83212b">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1484216435e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\Communication\CommandHandle.cpp" lastModified="148426dac0e">
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.cpp" lastModified="14844cee287">
+         <include file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="148421715d6">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\Application\SystemStatus\SystemStatus.cpp" lastModified="1484ea690b9">
+         <include file="..\..\..\Application\SystemStatus\SystemStatus.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\AttitudeController.cpp" lastModified="148426e1906">
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="148421685ac">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h" lastModified="14842165220">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\timerTest.h" lastModified="1482cb0c0a9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h" lastModified="148421627e9">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.h" lastModified="1484216133b">
+      </source>
+      <source file="..\..\..\timerTest.c" lastModified="1482d439412">
+         <include file="..\..\..\timerTest.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1484290e92f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h" lastModified="1484216859f">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="1484216524e">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_dma.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="148421627fd">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="1484216354a">
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_i2c.h" lastModified="1484216434d">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1481db79356">
+      </source>
+      <source file="..\..\..\Application\FlightControl\NavigationController.cpp" lastModified="148426e331b">
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h" lastModified="14842163538">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h" lastModified="148421715bb">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+      </source>
+      <source file="..\..\..\Application\FlightControl\FlightControl.hpp" lastModified="14844b74fed">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+      <source file="..\..\..\Application\FlightNavigation\FlightNavigation.hpp" lastModified="14844ceaa40">
+         <include file="..\..\..\Framework\Source\Framework.hpp"/>
+      </source>
+   </includePath>
+</dependencies>

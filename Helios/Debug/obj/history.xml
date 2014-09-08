@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wall -ffunction-sections -g -O0 -std=gnu++11 -c -DSTM32F407VE -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -DSUPPORT_CPLUSPLUS -D__FPU_USED -DSYSTEM_LIB -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\HAL_Interfaces -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\types -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus -I..\..\..\..\..\Users\Jonas\Desktop -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\HAL -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\ControlInput -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\HAL\Generics -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\SystemStatus -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightControl -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Models -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\APP_Interfaces -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightNavigation -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\include -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib\include -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_boot -I..\..\..\..\..\Users\Jonas -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\Communication -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities\MAVLink -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightDynamics -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Utilities\MAVLink\common">
+      <target file="SystemStatus.o" lastModified="1485413dc56">
+         <source file="..\..\..\Application\SystemStatus\SystemStatus.cpp" lastModified="1484ea690b9"/>
+      </target>
+      <target file="syscalls.o" lastModified="14850e0f05a">
+         <source file="..\..\..\syscalls\syscalls.c" lastModified="148422962dc"/>
+      </target>
+      <target file="GenericUART.o" lastModified="14850e0f5b5">
+         <source file="..\..\..\HAL\Generics\GenericUART.cpp" lastModified="148448cdbc1"/>
+      </target>
+      <target file="GenericI2C.o" lastModified="14850e0e5af">
+         <source file="..\..\..\HAL\Generics\GenericI2C.cpp" lastModified="14837d7360d"/>
+      </target>
+      <target file="queue.o" lastModified="14850e0f258">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\queue.c" lastModified="1459410cd49"/>
+      </target>
+      <target file="FlightControl.o" lastModified="1485413c90c">
+         <source file="..\..\..\Application\FlightControl\FlightControl.cpp" lastModified="14853cbc06d"/>
+      </target>
+      <target file="stm32f4xx_tim.o" lastModified="14850e0f8fd">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="148421715d6"/>
+      </target>
+      <target file="timers.o" lastModified="14850e0ea17">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\timers.c" lastModified="1459410ce05"/>
+      </target>
+      <target file="tasks.o" lastModified="14850e0ee26">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\tasks.c" lastModified="1459410cdd6"/>
+      </target>
+      <target file="stm32f4xx_gpio.o" lastModified="14850e0eec3">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="1484216354a"/>
+      </target>
+      <target file="AttitudeController.o" lastModified="14850e0e949">
+         <source file="..\..\..\Application\FlightControl\AttitudeController.cpp" lastModified="148426e1906"/>
+      </target>
+      <target file="LibraryHacks.o" lastModified="148541dbb16">
+         <source file="..\..\..\LibraryHacks.cpp" lastModified="148541da898"/>
+      </target>
+      <target file="timerTest.o" lastModified="14850e0f169">
+         <source file="..\..\..\timerTest.c" lastModified="1482d439412"/>
+      </target>
+      <target file="stm32f4xx_usart.o" lastModified="14850e0e73f">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="148421685ac"/>
+      </target>
+      <target file="event_groups.o" lastModified="14850e0f66c">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\event_groups.c" lastModified="1459410c191"/>
+      </target>
+      <target file="stm32f4xx_rcc.o" lastModified="14850e0e8f5">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="148421627fd"/>
+      </target>
+      <target file="Communication.o" lastModified="1485413cfdb">
+         <source file="..\..\..\Application\Communication\Communication.cpp" lastModified="1485413be94"/>
+      </target>
+      <target file="croutine.o" lastModified="14850e0f4a5">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\croutine.c" lastModified="1459410c172"/>
+      </target>
+      <target file="NavigationController.o" lastModified="14850e0f7c2">
+         <source file="..\..\..\Application\FlightControl\NavigationController.cpp" lastModified="148426e331b"/>
+      </target>
+      <target file="FlightNavigation.o" lastModified="1485413d939">
+         <source file="..\..\..\Application\FlightNavigation\FlightNavigation.cpp" lastModified="14844cee287"/>
+      </target>
+      <target file="list.o" lastModified="14850e0ef61">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\list.c" lastModified="1459410c308"/>
+      </target>
+      <target file="port.o" lastModified="14850e0f2de">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\GCC\ARM_CM4F\port.c" lastModified="1481dbc99c0"/>
+      </target>
+      <target file="startup_stm32f4xx.o" lastModified="14850e0e7b8">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="1481db79356"/>
+      </target>
+      <target file="CommandHandle.o" lastModified="14850e0ecb0">
+         <source file="..\..\..\Application\Communication\CommandHandle.cpp" lastModified="148426dac0e"/>
+      </target>
+      <target file="stm32f4xx_dma.o" lastModified="14850e0f0f6">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="1484216524e"/>
+      </target>
+      <target file="heap_3.o" lastModified="14850e0f97c">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\Source\portable\MemMang\heap_3.c" lastModified="1459410c9af"/>
+      </target>
+      <target file="ControlInput.o" lastModified="1485413d297">
+         <source file="..\..\..\Application\ControlInput\ControlInput.cpp" lastModified="1484eada279"/>
+      </target>
+      <target file="stm32f4xx_i2c.o" lastModified="14850e0f77b">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_i2c.c" lastModified="1484216435e"/>
+      </target>
+      <target file="main.o" lastModified="148541dba27">
+         <source file="..\..\..\main.cpp" lastModified="148541420b9"/>
+      </target>
+      <target file="system_stm32f4xx.o" lastModified="14850e0efdc">
+         <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1484290e92f"/>
+      </target>
+      <target file="RTOSHooks.o" lastModified="14850e0e64d">
+         <source file="..\..\..\Framework\Source\Portable\RTOS\FreeRTOS\RTOSHooks.c" lastModified="1482ce9abd0"/>
+      </target>
+      <target file="FlightDynamics.o" lastModified="1485413cbcb">
+         <source file="..\..\..\Application\FlightDynamics\FlightDynamics.cpp" lastModified="1484f6237ba"/>
+      </target>
+   </processor>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wall -ffunction-sections -g -O0 -std=gnu++11 -c -DSTM32F407VE -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -DSUPPORT_CPLUSPLUS -D__FPU_USED -DSYSTEM_LIB -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\types -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus -I..\..\..\..\..\Users\Jonas\Desktop -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\ControlInput -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\SystemStatus -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Models -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable\GCC\ARM_CM4F -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\APP_Interfaces -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightNavigation -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\MAVLink\common -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_lib\include -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\cmsis_boot -I..\..\..\..\..\Users\Jonas -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\portable\GCC -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework\Source\Portable\RTOS -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\Communication -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Framework -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\MAVLink -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\FreeRTOS\Source\include -I..\..\..\..\..\Users\Jonas\Desktop\Helios_c_plus_plus\Application\FlightDynamics">
+      <target file="WMutex.o" lastModified="1484ead1537">
+         <source file="..\..\..\FreeRTOSWrapper\WMutex.cpp" lastModified="1482c758df0"/>
+      </target>
+      <target file="WSemaphore.o" lastModified="1484ead0601">
+         <source file="..\..\..\FreeRTOSWrapper\WSemaphore.cpp" lastModified="1482c74170b"/>
+      </target>
+      <target file="WTask.o" lastModified="1484ead026f">
+         <source file="..\..\..\FreeRTOSWrapper\WTask.cpp" lastModified="148286410d8"/>
+      </target>
+      <target file="MessageDistributionSystem.o" lastModified="1484ead08af">
+         <source file="..\..\..\FreeRTOSWrapper\MessageDistributionSystem.cpp" lastModified="148284719aa"/>
+      </target>
+      <target file="WQueue.o" lastModified="1484ead0374">
+         <source file="..\..\..\FreeRTOSWrapper\WQueue.cpp" lastModified="1482c74dbb1"/>
+      </target>
+   </processor>
+</history>
