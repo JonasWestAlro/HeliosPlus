@@ -37,4 +37,6 @@ class ApplicationModule;
 
 //Drivers:
 #include "GenericPulseMeasurement.hpp"
+#include "PPMReceiver.hpp"
+
 
