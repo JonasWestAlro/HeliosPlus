@@ -53,9 +53,7 @@ typedef enum{
  * 		Message  =  MAV_SYS_STATUS_SENSOR (flags)
  *		uint8Msg =  Status 0:NOTOK 1:OK 2:Calibrating
  */
-	#define	STATUS_NOTOK 		0
-	#define STATUS_OK 			1
-	#define STATUS_CALIBRATING	2
+
 
 /* MOTOR_REPORT_STATUS
  * 		(This is used by motors handling modules to report their status)
