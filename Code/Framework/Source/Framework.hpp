@@ -34,6 +34,9 @@ class ApplicationModule;
 #include "APP_Attitude_I.hpp"
 #include "HAL_Accelerometer_I.hpp"
 #include "HAL_ControlReceiver_I.hpp"
+#include "HAL_Motor_I.hpp"
+#include "HAL_HeliosLED_I.hpp"
+#include "HAL_Communication_I.hpp"
 
 //Drivers:
 #include "GenericPulseMeasurement.hpp"

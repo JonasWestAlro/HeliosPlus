@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Framework.hpp"
 #include "stm32f4xx.h"
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
@@ -23,21 +24,21 @@ typedef enum{
 	GENERIC_UART_TYPE_USART6_PG9_PG14		/*!< TX PG9,  RX PG14 */
 }GENERIC_UART_TYPE;
 
-class GenericUART {
+class GenericUART : public HAL_Communication_I {
 	public:
 		GenericUART();
 		GenericUART(GENERIC_UART_TYPE USART, uint32_t BaudRate);
 
-		uint16_t dataAvailable(void);
-		bool receive(uint8_t* data);
-		bool send(uint8_t* data, uint16_t size);
-		bool sendInteger(uint32_t number);
-		bool sendFloat(float number);
-		bool transmit(void);
-		bool isBusy(void);
+		virtual uint16_t data_available(void);
+		virtual bool  	 receive(uint8_t*);
+		virtual bool  	 send(uint8_t);
+		virtual uint16_t put(uint8_t*, uint16_t);
+		virtual uint16_t transmit(void);
 
+		bool send_number(uint32_t);
+		bool send_number(float);
 	private:
-		bool put(uint8_t data);
+		bool isBusy(void);
 
 		USART_TypeDef* m_USART;
 		DMA_Stream_TypeDef* m_DMA_RX_Stream;

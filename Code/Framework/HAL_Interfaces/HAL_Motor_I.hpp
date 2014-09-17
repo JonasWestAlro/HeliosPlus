@@ -16,5 +16,5 @@ typedef enum{
 
 class HAL_Motor_I : public HAL_Interface {
 	public:
-	virtual void (*SetMotorSpeed)(MOTOR, uint16_t) = 0;
+	virtual void set_motor_speed(MOTOR, uint16_t) = 0;
 };

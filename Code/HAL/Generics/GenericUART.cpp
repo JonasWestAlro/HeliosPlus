@@ -334,10 +334,29 @@ GenericUART::GenericUART(GENERIC_UART_TYPE UART, uint32_t BaudRate)
   * @param[in]  uart 	The uart device to use
   * @return		The number of bytes available
   */
-uint16_t GenericUART::dataAvailable(void)
+uint16_t GenericUART::data_available(void)
 {
 	uint16_t temp = DMA_GetCurrDataCounter(m_DMA_RX_Stream);
 	return RXBUFFERSIZE - temp - m_NextRXByteToApplication;
+}
+
+
+/** @brief  	Send multiple bytes of data to the TX buffer.
+  * 			Call #GenUART_Transmit to transmit data
+  * @param[in]  uart 	The uart device to use
+  * @param[in]  data 	Pointer to the data
+  * @param[in]  size 	Number of bytes to send
+  * @retval 	0		Failure
+  * @retval		1		Success
+  */
+uint16_t GenericUART::put(uint8_t* data, uint16_t size)
+{
+   uint16_t i;
+	for(i=0; i<size; i++){
+		if(!this->send(data[i])) return false;
+	}
+	return true;
+
 }
 
 /** @brief  	Send one byte of data to the TX buffer.
@@ -347,8 +366,7 @@ uint16_t GenericUART::dataAvailable(void)
   * @retval 	0		Failure
   * @retval		1		Success
   */
-bool GenericUART::put(uint8_t data)
-{
+bool GenericUART::send(uint8_t data){
 	if(m_ActiveTransmitBuffer == 1){
 		if(m_TransmitBufferCounter >= RXBUFFERSIZE-1) return false;
 		m_TransmitBuffer_1[m_TransmitBufferCounter++] = data;
@@ -360,40 +378,24 @@ bool GenericUART::put(uint8_t data)
 	return true;
 }
 
-/** @brief  	Send multiple bytes of data to the TX buffer.
-  * 			Call #GenUART_Transmit to transmit data
-  * @param[in]  uart 	The uart device to use
-  * @param[in]  data 	Pointer to the data
-  * @param[in]  size 	Number of bytes to send
-  * @retval 	0		Failure
-  * @retval		1		Success
-  */
-bool GenericUART::send(uint8_t* data, uint16_t size){
-    uint16_t i;
-    for(i=0; i<size; i++){
-    	if(!this->put(data[i])) return false;
-    }
-    return true;
-}
-
-bool GenericUART::sendInteger(uint32_t number){
+bool GenericUART::send_number(uint32_t number){
     uint8_t i = 0;
 	char data[10] = {0};
     uint8_t len = snprintf(data, 10, "%d", (int)number);
 
     for(i=0; i<len; i++){
-    	if(!this->put(data[i])) return false;
+    	if(!this->send(data[i])) return false;
     }
     return true;
 }
 
-bool GenericUART::sendFloat(float number){
+bool GenericUART::send_number(float number){
     uint8_t i = 0;
 	char data[10] = {0};
     uint8_t len = snprintf(data, 10, "%f", number);
 
     for(i=0; i<len; i++){
-    	if(!this->put(data[i])) return false;
+    	if(!this->send(data[i])) return false;
     }
     return true;
 }
@@ -403,7 +405,7 @@ bool GenericUART::sendFloat(float number){
   * @retval 	0		Failure
   * @retval		1		Success
   */
-bool GenericUART::transmit(void)
+uint16_t GenericUART::transmit(void)
 {
 	//Check if there are anything in the buffer:
 	if(m_TransmitBufferCounter > 0){
@@ -438,11 +440,12 @@ bool GenericUART::transmit(void)
 	return false;
 }
 
+
 /** @brief  	Read one byte of data from the UART
   * @param[in]  data 	Pointer where data should be read to
   */
 bool GenericUART::receive(uint8_t* data){
-	if(this->dataAvailable()){
+	if(this->data_available()){
 		//Get the next byte for the application:
 		*data = m_ReceiveBuffer[m_NextRXByteToApplication];
 		//Increment counter:

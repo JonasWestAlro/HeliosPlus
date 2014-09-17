@@ -13,7 +13,7 @@ class Communication : public ApplicationModule {
 		void run(void);
 
 	private:
-		GenericUART m_UART;
+		//GenericUART m_UART;
 
 		void handle_message(Message& msg);
 

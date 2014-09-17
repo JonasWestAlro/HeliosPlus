@@ -5,7 +5,7 @@
 typedef enum{
 	LED_ON,
 	LED_OFF
-}LED_state;
+}LED_STATE;
 
 typedef enum{
 	STATUS_LED_RED,   //red if armed - green if not - yellow if calibrating
@@ -14,10 +14,10 @@ typedef enum{
 	DEBUG_YELLOW,
 	DEBUG_BLUE1,
 	DEBUG_BLUE2
-}HeliosLED;
+}HELIOS_LED;
 
 class HAL_HeliosLED_I : public HAL_Interface {
 	public:
-	virtual void set_LED(HeliosLED_t, LED_state_t) = 0;
-	virtual LED_state_t get_LED(HeliosLED_t) = 0;
+	virtual void set_LED(HELIOS_LED, LED_STATE) = 0;
+	virtual LED_STATE get_LED(HELIOS_LED) = 0;
 };
