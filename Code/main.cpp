@@ -28,7 +28,8 @@ int main(void){
 	BMP085 bmp085;
 	float temperature;
 	while(1){
-		temperature = bmp085.getAltitude();
+		if(bmp085.dataAvailable())
+			temperature = bmp085.getAltitude();
 		Time.delay_ms(150);
 	}
 
