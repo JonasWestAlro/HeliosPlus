@@ -26,7 +26,8 @@ BMP085::BMP085(void)
 
 	this->readCalibrationData();
 
-	m_I2C.restart(400000);
+	m_I2C.set_clock_speed(400000);
+	m_I2C.restart();
 }
 
 BMP085::~BMP085(void)

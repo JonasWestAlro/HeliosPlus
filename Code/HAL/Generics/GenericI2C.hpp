@@ -19,20 +19,20 @@ class GenericI2C {
 	public:
 		GenericI2C(GENERIC_I2C_TYPE I2C, uint32_t ClockSpeed);
 
-		virtual bool read_register8(uint8_t address, uint8_t registerAddress, uint8_t n, uint8_t* data);
-		virtual bool read_register16(uint8_t address, uint16_t registerAddress, uint8_t n, uint8_t* data);
-		virtual bool write_register8(uint8_t address, uint8_t registerAddress, uint8_t n, uint8_t* data);
-		virtual bool write_register16(uint8_t address, uint16_t registerAddress, uint8_t n, uint8_t* data);
+		bool read_register8(uint8_t address, uint8_t registerAddress, uint8_t n, uint8_t* data);
+		bool read_register16(uint8_t address, uint16_t registerAddress, uint8_t n, uint8_t* data);
+		bool write_register8(uint8_t address, uint8_t registerAddress, uint8_t n, uint8_t* data);
+		bool write_register16(uint8_t address, uint16_t registerAddress, uint8_t n, uint8_t* data);
 
-		virtual void restart(void);
-		virtual void restart(uint32_t clock);
+		void restart(void);
+		void set_clock_speed(uint32_t ClockSpeed);
 
 	private:
-		virtual void setup(void);
-		virtual bool start(uint8_t address, uint8_t direction);
-		virtual bool write(uint8_t data);
-		virtual bool read_ack(uint8_t* data);
-		virtual bool read_nack(uint8_t* data);
+		void setup(void);
+		bool start(uint8_t address, uint8_t direction);
+		bool write(uint8_t data);
+		bool readAck(uint8_t* data);
+		bool readNack(uint8_t* data);
 
 		I2C_TypeDef* m_I2C;
 		GENERIC_I2C_TYPE m_Type;

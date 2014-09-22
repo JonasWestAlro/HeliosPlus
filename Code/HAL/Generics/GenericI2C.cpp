@@ -22,11 +22,11 @@ bool GenericI2C::read_register8(uint8_t address, uint8_t registerAddress, uint8_
 	uint8_t i;
 	for(i=0; i<n-1; i++){
 		//Read one byte and request another byte
-		if (!this->read_ack(&(data[i]))) return false;
+		if (!this->readAck(&(data[i]))) return false;
 	}
 
 	//Read one byte and don't request another byte, stop transmission
-	if (!this->read_nack(&(data[n-1]))) return false;
+	if (!this->readNack(&(data[n-1]))) return false;
 
 	I2C_GenerateSTOP(m_I2C, ENABLE);
 
@@ -50,11 +50,11 @@ bool GenericI2C::read_register16(uint8_t address, uint16_t registerAddress, uint
 	uint8_t i;
 	for(i=0; i<n-1; i++){
 		//Read one byte and request another byte
-		if (!this->read_ack(&(data[i]))) return false;
+		if (!this->readAck(&(data[i]))) return false;
 	}
 
 	//Read one byte and don't request another byte, stop transmission
-	if (!this->read_nack(&(data[n-1]))) return false;
+	if (!this->readNack(&(data[n-1]))) return false;
 
 	I2C_GenerateSTOP(m_I2C, ENABLE);
 
@@ -111,12 +111,9 @@ void GenericI2C::restart(void)
 	this->setup();
 }
 
-void GenericI2C::restart(uint32_t clock)
+void GenericI2C::set_clock_speed(uint32_t ClockSpeed)
 {
-	I2C_GenerateSTOP(m_I2C, ENABLE);
-	I2C_DeInit(m_I2C);
-	m_ClockSpeed = clock;
-	this->setup();
+	m_ClockSpeed = ClockSpeed;
 }
 
 void GenericI2C::setup(void)
@@ -208,25 +205,24 @@ void GenericI2C::setup(void)
 	switch (m_Type) {
 		case GENERIC_I2C_TYPE_I2C1_PB6_PB7:
 		case GENERIC_I2C_TYPE_I2C1_PB8_PB9:
-		    I2C_Init(I2C1, &I2C_InitStruct);
-		    I2C_Cmd(I2C1, ENABLE);
+			m_I2C = I2C1;
 			break;
 
 		case GENERIC_I2C_TYPE_I2C2_PF1_PF0:
 		case GENERIC_I2C_TYPE_I2C2_PH4_PH5:
-		    I2C_Init(I2C2, &I2C_InitStruct);
-		    I2C_Cmd(I2C2, ENABLE);
+			m_I2C = I2C2;
 			break;
 
 		case GENERIC_I2C_TYPE_I2C3_PH7_PH8:
 		case GENERIC_I2C_TYPE_I2C3_PA8_PC9:
-		    I2C_Init(I2C3, &I2C_InitStruct);
-		    I2C_Cmd(I2C3, ENABLE);
+			m_I2C = I2C3;
 			break;
 
 		default:
 			break;
 	}
+    I2C_Init(m_I2C, &I2C_InitStruct);
+    I2C_Cmd(m_I2C, ENABLE);
 }
 
 bool GenericI2C::start(uint8_t address, uint8_t direction)
@@ -275,7 +271,7 @@ bool GenericI2C::write(uint8_t data)
 	return true;
 }
 
-bool GenericI2C::read_ack(uint8_t* data)
+bool GenericI2C::readAck(uint8_t* data)
 {
 	// Enable acknowledge of recieved data
 	I2C_AcknowledgeConfig(m_I2C, ENABLE);
@@ -290,7 +286,7 @@ bool GenericI2C::read_ack(uint8_t* data)
 	return true;
 }
 
-bool GenericI2C::read_nack(uint8_t* data)
+bool GenericI2C::readNack(uint8_t* data)
 {
 	// disabe acknowledge of received data
 	// nack also generates stop condition after last byte received

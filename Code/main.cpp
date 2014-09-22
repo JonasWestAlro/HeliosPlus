@@ -25,13 +25,6 @@ uint8_t 	EEPROM::table_counter = 0;
 
 int main(void){
 
-	BMP085 bmp085;
-	float temperature;
-	while(1){
-		temperature = bmp085.getAltitude();
-		Time.delay_ms(150);
-	}
-
 	MPU9150 mpu9150;
 
 	float x = 0, y = 0, z = 0;
@@ -41,12 +34,14 @@ int main(void){
 		Time.delay_ms(20);
 	}
 
-
-
-
-
-
-
+	BMP085 bmp085;
+		float temperature;
+		while(1){
+			if(bmp085.dataAvailable()){
+				temperature = bmp085.getAltitude();
+			}
+			Time.delay_ms(150);
+		}
 
 
 	//Create Application modules ------------------------------------------:
