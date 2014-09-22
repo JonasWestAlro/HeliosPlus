@@ -8,7 +8,7 @@ GenericI2C::GenericI2C(GENERIC_I2C_TYPE I2C, uint32_t ClockSpeed)
 	this->setup();
 }
 
-bool GenericI2C::read8Register(uint8_t address, uint8_t registerAddress, uint8_t n, uint8_t* data)
+bool GenericI2C::read_register8(uint8_t address, uint8_t registerAddress, uint8_t n, uint8_t* data)
 {
 	//Start a transmission in Master transmitter mode
 	if (!this->start(address<<1, I2C_Direction_Transmitter)) return false;
@@ -22,18 +22,18 @@ bool GenericI2C::read8Register(uint8_t address, uint8_t registerAddress, uint8_t
 	uint8_t i;
 	for(i=0; i<n-1; i++){
 		//Read one byte and request another byte
-		if (!this->readAck(&(data[i]))) return false;
+		if (!this->read_ack(&(data[i]))) return false;
 	}
 
 	//Read one byte and don't request another byte, stop transmission
-	if (!this->readNack(&(data[n-1]))) return false;
+	if (!this->read_nack(&(data[n-1]))) return false;
 
 	I2C_GenerateSTOP(m_I2C, ENABLE);
 
 	return true;
 }
 
-bool GenericI2C::read16Register(uint8_t address, uint16_t registerAddress, uint8_t n, uint8_t* data)
+bool GenericI2C::read_register16(uint8_t address, uint16_t registerAddress, uint8_t n, uint8_t* data)
 {
 	//Start a transmission in Master transmitter mode
 	if (!this->start(address<<1, I2C_Direction_Transmitter)) return false;
@@ -50,18 +50,18 @@ bool GenericI2C::read16Register(uint8_t address, uint16_t registerAddress, uint8
 	uint8_t i;
 	for(i=0; i<n-1; i++){
 		//Read one byte and request another byte
-		if (!this->readAck(&(data[i]))) return false;
+		if (!this->read_ack(&(data[i]))) return false;
 	}
 
 	//Read one byte and don't request another byte, stop transmission
-	if (!this->readNack(&(data[n-1]))) return false;
+	if (!this->read_nack(&(data[n-1]))) return false;
 
 	I2C_GenerateSTOP(m_I2C, ENABLE);
 
 	return true;
 }
 
-bool GenericI2C::write8Register(uint8_t address, uint8_t registerAddress, uint8_t n, uint8_t* data)
+bool GenericI2C::write_register8(uint8_t address, uint8_t registerAddress, uint8_t n, uint8_t* data)
 {
 	//Start a transmission in Master transmitter mode
 	if (!this->start(address<<1, I2C_Direction_Transmitter)) return false;
@@ -81,7 +81,7 @@ bool GenericI2C::write8Register(uint8_t address, uint8_t registerAddress, uint8_
 	return 1;
 }
 
-bool GenericI2C::write16Register(uint8_t address, uint16_t registerAddress, uint8_t n, uint8_t* data)
+bool GenericI2C::write_register16(uint8_t address, uint16_t registerAddress, uint8_t n, uint8_t* data)
 {
 	//Start a transmission in Master transmitter mode
 	if (!this->start(address<<1, I2C_Direction_Transmitter)) return false;
@@ -111,6 +111,13 @@ void GenericI2C::restart(void)
 	this->setup();
 }
 
+void GenericI2C::restart(uint32_t clock)
+{
+	I2C_GenerateSTOP(m_I2C, ENABLE);
+	I2C_DeInit(m_I2C);
+	m_ClockSpeed = clock;
+	this->setup();
+}
 
 void GenericI2C::setup(void)
 {
@@ -268,7 +275,7 @@ bool GenericI2C::write(uint8_t data)
 	return true;
 }
 
-bool GenericI2C::readAck(uint8_t* data)
+bool GenericI2C::read_ack(uint8_t* data)
 {
 	// Enable acknowledge of recieved data
 	I2C_AcknowledgeConfig(m_I2C, ENABLE);
@@ -283,7 +290,7 @@ bool GenericI2C::readAck(uint8_t* data)
 	return true;
 }
 
-bool GenericI2C::readNack(uint8_t* data)
+bool GenericI2C::read_nack(uint8_t* data)
 {
 	// disabe acknowledge of received data
 	// nack also generates stop condition after last byte received

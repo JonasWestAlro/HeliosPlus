@@ -37,6 +37,8 @@ class ApplicationModule;
 #include "HAL_Motor_I.hpp"
 #include "HAL_HeliosLED_I.hpp"
 #include "HAL_Communication_I.hpp"
+#include "HAL_Multiplexer_I.hpp"
+#include "HAL_Altitude_I.hpp"
 
 //Drivers:
 #include "GenericPulseMeasurement.hpp"

@@ -3,9 +3,9 @@
 #include "Framework.hpp"
 
 struct AccelerometerCalibration{
-	float OffsetX;
-	float OffsetY;
-	float OffsetZ;
+	float offset_x;
+	float offset_y;
+	float offset_z;
 };
 
 class HAL_Accelerometer_I : public HAL_Interface {
