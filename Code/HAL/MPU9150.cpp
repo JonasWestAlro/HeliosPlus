@@ -1,7 +1,7 @@
 #pragma once
 #include "MPU9150.hpp"
 
-MPU9150::MPU9150(): i2c(GENERIC_I2C_TYPE_I2C1_PB6_PB7, 100000){
+MPU9150::MPU9150(): i2c(SensorI2C::get_instance()){
 
 	uint8_t data;
 	//i2c.read_register8(MPU9150_ADDRESS, MPU9150_RA_WHO_AM_I, 1, &data);

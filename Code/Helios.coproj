@@ -204,6 +204,7 @@
     <File name="Utilities/MAVLink/common/mavlink_msg_gps_status.h" path="Utilities/MAVLink/common/mavlink_msg_gps_status.h" type="1"/>
     <File name="Framework/Source/Framework.hpp" path="Framework/Source/Framework.hpp" type="1"/>
     <File name="HAL/MB1040.hpp" path="HAL/MB1040.hpp" type="1"/>
+    <File name="HAL/24LC64.hpp" path="HAL/24LC64.hpp" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_manual_setpoint.h" path="Utilities/MAVLink/common/mavlink_msg_manual_setpoint.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_setpoint_8dof.h" path="Utilities/MAVLink/common/mavlink_msg_setpoint_8dof.h" type="1"/>
     <File name="Framework/HAL_Interfaces/HAL_Magnetometer_I.hpp" path="Framework/HAL_Interfaces/HAL_Magnetometer_I.hpp" type="1"/>
@@ -319,6 +320,7 @@
     <File name="Utilities/MAVLink/common/mavlink_msg_log_erase.h" path="Utilities/MAVLink/common/mavlink_msg_log_erase.h" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_global_vision_position_estimate.h" path="Utilities/MAVLink/common/mavlink_msg_global_vision_position_estimate.h" type="1"/>
     <File name="System/cmsis_lib/source/stm32f4xx_rcc.c" path="cmsis_lib/source/stm32f4xx_rcc.c" type="1"/>
+    <File name="HAL/EEPROM_I2C.hpp" path="HAL/EEPROM_I2C.hpp" type="1"/>
     <File name="Application/FlightNavigation/FlightNavigation.hpp" path="Application/FlightNavigation/FlightNavigation.hpp" type="1"/>
     <File name="Utilities/MAVLink/common/mavlink_msg_setpoint_6dof.h" path="Utilities/MAVLink/common/mavlink_msg_setpoint_6dof.h" type="1"/>
     <File name="timerTest.h" path="timerTest.h" type="1"/>

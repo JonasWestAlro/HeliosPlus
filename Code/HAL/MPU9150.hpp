@@ -471,8 +471,8 @@ class MPU9150 : public HAL_Accelerometer_I, public HAL_Gyroscope_I{
 		virtual void    get_gyro_calibration(GyroscopeCalibration&);
 
 	private:
-	    //SensorI2C& i2c;
-	    GenericI2C i2c;
+	    SensorI2C& i2c;
+	    //GenericI2C i2c;
 	    float last_acc_values[3] = {0};
 	    uint32_t acc_timestamp = 0;
 	    AccelerometerCalibration acc_calibration = {0,0,0};
