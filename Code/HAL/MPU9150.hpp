@@ -456,258 +456,32 @@
 class MPU9150 : public HAL_Accelerometer_I{
 
 	public:
-		MPU9150(): i2c(SensorI2C::get_instance()){
+		MPU9150();
 
-
-			uint8_t data;
-			i2c.read_register8(MPU9150_ADDRESS, MPU9150_RA_WHO_AM_I, 1, &data);
-
-			while(1){
-				if(setup() == 0){
-					break;
-				}
-			}
-
-			//_i2c.I2C_ClockSpeed = 400000;
-			//MPU9150_Restart();
-		}
-
-	    virtual bool is_alive(){
-	    	return true;
-	    };
-	    virtual bool is_error(){
-	    	return false;
-	    };
-	    virtual int16_t get_data(float& x, float& y, float& z){
-	    	uint8_t buffer[6];
-			int16_t x_temp = 0;
-			int16_t y_temp = 0;
-			int16_t z_temp = 0;
-
-			//If it is > 1ms since we downloaded data last time, then do it again.
-			//else just return the last downloaded values.
-			if(Time.get_time_since_us(acc_timestamp) > 1000){
-				if(!i2c.read_register8(MPU9150_ADDRESS, MPU9150_RA_ACCEL_XOUT_H, 6, buffer))
-					return 0;
-
-				x_temp = (buffer[0]<<8) | buffer[1];
-				y_temp = (buffer[2]<<8) | buffer[3];
-				z_temp = (buffer[4]<<8) | buffer[5];
-
-				last_acc_values[0] = ((float)x_temp) * ACCRESOLUTION - acc_calibration.offset_x;
-				last_acc_values[1] = ((float)y_temp) * ACCRESOLUTION - acc_calibration.offset_y;
-				last_acc_values[2] = ((float)z_temp) * ACCRESOLUTION - acc_calibration.offset_z;
-
-				acc_timestamp = Time.get_timestamp();
-			}
-
-			x = last_acc_values[0];
-			y = last_acc_values[1];
-			z = last_acc_values[2];
-
-			return 1;
-	    }
-
-	    virtual void    restart(){
-	    	i2c.restart();
-	    }
-
-	    virtual void    set_calibration(AccelerometerCalibration& new_calibration){
-	    	acc_calibration = new_calibration;
-	    }
-
-	    virtual void    get_calibration(AccelerometerCalibration& return_calibration){
-	    	return_calibration = acc_calibration;
-	    }
+	    virtual bool 	is_alive();
+	    virtual bool 	is_error();
+	    virtual int16_t get_data(float& x, float& y, float& z);
+	    virtual void    restart();
+	    virtual void    set_calibration(AccelerometerCalibration& new_calibration);
+	    virtual void    get_calibration(AccelerometerCalibration& return_calibration);
 
 	private:
-	    SensorI2C& i2c;
+	    //SensorI2C& i2c;
+	    GenericI2C i2c;
 	    float last_acc_values[3] = {0};
 	    uint32_t acc_timestamp = 0;
 	    AccelerometerCalibration acc_calibration = {0,0,0};
 
-	    bool setup(){
-	    	uint8_t data[6];
+	    bool setup();
+	    int8_t set_gyro_fsr(uint16_t fsr);
+	    int8_t set_accel_fsr(uint8_t fsr);
+	    int8_t set_sample_rate(uint16_t rate);
+	    int8_t set_sensors(uint8_t sensors);
 
-			// Reset device
-			data[0] = 1<<MPU9150_PWR1_DEVICE_RESET_BIT;
-			if(!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_PWR_MGMT_1, 1, data))
-				return -1;
+	    int8_t set_lpf(uint8_t lpf);
 
-			Time.delay_ms(100);
-
-			// Power up device (this should happen no matter what, but just to be sure)
-			data[0] = 0;
-			if(!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_PWR_MGMT_1, 1, data))
-				return -1;
-
-			// Set Gyroscope FSR to 2000 degree per second
-			//if(MPU9150_SetGyroFSR(2000))
-			//	return -1;
-
-			// Set Accel FSR to 8g
-			if(set_accel_fsr(8))
-				return -1;
-
-			// Set digital lowpass filter
-			//if(MPU9150_SetLPF(42))
-			//	return -1;
-
-			// Set gyro/acc sampling rate to 1000 (no divider)
-			if(set_sample_rate(1000))
-				return -1;
-
-			// Disable interrupt
-			data[0] = 0;
-			if(!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_INT_ENABLE, 1, data))
-				return -1;
-
-			// Setup Compass
-			//if(MPU9150_SetupCompass())
-			//	return -1;
-
-			//if(MPU9150_SetCompassSampleRate(100))
-			//	return -1;
-
-			// Enable sensors
-			if(set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS))
-				return -1;
-
-			return 0;
-	    }
-
-	    int8_t set_gyro_fsr(uint16_t fsr){
-	    	uint8_t data;
-
-			switch (fsr) {
-				case 250:
-					data = MPU9150_GYRO_FS_250 << 3;
-					break;
-				case 500:
-					data = MPU9150_GYRO_FS_500 << 3;
-					break;
-				case 1000:
-					data = MPU9150_GYRO_FS_1000 << 3;
-					break;
-				case 2000:
-					data = MPU9150_GYRO_FS_2000 << 3;
-					break;
-				default:
-					return -1;
-			}
-
-			if(!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_GYRO_CONFIG, 1, &data))
-				return -1;
-
-			return 0;
-	    }
-
-	    int8_t set_accel_fsr(uint8_t fsr)
-	    {
-	        uint8_t data;
-
-	        switch (fsr) {
-	    		case 2:
-	    			data = MPU9150_ACCEL_FS_2 << 3;
-	    			break;
-	    		case 4:
-	    			data = MPU9150_ACCEL_FS_4 << 3;
-	    			break;
-	    		case 8:
-	    			data = MPU9150_ACCEL_FS_8 << 3;
-	    			break;
-	    		case 16:
-	    			data = MPU9150_ACCEL_FS_16 << 3;
-	    			break;
-	    		default:
-	    			return -1;
-	        }
-
-	        if(!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_ACCEL_CONFIG, 1, &data))
-	        	return -1;
-
-	        return 0;
-	    }
-
-	    int8_t set_sample_rate(uint16_t rate)
-	    {
-	    	if (rate < 4) rate = 4;
-	    	else if (rate > 1000) rate = 1000;
-
-	    	uint8_t data = 1000 / rate - 1;
-	    	if(!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_SMPLRT_DIV, 1, &data))
-	    		return -1;
-
-	    	//if(rate > 100) MPU9150_SetCompassSampleRate(100);
-	    	//else MPU9150_SetCompassSampleRate(rate);
-
-	    	// Automatically set LPF to 1/2 sampling rate.
-	    	//MPU9150_SetLPF(rate/2);
-	    	return 0;
-
-	    }
-
-	    int8_t set_sensors(uint8_t sensors)
-	    {
-	        unsigned char data;
-	        unsigned char user_ctrl;
-
-	        if (sensors & INV_XYZ_GYRO)
-	            data = 1; // CLK_PLL
-	        else if (sensors)
-	            data = 0;
-	        else
-	            data = BIT_SLEEP;
-
-	        Time.delay_ms(100);
-	        if (!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_PWR_MGMT_1, 1, &data)) {
-	            return -1;
-	        }
-
-	        data = 0;
-	        if (!(sensors & INV_X_GYRO))
-	            data |= BIT_STBY_XG;
-	        if (!(sensors & INV_Y_GYRO))
-	            data |= BIT_STBY_YG;
-	        if (!(sensors & INV_Z_GYRO))
-	            data |= BIT_STBY_ZG;
-	        if (!(sensors & INV_XYZ_ACCEL))
-	            data |= BIT_STBY_XYZA;
-
-	        Time.delay_ms(100);
-	        if(!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_PWR_MGMT_2, 1, &data))
-	            return -1;
-
-	        if (sensors && (sensors != INV_XYZ_ACCEL))
-	            // Latched interrupts only used in LP accel mode.
-	        	if(!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_INT_PIN_CFG, 1, 0))
-	        		return -1;
-
-
-	        if (!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_USER_CTRL, 1, &user_ctrl))
-	            return -1;
-	        // Handle AKM power management.
-	        if (sensors & INV_XYZ_COMPASS) {
-	            data = AKM_SINGLE_MEASUREMENT;
-	            user_ctrl |= BIT_AUX_IF_EN;
-	        } else {
-	            data = AKM_POWER_DOWN;
-	            user_ctrl &= ~BIT_AUX_IF_EN;
-	        }
-	        user_ctrl &= ~BIT_DMP_EN;
-
-
-	        Time.delay_ms(100);
-	        if (!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_I2C_SLV1_DO, 1, &data))
-	            return -1;
-
-	        // Enable/disable I2C master mode.
-	        Time.delay_ms(100);
-	        if (!i2c.write_register8(MPU9150_ADDRESS, MPU9150_RA_USER_CTRL, 1, &user_ctrl))
-	            return -1;
-
-	        Time.delay_ms(50);
-	        return 0;
-	    }
+	    int8_t set_compass_sample_rate(uint16_t rate);
+	    int8_t setup_compass(void);
+	    int8_t set_bypass(uint8_t bypass_on);
 
 };
