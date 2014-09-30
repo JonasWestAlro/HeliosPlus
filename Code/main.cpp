@@ -11,7 +11,7 @@
 
 #include "MPU9150.hpp"
 #include "BMP085.hpp"
-//#include "HeliosLED.hpp"
+#include "HeliosLED.hpp"
 
 //TODO-JWA: These definitely shouln't be defined here!
 template<>
@@ -27,13 +27,22 @@ uint8_t 	EEPROM::table_counter = 0;
 int main(void){
 
 	MPU9150 mpu9150;
-	//HeliosLED leds;
+	HeliosLED leds;
 
 	float x = 0, y = 0, z = 0;
+	float gx = 0, gy = 0, gz = 0, gy_last = 0;
 
 	while(1){
-		//leds.set_LED(DEBUG_BLUE1, LED_ON);
-		mpu9150.get_data(x,y,z);
+		mpu9150.get_acc_data(x,y,z);
+		mpu9150.get_gyro_data(gx,gy,gz);
+
+		if(gy_last == gy)
+			leds.set_LED(DEBUG_BLUE1, LED_ON);
+		else
+			leds.set_LED(DEBUG_BLUE1, LED_OFF);
+
+
+		gy_last = gy;
 		Time.delay_ms(20);
 	}
 

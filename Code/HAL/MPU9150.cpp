@@ -9,6 +9,8 @@ MPU9150::MPU9150(): i2c(GENERIC_I2C_TYPE_I2C1_PB6_PB7, 100000){
 	while(1){
 		if(setup() == 0){
 			break;
+		}else{
+			i2c.restart();
 		}
 	}
 
@@ -22,7 +24,26 @@ bool MPU9150::is_alive(){
 bool MPU9150::is_error(){
 	return false;
 };
-int16_t MPU9150::get_data(float& x, float& y, float& z){
+
+
+void    MPU9150::restart(){
+	i2c.restart();
+}
+
+/***************************************************
+ * 				ACCELEROMETER METHODS
+ ***************************************************/
+
+void    MPU9150::set_acc_calibration(AccelerometerCalibration& new_calibration){
+	acc_calibration = new_calibration;
+}
+
+void    MPU9150::get_acc_calibration(AccelerometerCalibration& return_calibration){
+	return_calibration = acc_calibration;
+}
+
+
+int16_t MPU9150::get_acc_data(float& x, float& y, float& z){
 	uint8_t buffer[6];
 	int16_t x_temp = 0;
 	int16_t y_temp = 0;
@@ -52,17 +73,53 @@ int16_t MPU9150::get_data(float& x, float& y, float& z){
 	return 1;
 }
 
-void    MPU9150::restart(){
-	i2c.restart();
+
+/***************************************************
+ * 				GYROSCOPE METHODS
+ ***************************************************/
+void    MPU9150::set_gyro_calibration(GyroscopeCalibration& new_calibration){
+	gyro_calibration = new_calibration;
 }
 
-void    MPU9150::set_calibration(AccelerometerCalibration& new_calibration){
-	acc_calibration = new_calibration;
+void    MPU9150::get_gyro_calibration(GyroscopeCalibration& return_calibration){
+	return_calibration = gyro_calibration;
 }
 
-void    MPU9150::get_calibration(AccelerometerCalibration& return_calibration){
-	return_calibration = acc_calibration;
+
+int16_t MPU9150::get_gyro_data(float& x, float& y, float& z){
+	uint8_t buffer[6];
+	int16_t x_temp = 0;
+	int16_t y_temp = 0;
+	int16_t z_temp = 0;
+
+	//If it is > 1ms since we downloaded data last time, then do it again.
+	//else just return the last downloaded values.
+	if(Time.get_time_since_us(gyro_timestamp) > 1000){
+		if(!i2c.read_register8(MPU9150_ADDRESS, MPU9150_RA_GYRO_XOUT_H, 6, buffer))
+			return 0;
+
+		x_temp = (buffer[0]<<8) | buffer[1];
+		y_temp = (buffer[2]<<8) | buffer[3];
+		z_temp = (buffer[4]<<8) | buffer[5];
+
+		last_gyro_values[0] = ((float)x_temp) * GYRORESOLUTION - gyro_calibration.offset_x;
+		last_gyro_values[1] = ((float)y_temp) * GYRORESOLUTION - gyro_calibration.offset_y;
+		last_gyro_values[2] = ((float)z_temp) * GYRORESOLUTION - gyro_calibration.offset_z;
+
+		gyro_timestamp = Time.get_timestamp();
+	}
+
+	x = last_gyro_values[0];
+	y = last_gyro_values[1];
+	z = last_gyro_values[2];
+
+	return 1;
 }
+
+
+/***************************************************
+ * 					PRIVATE METHODS
+ ***************************************************/
 
 bool MPU9150::setup(){
 	uint8_t data[6];
@@ -405,4 +462,3 @@ int8_t MPU9150::set_bypass(uint8_t bypass_on){
 
 		return 0;
 }
-

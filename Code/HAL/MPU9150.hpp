@@ -453,17 +453,22 @@
 #include "Framework.hpp"
 #include "SensorI2C.hpp"
 
-class MPU9150 : public HAL_Accelerometer_I{
+class MPU9150 : public HAL_Accelerometer_I, public HAL_Gyroscope_I{
 
 	public:
 		MPU9150();
 
 	    virtual bool 	is_alive();
 	    virtual bool 	is_error();
-	    virtual int16_t get_data(float& x, float& y, float& z);
 	    virtual void    restart();
-	    virtual void    set_calibration(AccelerometerCalibration& new_calibration);
-	    virtual void    get_calibration(AccelerometerCalibration& return_calibration);
+
+	    virtual int16_t get_acc_data(float& x, float& y, float& z);
+	    virtual void    set_acc_calibration(AccelerometerCalibration& new_calibration);
+	    virtual void    get_acc_calibration(AccelerometerCalibration& return_calibration);
+
+		virtual int16_t get_gyro_data(float&, float&, float&);
+		virtual void    set_gyro_calibration(GyroscopeCalibration&);
+		virtual void    get_gyro_calibration(GyroscopeCalibration&);
 
 	private:
 	    //SensorI2C& i2c;
@@ -471,6 +476,10 @@ class MPU9150 : public HAL_Accelerometer_I{
 	    float last_acc_values[3] = {0};
 	    uint32_t acc_timestamp = 0;
 	    AccelerometerCalibration acc_calibration = {0,0,0};
+
+	    float last_gyro_values[3] = {0};
+	    uint32_t gyro_timestamp = 0;
+	    GyroscopeCalibration gyro_calibration = {0,0,0};
 
 	    bool setup();
 	    int8_t set_gyro_fsr(uint16_t fsr);

@@ -1,5 +1,14 @@
 #include "GenericI2C.hpp"
 
+#define CHECK_TIMEOUT(x) {if(Time.get_time_since_us(timebegin) > x) return 0;}
+//#define CHECK_TIMEOUT(x) {}
+#define TIMEOUT 20000
+
+#define EXIT_CRIT_AND_RETURN {\
+							\
+							return 0;\
+							}
+
 GenericI2C::GenericI2C(GENERIC_I2C_TYPE I2C, uint32_t ClockSpeed)
 {
 	m_Type = I2C;
@@ -227,13 +236,15 @@ void GenericI2C::setup(void)
 
 bool GenericI2C::start(uint8_t address, uint8_t direction)
 {
+	uint32_t timebegin = Time.get_timestamp();
+
 	// Send I2C START condition
 	I2C_GenerateSTART(m_I2C, ENABLE);
 
 	// wait for I2C EV5 --> Slave has acknowledged start condition
-	while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_MODE_SELECT));
+	while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_MODE_SELECT))
 		// Need to check for timeout (Remove semicolon)
-		//CHECK_TIMEOUT(TIMEOUT);
+		CHECK_TIMEOUT(TIMEOUT);
 
 	// Send slave Address for write
 	I2C_Send7bitAddress(m_I2C, address, direction);
@@ -244,14 +255,14 @@ bool GenericI2C::start(uint8_t address, uint8_t direction)
 	 * direction
 	 */
 	if(direction == I2C_Direction_Transmitter){
-		while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+		while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
 			// Need to check for timeout (Remove semicolon)
-			//CHECK_TIMEOUT(TIMEOUT);
+			CHECK_TIMEOUT(TIMEOUT);
 	}
 	else if(direction == I2C_Direction_Receiver){
-		while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED));
+		while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED))
 			// Need to check for timeout (Remove semicolon)
-			//CHECK_TIMEOUT(TIMEOUT);
+			CHECK_TIMEOUT(TIMEOUT);
 	}
 	else {
 		return false;
@@ -262,23 +273,26 @@ bool GenericI2C::start(uint8_t address, uint8_t direction)
 
 bool GenericI2C::write(uint8_t data)
 {
+	uint32_t timebegin = Time.get_timestamp();
 	I2C_SendData(m_I2C, data);
 
-	while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
+	while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
 		// Need to check for timeout (Remove semicolon)
-		//CHECK_TIMEOUT(TIMEOUT);
+		CHECK_TIMEOUT(TIMEOUT);
+
 
 	return true;
 }
 
 bool GenericI2C::readAck(uint8_t* data)
 {
+	uint32_t timebegin = Time.get_timestamp();
 	// Enable acknowledge of recieved data
 	I2C_AcknowledgeConfig(m_I2C, ENABLE);
 	// Wait until one byte has been received
-	while( !I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_BYTE_RECEIVED));
+	while( !I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_BYTE_RECEIVED))
 		// Need to check for timeout (Remove semicolon)
-		//CHECK_TIMEOUT(TIMEOUT);
+		CHECK_TIMEOUT(TIMEOUT);
 
 	// Read data from I2C data register and return data byte
 	*data = I2C_ReceiveData(m_I2C);
@@ -288,6 +302,8 @@ bool GenericI2C::readAck(uint8_t* data)
 
 bool GenericI2C::readNack(uint8_t* data)
 {
+	uint32_t timebegin = Time.get_timestamp();
+
 	// disabe acknowledge of received data
 	// nack also generates stop condition after last byte received
 	// see reference manual for more info
@@ -295,9 +311,9 @@ bool GenericI2C::readNack(uint8_t* data)
 	I2C_GenerateSTOP(m_I2C, ENABLE);
 
 	// Wait until one byte has been received
-	while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_BYTE_RECEIVED));
+	while(!I2C_CheckEvent(m_I2C, I2C_EVENT_MASTER_BYTE_RECEIVED))
 		// Need to check for timeout (Remove semicolon)
-		//CHECK_TIMEOUT(TIMEOUT);
+		CHECK_TIMEOUT(TIMEOUT);
 
 	// Read data from I2C data register and return data byte
 	*data = I2C_ReceiveData(m_I2C);

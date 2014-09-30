@@ -39,6 +39,7 @@ class ApplicationModule;
 #include "HAL_Communication_I.hpp"
 #include "HAL_Multiplexer_I.hpp"
 #include "HAL_Altitude_I.hpp"
+#include "HAL_Gyroscope_I.hpp"
 
 //Drivers:
 #include "GenericPulseMeasurement.hpp"

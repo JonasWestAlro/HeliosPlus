@@ -48,18 +48,21 @@ class HeliosLED : public HAL_HeliosLED_I{
 			uint8_t LED = (uint8_t)helios_led;
 
 			if(state == LED_ON){
-				GPIO_WriteBit(ledLUT[LED].port, ledLUT[LED].pin, 1);
+				GPIO_WriteBit(ledLUT[LED].port, ledLUT[LED].pin, Bit_SET);
 			}else{
-				GPIO_WriteBit(ledLUT[LED].port, ledLUT[LED].pin, 0);
+				GPIO_WriteBit(ledLUT[LED].port, ledLUT[LED].pin, Bit_RESET);
 			}
 		};
 
 		virtual LED_STATE get_LED(HELIOS_LED helios_led){
-
+			uint8_t LED = (uint8_t)helios_led;
+			if(GPIO_ReadOutputDataBit(ledLUT[LED].port, ledLUT[LED].pin))
+				return LED_ON;
+			else return LED_OFF;
 		};
 
 	private:
-		const LED_LUTentry_t ledLUT[] = {
+		 LED_LUTentry ledLUT[6] = {
 				/*ID*/				/*PORT*/		/*PIN*/
 				{STATUS_LED_RED,	 GPIOB, 		GPIO_Pin_13},
 				{STATUS_LED_GREEN,	 GPIOB,			GPIO_Pin_12},
