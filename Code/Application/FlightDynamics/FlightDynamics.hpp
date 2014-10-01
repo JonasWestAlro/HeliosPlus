@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Framework.hpp"
-
+#include "EKF_Attitude.hpp"
 
 class FlightDynamics : public ApplicationModule{
 	public:

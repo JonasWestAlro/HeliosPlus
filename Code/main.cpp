@@ -13,6 +13,7 @@
 #include "BMP085.hpp"
 #include "HeliosLED.hpp"
 #include "24LC64.hpp"
+#include "HC-SR04.hpp"
 
 //TODO-JWA: These definitely shouln't be defined here!
 template<>
@@ -30,9 +31,11 @@ int main(void){
 	MPU9150 mpu9150;
 	HeliosLED leds;
 	EEPROM_24LC64 eeprom;
+	HC_SR40 sonar;
 
 	float x = 0, y = 0, z = 0;
 	float gx = 0, gy = 0, gz = 0, gy_last = 0;
+	float altitude = 0;
 
 	uint8_t in_buffer[10] = {1,2,3,4,5,6,7,8,9,10};
 	uint8_t out_buffer[10] = {0};
@@ -49,6 +52,7 @@ int main(void){
 		else
 			leds.set_LED(DEBUG_BLUE1, LED_OFF);
 
+		altitude = sonar.get_altitude();
 
 		gy_last = gy;
 		Time.delay_ms(20);
