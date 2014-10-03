@@ -85,8 +85,8 @@ GenericUART::GenericUART(GENERIC_UART_TYPE UART, uint32_t BaudRate)
 			RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 			GPIO_InitStruct.GPIO_Pin = GPIO_Pin_10 | GPIO_Pin_11;
 			GPIO_Init(GPIOC, &GPIO_InitStruct);
-		    GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_UART4);
-		    GPIO_PinAFConfig(GPIOA, GPIO_PinSource11, GPIO_AF_UART4);
+		    GPIO_PinAFConfig(GPIOC, GPIO_PinSource10, GPIO_AF_UART4);
+		    GPIO_PinAFConfig(GPIOC, GPIO_PinSource11, GPIO_AF_UART4);
 		    break;
 
 		case GENERIC_UART_TYPE_UART5_PC12_PD2: // (TX C12, RX D2)
