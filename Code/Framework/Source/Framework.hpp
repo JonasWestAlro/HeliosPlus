@@ -30,9 +30,15 @@ class ApplicationModule;
 #include "HAL_Interface.hpp"
 #include "Timing.hpp"
 
+#include "Globals.hpp"
+
 //Interfaces:
 #include "APP_Attitude_I.hpp"
 #include "APP_Quaternion_I.hpp"
+#include "APP_Control_I.hpp"
+#include "APP_Navigation_I.hpp"
+#include "APP_SystemStatus_I.hpp"
+
 #include "HAL_Accelerometer_I.hpp"
 #include "HAL_ControlReceiver_I.hpp"
 #include "HAL_Motor_I.hpp"

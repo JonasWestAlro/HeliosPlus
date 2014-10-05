@@ -20,10 +20,10 @@ class Messenger{
 			receiver->msg_queue.send(&msg);
 		}
 
-		void send_to(Messenger* receiver, Message& msg){
-			msg.sender   = this;
-			msg.receiver = receiver;
-			receiver->msg_queue.send(&msg);
+		void send_to(Messenger* receiver, Message* msg){
+			msg->sender   = this;
+			msg->receiver = receiver;
+			receiver->msg_queue.send(msg);
 		}
 
 		void respond(Message& msg, Message& response){
