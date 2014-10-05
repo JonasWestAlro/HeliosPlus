@@ -54,8 +54,7 @@ int main(void){
 	WirelessUART wireless_uart;
 
 	//Bind Application Interfaces ------------------------------------------:
-	APP_Attitude_I attitude({ &control_input.attitude,	  //PROVIDER
-							  &flight_control.attitude,   //CONSUMER
+	APP_Attitude_I attitude({ &flight_control.attitude,   //CONSUMER
 							  &flight_navigation.attitude,//CONSUMER
 							  &communication.attitude});  //CONSUMER
 

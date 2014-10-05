@@ -14,6 +14,7 @@ class PPMReceiver : public HAL_ControlReceiver_I{
 
 		virtual uint8_t  get_status(void);
 		virtual float 	 get_channel(ControlReceiverChannel);
+		virtual void 	 get_all_channels(ControlReceiverValues&);
 		virtual void 	 start_calibration(void);
 		virtual void 	 stop_calibration(void);
 		virtual void 	 get_calibration(ControlReceiverCalibration*);
@@ -36,6 +37,7 @@ class PPMReceiver : public HAL_ControlReceiver_I{
 
 		ControlReceiverChannel channel_mapping[6];
 		uint16_t 	channel_values[6] = {1500, 1500, 1500, 1500, 1500, 1500};
+		ControlReceiverValues sorted_channel_values;
 
 		bool 		calibrating = false;
 		uint32_t 	last_update_timestamp[6] = {0};

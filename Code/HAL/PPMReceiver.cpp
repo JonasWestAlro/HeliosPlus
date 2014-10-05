@@ -6,13 +6,13 @@ static ControlReceiverCalibration standard_calibration = {
 	/*LOW*/		1088, 1095, 1094, 1093, 1093, 1089
 };
 
-static ControlReceiverChannel standard_channel_mapping[6] = {
-		/*Channel 1:*/ CHANNEL_THROTTLE,
-		/*Channel 2:*/ CHANNEL_ROLL,
-		/*Channel 3:*/ CHANNEL_PITCH,
-		/*Channel 4:*/ CHANNEL_YAW,
-		/*Channel 5:*/ CHANNEL_SWITCH,
-		/*Channel 6:*/ CHANNEL_CLICK,
+static uint8_t standard_channel_mapping[6] = {
+		/*CHANNEL_THROTTLE:*/ 0,
+		/*CHANNEL_ROLL:    */ 1,
+		/*CHANNEL_PITCH:   */ 2,
+		/*CHANNEL_YAW:     */ 3,
+		/*CHANNEL_AUX1:    */ 4,
+		/*CHANNEL_AUX2:    */ 5
 };
 
 PPMReceiver::PPMReceiver(){
@@ -147,6 +147,13 @@ void PPMReceiver::execute(void){
 		}
 	}
 
+	sorted_channel_values.throttle = get_channel(CHANNEL_THROTTLE);
+	sorted_channel_values.pitch    = get_channel(CHANNEL_PITCH);
+	sorted_channel_values.roll     = get_channel(CHANNEL_ROLL);
+	sorted_channel_values.yaw 	   = get_channel(CHANNEL_YAW);
+	sorted_channel_values.aux1 	   = get_channel(CHANNEL_AUX1);
+	sorted_channel_values.aux2     = get_channel(CHANNEL_AUX2);
+
 	update_status();
 	if(calibrating) calibrate();
 }
@@ -160,19 +167,20 @@ float PPMReceiver::get_channel(ControlReceiverChannel channel){
 	float norm_channel;
 
 	for(i=0; i<6; i++){
-		if(channel == channel_mapping[i]){
-			//here "i" is real channel number
-			norm_channel = get_normalized_channel(i);
+		norm_channel = get_normalized_channel(channel_mapping[channel]);
 
-			if(channel == CHANNEL_SWITCH || channel == CHANNEL_CLICK){
-				if(norm_channel > 500) return 1000;
-				else return -1000;
-			}else
-				return norm_channel;
-		}
+		if(channel == CHANNEL_AUX1 || channel == CHANNEL_AUX2){
+			if(norm_channel > 500) return 1000;
+			else return -1000;
+		}else
+			return norm_channel;
 	}
 
-	return 0;
+	return norm_channel;
+}
+
+void  PPMReceiver::get_all_channels(ControlReceiverValues& result){
+	result = sorted_channel_values;
 }
 
 void 	 PPMReceiver::start_calibration(void){}
