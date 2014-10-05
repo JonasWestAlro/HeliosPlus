@@ -16,7 +16,7 @@ class SystemStatus : public ApplicationModule{
 					FlightDynamics* flightdynamics, FlightNavigation* flightnavigation);
 
 	protected:
-		void run(void);
+		void task(void);
 
 	private:
 		void handle_message(Message& msg);

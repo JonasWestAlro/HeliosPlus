@@ -10,10 +10,6 @@ struct APP_Quaternion_I : APP_Interface<APP_Attitude_I>{
 	float y;
 	float z;
 
-	float pitch_velocity;
-	float roll_velocity;
-	float yaw_velocity;
-
     void operator=(const Quaternion &q )
     {
        w = q.w;

@@ -7,15 +7,13 @@ ControlInput::ControlInput(const char* name, uint32_t stackSize, uint8_t priorit
 	// Init here
 }
 
-void ControlInput::run(void)
+void ControlInput::task(void)
 {
-	while(1)
-	{
+
 		attitude.pitch = 100;
 		attitude.publish();
 
-		vTaskDelay(300);
-	}
+
 }
 
 /****************************************************************

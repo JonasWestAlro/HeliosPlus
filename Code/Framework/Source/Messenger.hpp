@@ -42,10 +42,10 @@ class Messenger{
 			return msg_queue.try_receive(ptr);
 		}
 
-		void broadcast(Message& msg){
-			msg.sender 	 = this;
-			msg.receiver = 0;
-			MessageDistribution::getInstance().broadcast(msg);
+		void broadcast(Message* msg){
+			msg->sender 	 = this;
+			msg->receiver = 0;
+			MessageDistribution::getInstance().broadcast(*msg);
 		}
 
 		void broadcast(Message msg){

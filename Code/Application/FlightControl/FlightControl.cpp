@@ -6,14 +6,10 @@ FlightControl::FlightControl(const char* name, uint32_t stackSize, uint8_t prior
 	// Initializer code goes here
 }
 
-void FlightControl::run(void)
+void FlightControl::task(void)
 {
-	while(1)
-	{
-		attitude.pitch = 10;
-		attitude.receive();
 
+	attitude.pitch = 10;
+	attitude.receive();
 
-		vTaskDelay(300);
-	}
 }

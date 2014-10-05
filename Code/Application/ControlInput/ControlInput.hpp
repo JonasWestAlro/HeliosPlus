@@ -8,8 +8,8 @@ class ControlInput : public ApplicationModule{
 		APP_Attitude_I attitude;
 
 	protected:
-		void run(void);
-
+		void task(void);
+		void handle_message(Message& msg){}
 	private:
 		void handle_internal_message(void);
 		void handle_switch(float state);

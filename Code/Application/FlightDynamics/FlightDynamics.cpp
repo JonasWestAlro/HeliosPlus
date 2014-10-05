@@ -20,112 +20,57 @@ FlightDynamics::FlightDynamics(const char* name, uint32_t stackSize, uint8_t pri
 
 	eeprom.load(&eeprom_structure, sizeof(EEPROM_Structure));
 
-	attitude_socket.pitch = 0;
+	attitude_socket.reset();
+
+	set_frequency(200);
 }
 
-void FlightDynamics::run(void){
-	Message msg;
+void FlightDynamics::task(void){
 
-	uint32_t timestamp = Time.get_timestamp();
-	//gyroscope->start_gyro_calibration();
+	//Download Sensor data from sensors:
+	update_sensor_data();
 
-	while(1){
-		//Log the current tick of the system:
-		xLastWakeTime = xTaskGetTickCount();
-
-		while(messenger.try_receive(&msg)){
-			handle_message(msg);
-		}
-		accelerometer->is_alive();
-
-
-		//Download Sensor data from sensors:
-		update_sensor_data();
-
-		//Run extended kalman filter:
-		if(raw_acc[0] != 0 && raw_acc[1] != 0 && raw_acc[2] != 0){
-			EKF.innovate_priori(attitude_quaternion, raw_gyro[0], raw_gyro[1], raw_gyro[2]);
-			//EKF.innovate_priori(attitude_quaternion, 0, 0, 0);
-			EKF.innovate_stage1(attitude_quaternion, raw_acc[0],  raw_acc[1],  raw_acc[2]);
-			attitude_quaternion.normalize();
-		}
-
-		//RUN THE OLD KALMAN:
-		/*static float old_quaternion[4];
-		static uint32_t Timestamp;
-		static float 	dt;
-		static float ExtendedKalmanAngles[3] = {0};
-
-
-		dt = Time.get_time_since_sec(Timestamp);
-
-		ExtendedKalman_Innovate_Priori(old_quaternion,
-									   raw_gyro[0], raw_gyro[1], raw_gyro[2],
-									   dt);
-
-		ExtendedKalman_Innovate_Stage1(old_quaternion,
-									   raw_acc[0],  raw_acc[1],  raw_acc[2]);
-		Timestamp = Time.get_timestamp();
-
-		Quaternion_Normalize(old_quaternion);
-
-		// Pitch and Roll are flipped do to the kalman filter.
-		mavlink_quaternion_to_euler(old_quaternion, &ExtendedKalmanAngles[0], &ExtendedKalmanAngles[1], &ExtendedKalmanAngles[2]);
-		 */
-
-		//END OF OLD FILTER:
-		attitude_euler = attitude_quaternion.to_euler();
-		attitude_euler.to_degrees();
-
-		//Update the attitude (euler) interface/socket:
-		attitude_socket.pitch 			= attitude_euler.x;
-		attitude_socket.roll 			= attitude_euler.y;
-		attitude_socket.yaw 			= attitude_euler.z;
-
-		/*attitude_socket.pitch_velocity 	= pitch_filter.process(raw_gyro[0]);
-		attitude_socket.roll_velocity  	= roll_filter.process(raw_gyro[1]);
-		attitude_socket.yaw_velocity 	= yaw_filter.process(raw_gyro[2]);*/
-
-		//Update the quarternion interface/socket:
-		/*attitude_quarternion_socket 				= attitude_quaternion;
-		attitude_quarternion_socket.pitch_velocity 	= pitch_filter.process(raw_gyro[0]);
-		attitude_quarternion_socket.roll_velocity  	= roll_filter.process(raw_gyro[1]);
-		attitude_quarternion_socket.yaw_velocity 	= yaw_filter.process(raw_gyro[2]);*/
-
-		//Publish the data to other stakeholders:
-		attitude_socket.publish();
-		attitude_quarternion_socket.publish();
-
-		/*FlightDynamics_CalibrateAccelerometer(CALIBRATE_PROCESS);
-		FlightDynamics_CalibrateGyroscope(CALIBRATE_PROCESS);
-		FlightDynamics_CalibrateMagnetometer(CALIBRATE_PROCESS);
-		FlightDynamics_UpdateState();
-
-		//This is for debugging:
-		FlightDynamics_TransmitDebug();
-		FlightDynamics_debugLED();*/
-		debug_led();
-
-		//if(Time.get_time_since_ms(timestamp) > 10000){
-		//	gyroscope->stop_gyro_calibration();
-		//}
-
-		//Wait for the next cycle.
-
-		debug->send_number(attitude_socket.pitch);
-		debug->send(',');
-		debug->send_number(45.0f);
-		debug->send(',');
-		debug->send_number(-45.0f);
-
-		//debug->send_number(ExtendedKalmanAngles[0]);
-
-		debug->send('\n');
-		//debug->send('\r');
-		debug->transmit();
-
-		vTaskDelayUntil(&xLastWakeTime, 200);
+	//Run extended kalman filter:
+	if(raw_acc[0] != 0 && raw_acc[1] != 0 && raw_acc[2] != 0){
+		EKF.innovate_priori(attitude_quaternion, raw_gyro[0], raw_gyro[1], raw_gyro[2]);
+		//EKF.innovate_priori(attitude_quaternion, 0, 0, 0);
+		EKF.innovate_stage1(attitude_quaternion, raw_acc[0],  raw_acc[1],  raw_acc[2]);
+		attitude_quaternion.normalize();
 	}
+
+	attitude_euler = attitude_quaternion.to_euler();
+	attitude_euler.to_degrees();
+
+	//Update the attitude (euler) interface/socket:
+	attitude_socket.pitch 			= attitude_euler.x;
+	attitude_socket.roll 			= attitude_euler.y;
+	attitude_socket.yaw 			= attitude_euler.z;
+
+	attitude_socket.pitch_velocity 	= pitch_filter.process(raw_gyro[0]);
+	attitude_socket.roll_velocity  	= roll_filter.process(raw_gyro[1]);
+	attitude_socket.yaw_velocity 	= yaw_filter.process(raw_gyro[2]);
+
+	//Update the quarternion interface/socket:
+	attitude_quarternion_socket = attitude_quaternion;
+
+	//Publish the data to other stake-holders:
+	attitude_socket.publish();
+	attitude_quarternion_socket.publish();
+
+
+	update_status();
+	debug_led();
+
+	//Wait for the next cycle.
+	debug->send_number(attitude_socket.pitch_velocity);
+	debug->send(',');
+	debug->send_number(attitude_socket.roll_velocity);
+	debug->send(',');
+	debug->send_number(attitude_socket.yaw_velocity);
+
+	debug->send('\n');
+	debug->transmit();
+
 }
 
 void FlightDynamics::handle_message(Message& msg){
@@ -167,9 +112,9 @@ void FlightDynamics::update_sensor_data(){
 
 			no_sensor_errors++;
 			gyroscope->restart();
-			sensor_status = STATUS_NOTOK;
+			sensor_error = true;
 	}else{
-		sensor_status = STATUS_OK;
+		sensor_error = false;
 	}
 
 	portEXIT_CRITICAL();
@@ -202,6 +147,41 @@ void FlightDynamics::debug_led(void){
 	}
 
 	old_gyro = raw_gyro[0];
+}
+
+void FlightDynamics::update_status(void){
+	static STATUS last_state = STATUS_OK;
+
+	if(acc_calibrating || gyro_calibrating || mag_calibrating){
+		sensor_status = STATUS_CALIBRATING;
+
+	}else if(sensor_error == true){
+		sensor_status = STATUS_NOTOK;
+
+	}else{
+		sensor_status = STATUS_OK;
+	}
+
+	//Notify others about any changes:
+	if(last_state != sensor_status){
+		report_status();
+	}
+
+	last_state = sensor_status;
+}
+
+void FlightDynamics::report_status(void){
+	Message message;
+
+	message.sender = &messenger;
+	message.message_type = SENSOR_REPORT_STATUS;
+
+	message.set_integer32( MAV_SYS_STATUS_SENSOR_3D_GYRO  |
+						   MAV_SYS_STATUS_SENSOR_3D_ACCEL |
+						   MAV_SYS_STATUS_SENSOR_3D_MAG);
+
+	message.data[5] = sensor_status;
+	messenger.broadcast(&message);
 }
 
 /*

@@ -7,11 +7,6 @@
 #include "IIR_Filter.hpp"
 #include "mavlink.h"
 
-extern "C" {
-    #include "Attitude_ExtendedKalman.h"
-}
-
-
 class FlightDynamics : public ApplicationModule{
 	public:
 		FlightDynamics(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
@@ -25,7 +20,8 @@ class FlightDynamics : public ApplicationModule{
 		APP_Attitude_I   attitude_socket;
 		APP_Quaternion_I attitude_quarternion_socket;
 	protected:
-		void run(void);
+		void task(void);
+		void handle_message(Message& msg);
 
 	private:
 		portTickType xLastWakeTime;
@@ -41,6 +37,7 @@ class FlightDynamics : public ApplicationModule{
 
 		//Sensor status:
 		STATUS sensor_status = STATUS_NOTOK;
+		bool sensor_error = false;
 
 		//Sensor fusion variables:
 		EKF_Attitude EKF;
@@ -55,16 +52,19 @@ class FlightDynamics : public ApplicationModule{
 		IIR_Filter<4> roll_filter;
 		IIR_Filter<4> yaw_filter;
 
+		bool acc_calibrating = false;
+		bool gyro_calibrating = false;
+		bool mag_calibrating = false;
+
 		struct EEPROM_Structure{
 			AccelerometerCalibration accelerometer_calibration;
 		};
 
 		EEPROM_Structure eeprom_structure;
 
-		void handle_message(Message& msg);
 		void update_sensor_data();
-		void report_status(){}
-		void update_status(){}
+		void report_status();
+		void update_status();
 		void debug_led();
 };
 

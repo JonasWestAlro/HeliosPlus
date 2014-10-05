@@ -27,6 +27,18 @@ class Task {
 			return m_TaskHandle;
 		}
 
+		inline portTickType get_tick(){
+			return xTaskGetTickCount();
+		}
+
+		inline void delay_until(TickType_t * const pxPreviousWakeTime, const TickType_t xTimeIncrement){
+			vTaskDelayUntil(pxPreviousWakeTime, xTimeIncrement);
+		}
+
+		inline uint32_t get_tick_frequency(){
+			return configTICK_RATE_HZ;
+		}
+
 		#if (INCLUDE_uxTaskGetStackHighWaterMark == 1)
 			inline uint32_t getFreeStack(void) const { return uxTaskGetStackHighWaterMark(m_TaskHandle); }
 		#endif

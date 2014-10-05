@@ -10,13 +10,9 @@ class Communication : public ApplicationModule {
 		APP_Attitude_I attitude;
 
 	protected:
-		void run(void);
-
-	private:
-		//GenericUART m_UART;
-
+		void task(void);
 		void handle_message(Message& msg);
-
+	private:
 		// Functions
 		void handle_internal_message(void);
 		void request_control(uint8_t);

@@ -15,19 +15,9 @@ SystemStatus::SystemStatus(const char* name, uint32_t stackSize, uint8_t priorit
 	messenger.subscribe(REQUEST_SHIFT_OF_CONTROL);
 }
 
-void SystemStatus::SystemStatus::run(void)
+void SystemStatus::task(void)
 {
-	Message msg;
 
-	while(1){
-		while(messenger.try_receive(&msg)){
-			handle_message(msg);
-		}
-
-
-
-		vTaskDelay(300);
-	}
 }
 
 void SystemStatus::handle_message(Message& msg){

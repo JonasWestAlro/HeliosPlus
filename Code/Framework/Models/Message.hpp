@@ -50,6 +50,14 @@ class Message{
 			return *(float*)data;
 		}
 
+		void set_integer32(uint32_t int_value){
+			*(uint32_t*)data = int_value;
+		}
+
+		uint32_t get_integer32(){
+			return *(uint32_t*)data;
+		}
+
 		void set_byte_array(uint8_t* bytearray){
 			for(uint8_t i=0; i<6; i++){
 				data[i] = bytearray[i];

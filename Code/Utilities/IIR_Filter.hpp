@@ -17,7 +17,7 @@ public:
 		for(auto elem : list ){
 			coeffs[i] = elem;
 			i++;
-			if(i == N) break;
+			if(i == (N*2+1)) break;
 		}
 	}
 
@@ -62,8 +62,8 @@ public:
 	}
 
 private:
-	float      coeffs[N*2+1];
-	float	   outputs[N];
-	float 	   inputs[N];
+	float      coeffs[N*2+1] = {0};
+	float	   outputs[N] = {0};
+	float 	   inputs[N] = {0};
 
 };

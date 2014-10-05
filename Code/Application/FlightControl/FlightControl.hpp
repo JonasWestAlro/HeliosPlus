@@ -8,8 +8,8 @@ class FlightControl : public ApplicationModule{
 		APP_Attitude_I attitude;
 
 	protected:
-		void run(void);
-
+		void task(void);
+		void handle_message(Message& msg){}
 	private:
 
 };

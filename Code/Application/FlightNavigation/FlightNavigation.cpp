@@ -7,13 +7,11 @@ FlightNavigation::FlightNavigation(const char* name, uint32_t stackSize, uint8_t
 	// Initializer code goes here
 }
 
-void FlightNavigation::run(void)
+void FlightNavigation::task(void)
 {
-	while(1)
-	{
+
 		attitude.pitch = 10;
 		attitude.receive();
 
-		vTaskDelay(300);
-	}
+
 }

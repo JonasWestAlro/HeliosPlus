@@ -6,51 +6,29 @@
 Communication::Communication(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size)
 : ApplicationModule(name, stackSize, priority, eeprom_size)
 {
-	// Initializer code goes here
 
-
-	// m_UART.init(GENERIC_UART_TYPE_USART3_PB10_PB11, 230400);
-
-	//Setup Multiplexer
-	/*GPIO_InitTypeDef GPIOInitStruct;
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
-	GPIOInitStruct.GPIO_Mode = GPIO_Mode_OUT;
-	GPIOInitStruct.GPIO_OType = GPIO_OType_PP;
-	GPIOInitStruct.GPIO_Pin = GPIO_Pin_1;
-	GPIOInitStruct.GPIO_PuPd = GPIO_PuPd_DOWN;
-	GPIOInitStruct.GPIO_Speed = GPIO_Speed_100MHz;
-	GPIO_Init(GPIOE, &GPIOInitStruct);
-	GPIO_SetBits(GPIOE,GPIO_Pin_1);*/
+	set_frequency(50);
 }
 
-void Communication::run(void){
-	Message msg;
-	while(1)
-	{
-		while(messenger.try_receive(&msg)){
-			handle_message(msg);
-		}
+void Communication::task(void){
 
-		//Testing interface:
-		attitude.pitch = 10;
-		attitude.receive();
+	//Testing interface:
+	attitude.pitch = 10;
+	attitude.receive();
 
-		//Testing message breoadcast:
-		messenger.broadcast(CALIBRATE_GYROSCOPE);
+	//Testing message breoadcast:
+	messenger.broadcast(CALIBRATE_GYROSCOPE);
 
 
-		messenger.broadcast(Message(CALIBRATE_ACCELEROMETER));
+	messenger.broadcast(Message(CALIBRATE_ACCELEROMETER));
 
 
-		messenger.broadcast(Message(REQUEST_SHIFT_OF_CONTROL,
-									(uint8_t)REQUEST_TAKE_CONTROL));
+	messenger.broadcast(Message(REQUEST_SHIFT_OF_CONTROL,
+								(uint8_t)REQUEST_TAKE_CONTROL));
 
-		//Testing globals:
-		Globals::angle_control_p.set(0.9);
+	//Testing globals:
+	Globals::angle_control_p.set(0.9);
 
-
-		vTaskDelay(300);
-	}
 }
 
 
