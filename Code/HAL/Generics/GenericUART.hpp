@@ -35,8 +35,9 @@ class GenericUART : public HAL_Communication_I {
 		virtual uint16_t put(uint8_t*, uint16_t);
 		virtual uint16_t transmit(void);
 
-		bool send_number(uint32_t);
-		bool send_number(float);
+		virtual bool send_number(uint32_t);
+		virtual bool send_number(float);
+
 	private:
 		bool isBusy(void);
 

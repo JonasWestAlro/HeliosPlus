@@ -17,5 +17,7 @@ class HAL_Gyroscope_I : public HAL_Interface {
 		virtual int16_t get_gyro_data(float&, float&, float&) = 0;
 		virtual void    set_gyro_calibration(GyroscopeCalibration&) = 0;
 		virtual void    get_gyro_calibration(GyroscopeCalibration&) = 0;
+		virtual void 	start_gyro_calibration(void) = 0;
+		virtual void 	stop_gyro_calibration(void) = 0;
 };
 

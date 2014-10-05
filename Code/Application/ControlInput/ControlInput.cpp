@@ -11,7 +11,7 @@ void ControlInput::run(void)
 {
 	while(1)
 	{
-		attitude.Pitch = 100;
+		attitude.pitch = 100;
 		attitude.publish();
 
 		vTaskDelay(300);

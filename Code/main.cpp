@@ -1,4 +1,8 @@
 #include "stm32f4xx.h"
+#include "stm32f4xx_usart.h"
+#include "stm32f4xx_gpio.h"
+#include "stm32f4xx_rcc.h"
+
 #include "Communication.hpp"
 #include "ControlInput.hpp"
 #include "FlightControl.hpp"
@@ -14,6 +18,8 @@
 #include "HeliosLED.hpp"
 #include "24LC64.hpp"
 #include "HC-SR04.hpp"
+#include "UART.hpp"
+#include "WirelessUART.hpp"
 
 //TODO-JWA: These definitely shouln't be defined here!
 template<>
@@ -25,8 +31,53 @@ uint32_t 	EEPROM::counter = 1000;
 EEPROM* 	EEPROM::EEPROM_table[10];
 uint8_t 	EEPROM::table_counter = 0;
 
+uint8_t temp[15] = "HEJ MED DIG\n\r";
 
 int main(void){
+
+
+	//Create Application modules ------------------------------------------:
+	Communication 		communication("Communication", 			configMINIMAL_STACK_SIZE*10, 	1, 1000);
+	ControlInput 		control_input("ControlInput", 			configMINIMAL_STACK_SIZE*5, 	1, 1000);
+	FlightControl 		flight_control("FlightControl", 		configMINIMAL_STACK_SIZE*2, 	1, 1000);
+	FlightDynamics 		flight_dynamics("FlightDynamics", 		configMINIMAL_STACK_SIZE*20, 	1, 1000);
+	FlightNavigation 	flight_navigation("FlightNavigations", 	configMINIMAL_STACK_SIZE*5, 	1, 1000);
+
+	SystemStatus 		system_status("SystemStatus", 			configMINIMAL_STACK_SIZE, 		1, 1000,
+									  &communication, &control_input, &flight_control, &flight_dynamics, &flight_navigation);
+
+
+	//Create drivers ----------------------------------------------------:
+	MPU9150 mpu9150;
+	HeliosLED leds;
+	WirelessUART wireless_uart;
+
+	//Bind Application Interfaces ------------------------------------------:
+	APP_Attitude_I attitude({ &control_input.attitude,	  //PROVIDER
+							  &flight_control.attitude,   //CONSUMER
+							  &flight_navigation.attitude,//CONSUMER
+							  &communication.attitude});  //CONSUMER
+
+	APP_Attitude_I attitude1({&communication.attitude});
+
+
+	//Bind HAL Interfaces ------------------------------------------::
+	flight_dynamics.set_accelerometer(&mpu9150);
+	flight_dynamics.set_gyroscope(&mpu9150);
+	flight_dynamics.set_magnetometer(&mpu9150);
+	flight_dynamics.set_leds(&leds);
+	flight_dynamics.set_debug(&wireless_uart);
+
+	//Check that EEPROM table is not changed:
+	//EEPROM::Synchronize()
+
+	//Start Scheduler:
+	schedulerStart();
+
+	while(1);
+}
+
+void test_sensors(){
 
 	MPU9150 mpu9150;
 	HeliosLED leds;
@@ -67,40 +118,4 @@ int main(void){
 		Time.delay_ms(150);
 	}
 
-
-
-	//Create Application modules ------------------------------------------:
-	Communication 		communication("Communication", 			configMINIMAL_STACK_SIZE * 10, 	1, 1000);
-	ControlInput 		control_input("ControlInput", 			configMINIMAL_STACK_SIZE, 		1, 1000);
-	FlightControl 		flight_control("FlightControl", 		configMINIMAL_STACK_SIZE, 		1, 1000);
-	FlightDynamics 		flight_dynamics("FlightDynamics", 		configMINIMAL_STACK_SIZE, 		1, 1000);
-	FlightNavigation 	flight_navigation("FlightNavigations", 	configMINIMAL_STACK_SIZE, 		1, 1000);
-
-	SystemStatus 		system_status("SystemStatus", 			configMINIMAL_STACK_SIZE, 		1, 1000,
-									  &communication, &control_input, &flight_control, &flight_dynamics, &flight_navigation);
-
-
-	//Create Drivers:
-	//MPU9150 mpu9150;
-
-	//Bind Application Interfaces ------------------------------------------:
-	APP_Attitude_I attitude({ &control_input.attitude,	  //PROVIDER
-							  &flight_control.attitude,   //CONSUMER
-							  &flight_navigation.attitude,//CONSUMER
-							  &communication.attitude});  //CONSUMER
-
-	APP_Attitude_I attitude1({&communication.attitude});
-
-
-	//Bind HAL Interfaces ------------------------------------------::
-	flight_dynamics.set_accelerometer(&mpu9150);
-
-
-	//Check that EEPROM table is not changed:
-	//EEPROM::Synchronize()
-
-	//Start Scheduler:
-	schedulerStart();
-
-	while(1);
 }

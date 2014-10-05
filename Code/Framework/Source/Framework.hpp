@@ -32,6 +32,7 @@ class ApplicationModule;
 
 //Interfaces:
 #include "APP_Attitude_I.hpp"
+#include "APP_Quaternion_I.hpp"
 #include "HAL_Accelerometer_I.hpp"
 #include "HAL_ControlReceiver_I.hpp"
 #include "HAL_Motor_I.hpp"
@@ -41,6 +42,7 @@ class ApplicationModule;
 #include "HAL_Altitude_I.hpp"
 #include "HAL_Gyroscope_I.hpp"
 #include "HAL_Eeprom_I.hpp"
+#include "HAL_Magnetometer_I.hpp"
 
 //Drivers:
 #include "GenericPulseMeasurement.hpp"

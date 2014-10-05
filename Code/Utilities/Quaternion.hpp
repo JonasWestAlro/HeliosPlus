@@ -12,12 +12,12 @@ class Quaternion{
 		Quaternion(): x(0.0f), y(0.0f), z(0.0f), w(1.0f){};
 
 		explicit  Quaternion(const EulerAngle& a){
-			float cosX2 = cos(x / 2.0f);
-			float sinX2 = sin(x / 2.0f);
-			float cosY2 = cos(y / 2.0f);
-			float sinY2 = sin(y / 2.0f);
-			float cosZ2 = cos(z / 2.0f);
-			float sinZ2 = sin(z / 2.0f);
+			float cosX2 = cos(a.x / 2.0f);
+			float sinX2 = sin(a.x / 2.0f);
+			float cosY2 = cos(a.y / 2.0f);
+			float sinY2 = sin(a.y / 2.0f);
+			float cosZ2 = cos(a.z / 2.0f);
+			float sinZ2 = sin(a.z / 2.0f);
 
 			w = cosX2 * cosY2 * cosZ2 + sinX2 * sinY2 * sinZ2;
 			x = sinX2 * cosY2 * cosZ2 - cosX2 * sinY2 * sinZ2;

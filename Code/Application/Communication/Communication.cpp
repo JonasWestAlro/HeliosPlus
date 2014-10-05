@@ -32,7 +32,7 @@ void Communication::run(void){
 		}
 
 		//Testing interface:
-		attitude.Pitch = 10;
+		attitude.pitch = 10;
 		attitude.receive();
 
 		//Testing message breoadcast:

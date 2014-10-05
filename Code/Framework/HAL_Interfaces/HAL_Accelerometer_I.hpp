@@ -16,4 +16,6 @@ class HAL_Accelerometer_I : public HAL_Interface {
 		virtual int16_t get_acc_data(float&, float&, float&) = 0;
 		virtual void    set_acc_calibration(AccelerometerCalibration&) = 0;
 		virtual void    get_acc_calibration(AccelerometerCalibration&) = 0;
+		virtual void 	start_acc_calibration(void) = 0;
+		virtual void 	stop_acc_calibration(void) = 0;
 };

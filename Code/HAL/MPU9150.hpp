@@ -453,7 +453,7 @@
 #include "Framework.hpp"
 #include "SensorI2C.hpp"
 
-class MPU9150 : public HAL_Accelerometer_I, public HAL_Gyroscope_I{
+class MPU9150 : public HAL_Accelerometer_I, public HAL_Gyroscope_I, public HAL_Magnetometer_I{
 
 	public:
 		MPU9150();
@@ -465,22 +465,48 @@ class MPU9150 : public HAL_Accelerometer_I, public HAL_Gyroscope_I{
 	    virtual int16_t get_acc_data(float& x, float& y, float& z);
 	    virtual void    set_acc_calibration(AccelerometerCalibration& new_calibration);
 	    virtual void    get_acc_calibration(AccelerometerCalibration& return_calibration);
+		virtual void 	start_acc_calibration(void);
+		virtual void 	stop_acc_calibration(void);
 
 		virtual int16_t get_gyro_data(float&, float&, float&);
 		virtual void    set_gyro_calibration(GyroscopeCalibration&);
 		virtual void    get_gyro_calibration(GyroscopeCalibration&);
+		virtual void 	start_gyro_calibration(void);
+		virtual void 	stop_gyro_calibration(void);
 
+		virtual int16_t get_mag_data(float& x, float& y, float& z){
+			return 1;
+		}
+		virtual int16_t	get_raw_mag_data(int16_t* data){return 1; }
+		virtual void  	get_mag_calibration(MagnetometerCalibration* c){}
+		virtual void	set_mag_calibration(MagnetometerCalibration* c){}
+		virtual void 	start_mag_calibration(void){}
+		virtual void 	stop_mag_calibration(void){}
 	private:
 	    SensorI2C& i2c;
-	    //GenericI2C i2c;
+
+	    //Accelerometer variables:
 	    float last_acc_values[3] = {0};
 	    uint32_t acc_timestamp = 0;
 	    AccelerometerCalibration acc_calibration = {0,0,0};
 
+	    //Gyroscope variables:
 	    float last_gyro_values[3] = {0};
 	    uint32_t gyro_timestamp = 0;
-	    GyroscopeCalibration gyro_calibration = {0,0,0};
+	    GyroscopeCalibration gyro_calibration = {-1.6679107, 2.69882321, -2.18981051};
 
+	    //Calibrating variables:
+	    bool gyro_calibrating = false;
+	    bool acc_calibrating = false;
+	    bool mag_calibrating = false;
+	    float gyro_calibration_sum[3];
+	    int   gyro_calibration_points;
+	    float acc_calibration_sum[3];
+	    int   acc_calibration_points;
+	    float mag_calibration_sum[3];
+	    int   mag_calibration_points;
+
+	    //Methods:
 	    bool setup();
 	    int8_t set_gyro_fsr(uint16_t fsr);
 	    int8_t set_accel_fsr(uint8_t fsr);
@@ -493,4 +519,7 @@ class MPU9150 : public HAL_Accelerometer_I, public HAL_Gyroscope_I{
 	    int8_t setup_compass(void);
 	    int8_t set_bypass(uint8_t bypass_on);
 
+	    void process_gyro_calibration();
+	    void process_acc_calibration(){}
+	    void process_mag_calibration(){}
 };

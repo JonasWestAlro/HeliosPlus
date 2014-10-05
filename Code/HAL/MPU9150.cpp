@@ -73,6 +73,9 @@ int16_t MPU9150::get_acc_data(float& x, float& y, float& z){
 	return 1;
 }
 
+void 	MPU9150::start_acc_calibration(void){}
+void 	MPU9150::stop_acc_calibration(void){}
+
 
 /***************************************************
  * 				GYROSCOPE METHODS
@@ -113,8 +116,42 @@ int16_t MPU9150::get_gyro_data(float& x, float& y, float& z){
 	y = last_gyro_values[1];
 	z = last_gyro_values[2];
 
+	if(gyro_calibrating) process_gyro_calibration();
+
 	return 1;
 }
+
+ void MPU9150::start_gyro_calibration(void){
+	gyro_calibration_sum[0] = 0;
+	gyro_calibration_sum[1] = 0;
+	gyro_calibration_sum[2] = 0;
+	gyro_calibration_points = 0;
+	gyro_calibrating = true;
+
+	return;
+}
+
+
+
+void MPU9150::process_gyro_calibration(){
+	gyro_calibration_sum[0] += last_gyro_values[0];
+	gyro_calibration_sum[1] += last_gyro_values[1];
+	gyro_calibration_sum[2] += last_gyro_values[2];
+	gyro_calibration_points++;
+}
+
+ void MPU9150::stop_gyro_calibration(void){
+
+	 if(!gyro_calibrating) return;
+	//Add the new offsets:
+	gyro_calibration.offset_x = (gyro_calibration_sum[0]+ gyro_calibration_points*gyro_calibration.offset_x) / gyro_calibration_points;
+	gyro_calibration.offset_y = (gyro_calibration_sum[1]+ gyro_calibration_points*gyro_calibration.offset_y) / gyro_calibration_points;
+	gyro_calibration.offset_z = (gyro_calibration_sum[2]+ gyro_calibration_points*gyro_calibration.offset_z) / gyro_calibration_points;
+
+	gyro_calibrating = false;
+}
+
+
 
 
 /***************************************************

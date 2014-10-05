@@ -1,5 +1,7 @@
 #pragma once
 
+#include "math.h"
+
 class EulerAngle{
 public:
 	float x;
@@ -7,6 +9,7 @@ public:
 	float z;
 
 	EulerAngle(): x(0.0f), y(0.0f), z(0.0f){};
+	EulerAngle(float x_, float y_, float z_): x(x_), y(y_), z(z_){};
 
 	float dot_product(EulerAngle b){
 		return x * b.x + y * b.y + z * b.z;
@@ -22,5 +25,10 @@ public:
 	  return d;
 	}
 
+	void to_degrees(){
+		x *= 360/(2*M_PI);
+		y *= 360/(2*M_PI);
+		z *= 360/(2*M_PI);
+	}
 
 };

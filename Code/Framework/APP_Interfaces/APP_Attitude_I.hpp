@@ -4,10 +4,10 @@
 struct APP_Attitude_I : APP_Interface<APP_Attitude_I>{
 	using APP_Interface::APP_Interface;
 
-	float Pitch;
-	float Roll;
-	float Yaw;
-	float PitchVelocity;
-	float RollVelocity;
-	float YawVelocity;
+	float pitch;
+	float roll;
+	float yaw;
+	float pitch_velocity;
+	float roll_velocity;
+	float yaw_velocity;
 };

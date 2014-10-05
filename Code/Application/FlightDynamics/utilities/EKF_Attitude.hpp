@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Framework.hpp"
 #include "arm_math.h"
 #include "Quaternion.hpp"
 
@@ -22,8 +23,7 @@ public:
 	void innovate_priori(Quaternion& q,
 						float Gx,
 						float Gy,
-						float Gz,
-						float dt);
+						float Gz);
 
 	void innovate_stage1(Quaternion& q,
 								 float Ax,

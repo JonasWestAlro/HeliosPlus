@@ -42,12 +42,16 @@ EKF_Attitude::EKF_Attitude(){
 void EKF_Attitude::innovate_priori(Quaternion& quaternion,
 					float Gx,
 					float Gy,
-					float Gz,
-					float dt){
+					float Gz){
 
 	float quaternion_array[4] = {quaternion.w, quaternion.x, quaternion.y, quaternion.z};
 	arm_matrix_instance_f32 q;
 	arm_mat_init_f32(&q, 4, 1, quaternion_array);
+
+	static uint32_t timestamp;
+	static float 	dt;
+
+	dt = Time.get_time_since_sec(timestamp);
 
 	//---------------------- PREDICTION -----------------------------
 	//1. Obtain the angular velocities:
@@ -96,6 +100,7 @@ void EKF_Attitude::innovate_priori(Quaternion& quaternion,
 	//Pk = temp;
 	copy_matrix(&Pk, &temp4x4);
 
+	timestamp = Time.get_timestamp();
 }
 
 
@@ -264,8 +269,8 @@ void EKF_Attitude::innovate_stage2(Quaternion& quaternion,
 		quaternion.z = quaternion_array[3];
 }
 
-void EKF_Attitude::copy_matrix(arm_matrix_instance_f32* from,
-				 arm_matrix_instance_f32* to){
+void EKF_Attitude::copy_matrix(arm_matrix_instance_f32* to,
+				 arm_matrix_instance_f32* from){
 
 	uint8_t i;
 	for(i=0; i<from->numCols*from->numRows; i++){

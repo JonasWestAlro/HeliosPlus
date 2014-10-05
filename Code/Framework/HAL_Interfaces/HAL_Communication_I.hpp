@@ -9,4 +9,7 @@ class HAL_Communication_I : public HAL_Interface {
 	virtual bool  	 send(uint8_t) = 0;
 	virtual uint16_t put(uint8_t*, uint16_t) = 0;
 	virtual uint16_t transmit(void) = 0;
+
+	virtual bool send_number(uint32_t) = 0;
+	virtual bool send_number(float) = 0;
 };
