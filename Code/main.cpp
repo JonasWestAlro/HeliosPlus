@@ -55,7 +55,7 @@ int main(void){
 
 	//Bind Application Interfaces ------------------------------------------:
 	APP_Attitude_I attitude({ &flight_control.attitude,   //CONSUMER
-							  &flight_navigation.attitude,//CONSUMER
+							  &flight_navigation.attitude_socket,//CONSUMER
 							  &communication.attitude});  //CONSUMER
 
 	APP_Attitude_I attitude1({&communication.attitude});
