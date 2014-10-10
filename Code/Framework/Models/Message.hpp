@@ -78,6 +78,13 @@ class Message{
 			return ptr;
 		}
 
+		uint8_t get_enum(){
+			return data[5];
+		}
+
+		void set_enum(uint8_t enum_data){
+			data[5] = enum_data;
+		}
 
 	   /********************************************
 		* 			  MESSAGE DATA					*

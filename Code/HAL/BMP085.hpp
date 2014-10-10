@@ -6,14 +6,16 @@
 #define P_SEALEVEL 101325.0f //101297
 #define NUM_OF_OFFSET_CALCULATIONS 10.0f
 
-class BMP085 {
+class BMP085 : public HAL_Altitude_I {
 	public:
 		BMP085(void);
 		~BMP085(void);
-		bool		dataAvailable(void);
-		float 		getAltitude(void);
-		bool  		getStatus(void);
-		void 		setOffset(float);
+
+		virtual uint8_t data_available(void);
+		virtual float   get_altitude(void);
+		virtual uint8_t get_status(void);
+		virtual void 	set_offset(float);
+
 
 	private:
 		float	 	getTemperature(void);

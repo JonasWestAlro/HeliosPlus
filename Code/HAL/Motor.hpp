@@ -105,10 +105,10 @@ class Motor : public HAL_Motor_I {
 
 	    	uint8_t i = 0;
 	    	for(i;i<8;i++){
-	    		if(Motors & 1<<i)
+	    		if(motor & 1<<i)
 	    		{
-	    			if(Speed >= MINSPEED && Speed <= MAXSPEED ){
-	    				uint16_t setSpeed = (Speed*OCOFFSET/1000.0)+OCOFFSET;
+	    			if(speed >= MINSPEED && speed <= MAXSPEED ){
+	    				uint16_t setSpeed = (speed*OCOFFSET/1000.0)+OCOFFSET;
 	    				*(CCR_Regs[i]) = setSpeed;
 	    			}else{
 	    				*(CCR_Regs[i]) = OCOFFSET;
@@ -119,7 +119,7 @@ class Motor : public HAL_Motor_I {
 	    }
 
 	private:
-	    const uint32_t* CCR_Regs[8] = {	 &(TIM4->CCR1),
+	    volatile uint32_t* CCR_Regs[8] = {	 &(TIM4->CCR1),
 										 &(TIM4->CCR2),
 										 &(TIM4->CCR3),
 										 &(TIM4->CCR4),

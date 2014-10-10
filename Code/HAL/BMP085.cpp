@@ -36,13 +36,12 @@ BMP085::~BMP085(void)
 }
 
 
-bool BMP085::dataAvailable(void)
-{
+uint8_t BMP085::data_available(void){
 	this->process();
 	return m_DataReady;
 }
 
-float BMP085::getAltitude(void)
+float BMP085::get_altitude(void)
 {
 	static float last_altitude;
 	float dif = last_altitude - m_Altitude;
@@ -213,7 +212,7 @@ bool BMP085::readRawPressure(void)
 	return false;
 }
 
-void BMP085::setOffset(float offset)
+void BMP085::set_offset(float offset)
 {
 	if(m_CalibrationInProgress == false)
 		m_AltitudeOffset += offset;
@@ -311,7 +310,7 @@ bool BMP085::read16BitData(uint8_t addr, uint16_t* output)
     return err;
 }
 
-bool BMP085::getStatus(void)
+uint8_t BMP085::get_status(void)
 {
 	static uint32_t last_error = 0;
 

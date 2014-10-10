@@ -13,6 +13,9 @@
 #include "Framework.hpp"
 #include "Global.hpp"
 
+
+//HAL Drivers includes:
+#include "Motor.hpp"
 #include "MPU9150.hpp"
 #include "BMP085.hpp"
 #include "HeliosLED.hpp"
@@ -20,6 +23,8 @@
 #include "HC-SR04.hpp"
 #include "UART.hpp"
 #include "WirelessUART.hpp"
+#include "PPMReceiver.hpp"
+#include "GPS_UART.hpp"
 
 //TODO-JWA: These definitely shouln't be defined here!
 template<>
@@ -31,9 +36,25 @@ uint32_t 	EEPROM::counter = 1000;
 EEPROM* 	EEPROM::EEPROM_table[10];
 uint8_t 	EEPROM::table_counter = 0;
 
-uint8_t temp[15] = "HEJ MED DIG\n\r";
 
 int main(void){
+	WirelessUART wireless_uart;
+
+
+	wireless_uart.put("Initiating sensors..\n\r\0");
+	wireless_uart.transmit();
+
+	//Create drivers ----------------------------------------------------:
+	MPU9150 	mpu9150;
+	HeliosLED 	leds;
+	PPMReceiver control_receiver;
+	Motor 		motors;
+	GPS_UART 	gps_uart;
+	HC_SR40 	sonar;
+	BMP085 		barometer;
+
+	wireless_uart.put("Sensors initiated..\n\r\0");
+	wireless_uart.transmit();
 
 
 	//Create Application modules ------------------------------------------:
@@ -46,12 +67,11 @@ int main(void){
 	SystemStatus 		system_status("SystemStatus", 			configMINIMAL_STACK_SIZE*10, 		1, 1000,
 									  &communication, &control_input, &flight_control, &flight_dynamics, &flight_navigation);
 
+	wireless_uart.put("Application Modules Created..\n\r\0");
+	wireless_uart.transmit();
 
-	//Create drivers ----------------------------------------------------:
-	Time.delay_ms(1000);
-	MPU9150 mpu9150;
-	HeliosLED leds;
-	WirelessUART wireless_uart;
+
+
 
 	//Bind Application Interfaces ------------------------------------------:
 	APP_Attitude_I attitude({ &flight_control.attitude,   //CONSUMER
@@ -67,6 +87,17 @@ int main(void){
 	flight_dynamics.set_magnetometer(&mpu9150);
 	flight_dynamics.set_leds(&leds);
 	flight_dynamics.set_debug(&wireless_uart);
+
+	control_input.set_control_receiver(&control_receiver);
+
+	flight_control.set_motors(&motors);
+
+	flight_navigation.set_accelerometer(&mpu9150);
+	flight_navigation.set_GPS(&gps_uart);
+	flight_navigation.set_barometer(&barometer);
+	flight_navigation.set_sonar(&sonar);
+
+	system_status.set_leds(&leds);
 
 	//Check that EEPROM table is not changed:
 	//EEPROM::Synchronize()
@@ -112,8 +143,8 @@ void test_sensors(){
 	BMP085 bmp085;
 	float temperature;
 	while(1){
-		if(bmp085.dataAvailable()){
-			temperature = bmp085.getAltitude();
+		if(bmp085.data_available()){
+			temperature = bmp085.get_altitude();
 		}
 		Time.delay_ms(150);
 	}

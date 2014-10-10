@@ -18,14 +18,13 @@ class FlightNavigation : public ApplicationModule {
 		APP_Attitude_I 	 attitude_socket;
 		APP_Navigation_I navigation_socket;
 
-	protected:
-		void task(void);
-		void handle_message(Message& msg);
-
 		void set_accelerometer(HAL_Accelerometer_I* acc){accelerometer = acc;}
 		void set_GPS(HAL_Communication_I* GPS_){GPS = GPS_;}
 		void set_barometer(HAL_Altitude_I* baro){barometer = baro;}
 		void set_sonar(HAL_Altitude_I* sonar_){sonar = sonar_;}
+	protected:
+		void task(void);
+		void handle_message(Message& msg);
 
 	private:
 		HAL_Accelerometer_I* 	accelerometer;

@@ -49,6 +49,10 @@ class ApplicationModule : Task {
 		virtual void task() = 0;
 		virtual void handle_message(Message& msg) = 0;
 
+		Messenger* get_messenger(){
+			return &messenger;
+		}
+
 	protected:
 		EEPROM eeprom;
 		Messenger messenger;

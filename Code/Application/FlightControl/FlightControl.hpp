@@ -12,14 +12,16 @@ class FlightControl : public ApplicationModule{
 		FlightControl(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
 		APP_Attitude_I attitude;
 
+		APP_Control_I  		control_socket;
+		APP_SystemStatus_I  system_status_socket;
+		APP_Attitude_I 	 	attitude_socket;
+		APP_Navigation_I 	navigation_socket;
+
+		void set_motors(HAL_Motor_I* motors_){motors = motors_;};
+
 	protected:
 		void task(void);
 		void handle_message(Message& msg);
-
-		APP_SystemStatus_I system_status_socket;
-		APP_Control_I  control_socket;
-		APP_Attitude_I attitude_socket;
-		APP_Navigation_I navigation_socket;
 
 	private:
 		HAL_Motor_I* motors;

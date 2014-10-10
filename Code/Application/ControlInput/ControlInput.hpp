@@ -9,8 +9,8 @@ class ControlInput : public ApplicationModule{
 
 		void set_control_receiver(HAL_ControlReceiver_I* p){control_receiver = p;}
 
-		APP_Control_I control_socket;
-		APP_SystemStatus_I system_status_socket;
+		APP_Control_I 		control_socket;
+		APP_SystemStatus_I 	system_status_socket;
 
 	protected:
 		void task(void);

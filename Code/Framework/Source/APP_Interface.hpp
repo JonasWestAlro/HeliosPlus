@@ -41,6 +41,14 @@ struct APP_InterfaceBase {
 		shared->mutex.release();
 	}
 
+	APP_InterfaceBase* get_pipe(){
+		return shared;
+	}
+
+	void set_pipe(APP_InterfaceBase* new_pipe){
+		shared = new_pipe;
+	}
+
 	APP_InterfaceBase* shared = 0;
 	Mutex mutex;
 };

@@ -10,7 +10,8 @@ typedef enum{
 	SENSOR_REPORT_STATUS,
 	MOTOR_REPORT_STATUS,
 	CONTROLINPUT_REPORT_STATUS,
-	SET_MODE_REQUEST,
+	ARM_REQUEST,
+	UNARM_REQUEST,
 	CALIBRATE_GYROSCOPE,
 	CALIBRATE_ACCELEROMETER,
 	CALIBRATE_MAGNETOMETER,
@@ -50,8 +51,8 @@ typedef enum{
 /*
  * SENSOR_REPORT_STATUS
  * 		(Is used to report sensor status)
- * 		Message  =  MAV_SYS_STATUS_SENSOR (flags)
- *		uint8Msg =  Status 0:NOTOK 1:OK 2:Calibrating
+ * 		uint32_t Data = MAV_SYS_STATUS_SENSOR (flags)
+ *		uint8_t Data[5] = Status 0:NOTOK 1:OK 2:Calibrating
  */
 
 
@@ -65,10 +66,10 @@ typedef enum{
  *		 report their status).
  *		 uint8Msg = Status 0:NOTOK 1:OK 2:Calibrating
  *
- * SET_MODE_REQUEST
+ * ARM_REQUEST
  * 		(Is used to request the system to arm it self)
- *		Message[0] = MAV_MODE
  *
+ * UNARM_REQUEST
  *
  *
  * */

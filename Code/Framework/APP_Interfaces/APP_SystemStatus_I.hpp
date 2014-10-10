@@ -7,5 +7,6 @@ struct APP_SystemStatus_I : APP_Interface<APP_SystemStatus_I>{
 	bool 	 armed;
 	bool 	 system_error;
 	uint8_t  system_error_code;
+	uint8_t  mavlink_state;
 	uint16_t voltage_battery;
 };

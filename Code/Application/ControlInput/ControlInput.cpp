@@ -150,9 +150,9 @@ void ControlInput::switch_arm_state(void){
 	system_status_socket.receive();
 
 	if(!system_status_socket.armed){
-		messenger.broadcast(Message(SET_MODE_REQUEST, (uint8_t)MAV_MODE_STABILIZE_ARMED));
+		messenger.broadcast(ARM_REQUEST);
 	}else{
-		messenger.broadcast(Message(SET_MODE_REQUEST, (uint8_t)MAV_MODE_STABILIZE_DISARMED));
+		messenger.broadcast(UNARM_REQUEST);
 	}
 }
 
