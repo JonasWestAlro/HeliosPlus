@@ -22,7 +22,7 @@
 #define nmea_h
 
 //#include "WConstants.h"
-#include "Framework.h"
+#include "Framework.hpp"
 #include "math.h"
 
 #define	ALL					0					// connect to all datatypes
