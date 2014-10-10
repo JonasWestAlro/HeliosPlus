@@ -185,15 +185,20 @@ void FlightDynamics::report_status(void){
 }
 
 void FlightDynamics::handle_debug_stream(){
-	Debug.send_number(attitude_socket.pitch);
-	Debug.send(',');
-	Debug.send_number(attitude_socket.roll);
-	Debug.send(',');
-	Debug.send_number(attitude_socket.yaw);
+	static uint32_t timestamp = 0;
 
-	Debug.send('\n');
-	Debug.send('\r');
-	Debug.transmit();
+	if(Time.get_time_since_ms(timestamp)>50){
+		Debug.send_number(attitude_socket.pitch);
+		Debug.send(',');
+		Debug.send_number(attitude_socket.roll);
+		Debug.send(',');
+		Debug.send_number(attitude_socket.yaw);
+
+		Debug.send('\n');
+		Debug.send('\r');
+		Debug.transmit();
+		timestamp = Time.get_timestamp();
+	}
 }
 
 /*

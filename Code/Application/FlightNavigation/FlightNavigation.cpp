@@ -4,6 +4,7 @@ FlightNavigation::FlightNavigation(const char* name, uint32_t stackSize, uint8_t
 : ApplicationModule(name, stackSize, priority, eeprom_size)
 {
 	// Initializer code goes here
+	set_frequency(200);
 }
 
 void FlightNavigation::task(void){

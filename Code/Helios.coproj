@@ -4,7 +4,7 @@
     <Device manufacturerId="9" manufacturerName="ST" chipId="487" chipName="STM32F407VE" boardId="" boardName=""/>
     <BuildOption>
       <Compile>
-        <Option name="OptimizationLevel" value="0"/>
+        <Option name="OptimizationLevel" value="3"/>
         <Option name="UseFPU" value="0"/>
         <Option name="UserEditCompiler" value="-std=gnu++11"/>
         <Option name="SupportCPlusplus" value="1"/>
@@ -51,10 +51,10 @@
           <Define name="STM32F4XX"/>
           <Define name="USE_STDPERIPH_DRIVER"/>
           <Define name="__ASSEMBLY__"/>
-          <Define name="__FPU_USED"/>
           <Define name="SYSTEM_LIB"/>
           <Define name="SUPPORT_CPLUSPLUS"/>
           <Define name="ARM_MATH_CM4"/>
+          <Define name="__FPU_USED"/>
         </DefinedSymbols>
       </Compile>
       <Link useDefault="0">
