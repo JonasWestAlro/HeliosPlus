@@ -6,6 +6,7 @@
 #include "EulerAngle.hpp"
 #include "IIR_Filter.hpp"
 #include "mavlink.h"
+#include "Debug.hpp"
 
 class FlightDynamics : public ApplicationModule{
 	public:
@@ -24,7 +25,7 @@ class FlightDynamics : public ApplicationModule{
 		void handle_message(Message& msg);
 
 	private:
-		portTickType xLastWakeTime;
+		bool debugging_stream = false;
 
 		//HAL Interfaces:
 		HAL_Accelerometer_I* accelerometer;
@@ -66,5 +67,6 @@ class FlightDynamics : public ApplicationModule{
 		void report_status();
 		void update_status();
 		void debug_led();
+		void handle_debug_stream();
 };
 

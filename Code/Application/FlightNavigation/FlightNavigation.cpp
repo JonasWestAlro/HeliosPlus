@@ -7,7 +7,7 @@ FlightNavigation::FlightNavigation(const char* name, uint32_t stackSize, uint8_t
 }
 
 void FlightNavigation::task(void){
-	static uint32_t timestamp = 0;
+	/*static uint32_t timestamp = 0;
 
 	//Get the current attitude of the system:
 	attitude_socket.receive();
@@ -25,11 +25,11 @@ void FlightNavigation::task(void){
 	//estimate altitude:
 	estimate_altitude();
 
-	/*---------   PUBLISH  -------------*/
+	//---------   PUBLISH  -------------
 	navigation_socket.acceleration.z   = accel_earth_frame.z;
 	navigation_socket.velocity.z 	   = altitude_velocity;
 	navigation_socket.position.z 	   = altitude;
-	navigation_socket.publish();
+	navigation_socket.publish();*/
 }
 
 void FlightNavigation::handle_message(Message& msg){}

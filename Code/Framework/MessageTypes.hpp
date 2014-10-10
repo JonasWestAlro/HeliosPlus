@@ -16,6 +16,8 @@ typedef enum{
 	CALIBRATE_ACCELEROMETER,
 	CALIBRATE_MAGNETOMETER,
 	CALIBRATE_CONTROLINPUT,
+	START_DEBUG_STREAM,
+	STOP_DEBUG_STREAM
 	/*Define more messages here for
 	 * your application*/
 }MessageType;

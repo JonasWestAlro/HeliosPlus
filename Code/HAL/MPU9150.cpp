@@ -11,6 +11,8 @@ MPU9150::MPU9150(): i2c(SensorI2C::get_instance()){
 			break;
 		}else{
 			i2c.restart();
+			setup();
+			break;
 		}
 	}
 

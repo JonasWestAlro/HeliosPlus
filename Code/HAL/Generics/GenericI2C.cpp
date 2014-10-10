@@ -117,6 +117,7 @@ void GenericI2C::restart(void)
 {
 	I2C_GenerateSTOP(m_I2C, ENABLE);
 	I2C_DeInit(m_I2C);
+	Time.delay_ms(5);
 	this->setup();
 }
 
