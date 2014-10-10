@@ -5,7 +5,7 @@ FlightControl::FlightControl(const char* name, uint32_t stackSize, uint8_t prior
 {
 
 	distribution_controller = &quadcopter;
-
+	set_frequency(200);
 }
 
 void FlightControl::task(void){

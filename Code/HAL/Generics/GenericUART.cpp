@@ -349,7 +349,7 @@ uint16_t GenericUART::data_available(void)
   * @retval 	0		Failure
   * @retval		1		Success
   */
-uint16_t GenericUART::put(uint8_t* data, uint16_t size)
+uint16_t GenericUART::put(char* data, uint16_t size)
 {
    uint16_t i;
 	for(i=0; i<size; i++){
@@ -420,7 +420,9 @@ uint16_t GenericUART::transmit(void)
 	//Check if there are anything in the buffer:
 	if(m_TransmitBufferCounter > 0){
 		//Check if UART is busy, report error if it is:
-		if(this->isBusy()) return false;
+		if(this->isBusy()){
+			return false;
+		}
 
 		//Setup DMA Transfer, and switch the buffer:
 		if(m_ActiveTransmitBuffer == 1){
@@ -447,7 +449,7 @@ uint16_t GenericUART::transmit(void)
 		m_TransmitBufferCounter = 0;
 		return true;
 	}
-	return false;
+	return true;
 }
 
 

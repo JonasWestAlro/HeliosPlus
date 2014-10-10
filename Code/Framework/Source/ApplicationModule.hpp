@@ -3,8 +3,9 @@
 #include "EEPROM.hpp"
 #include "Messenger.hpp"
 #include "Task.hpp"
+#include "Timing.hpp"
 
-class ApplicationModule : Task {
+class ApplicationModule : public Task {
 	public:
 		ApplicationModule(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0)
 		: Task(name, stackSize, priority),
@@ -22,9 +23,13 @@ class ApplicationModule : Task {
 				while(messenger.try_receive(&msg)){
 					handle_message(msg);
 				}
+				measured_frequency = 1.0/Time.get_time_since_sec(measurement_timestamp);
 
+				measurement_timestamp = Time.get_timestamp();
 				task();
+				measured_duration = Time.get_time_since_us(measurement_timestamp);
 
+				measurement_timestamp = Time.get_timestamp();
 				delay_until(&last_wake_tick, ticks_to_delay);
 			}
 		}
@@ -46,6 +51,14 @@ class ApplicationModule : Task {
 			}
 		}
 
+		float get_measured_frequency(){
+			return measured_frequency;
+		}
+
+		uint32_t get_measured_duration(){
+			return measured_duration;
+		}
+
 		virtual void task() = 0;
 		virtual void handle_message(Message& msg) = 0;
 
@@ -61,6 +74,10 @@ class ApplicationModule : Task {
 
 		portTickType ticks_to_delay = 2000;
 		portTickType last_wake_tick = 0;
+
+		float measured_frequency = 0;
+		uint32_t measurement_timestamp = 0;
+		uint32_t measured_duration;
 
 	private:
 

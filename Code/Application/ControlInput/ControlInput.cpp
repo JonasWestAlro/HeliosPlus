@@ -6,6 +6,8 @@ ControlInput::ControlInput(const char* name, uint32_t stackSize, uint8_t priorit
 {
 	messenger.subscribe(REQUEST_CONTROLINPUTS_REPORT);
 	messenger.subscribe(CALIBRATE_CONTROLINPUT);
+
+	set_frequency(50);
 }
 
 void ControlInput::task(void){

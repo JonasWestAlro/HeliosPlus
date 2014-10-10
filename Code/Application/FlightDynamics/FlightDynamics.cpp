@@ -61,16 +61,7 @@ void FlightDynamics::task(void){
 	update_status();
 	debug_led();
 
-	//Wait for the next cycle.
-	debug->send_number(attitude_socket.pitch_velocity);
-	debug->send(',');
-	debug->send_number(attitude_socket.roll_velocity);
-	debug->send(',');
-	debug->send_number(attitude_socket.yaw_velocity);
-
-	debug->send('\n');
-	debug->transmit();
-
+	if(debugging_stream) handle_debug_stream();
 }
 
 void FlightDynamics::handle_message(Message& msg){
@@ -94,6 +85,15 @@ void FlightDynamics::handle_message(Message& msg){
 				FlightDynamics_CalibrateAccelerometer(CALIBRATE_START);
 			}*/
 			break;
+
+		case START_DEBUG_STREAM:
+			debugging_stream = true;
+			break;
+
+		case STOP_DEBUG_STREAM:
+			debugging_stream = false;
+			break;
+
 		default:
 			break;
 	}
@@ -180,6 +180,23 @@ void FlightDynamics::report_status(void){
 
 	message.set_enum(sensor_status);
 	messenger.broadcast(&message);
+}
+
+void FlightDynamics::handle_debug_stream(){
+	static uint32_t timestamp = 0;
+
+	if(Time.get_time_since_ms(timestamp)>50){
+		Debug.send_number(attitude_socket.pitch);
+		Debug.send(',');
+		Debug.send_number(attitude_socket.roll);
+		Debug.send(',');
+		Debug.send_number(attitude_socket.yaw);
+
+		Debug.send('\n');
+		Debug.send('\r');
+		Debug.transmit();
+		timestamp = Time.get_timestamp();
+	}
 }
 
 /*

@@ -68,6 +68,7 @@
 
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
+#include "Framework_Time.h"
 
 /*-----------------------------------------------------------
  * Application specific definitions.
@@ -99,7 +100,7 @@ extern uint32_t SystemCoreClock;
 #define configMINIMAL_STACK_SIZE		( ( unsigned short ) 64 )
 #define configTOTAL_HEAP_SIZE			( ( size_t ) (20000) )
 #define configMAX_TASK_NAME_LEN			( 20 )
-#define configUSE_TRACE_FACILITY		0
+#define configUSE_TRACE_FACILITY		1
 #define configUSE_16_BIT_TICKS			0
 #define configIDLE_SHOULD_YIELD			1
 #define configUSE_MUTEXES				1
@@ -109,9 +110,10 @@ extern uint32_t SystemCoreClock;
 #define configUSE_MALLOC_FAILED_HOOK	1
 #define configUSE_APPLICATION_TASK_TAG	0
 #define configUSE_COUNTING_SEMAPHORES	1
-#define configGENERATE_RUN_TIME_STATS	FRAMEWORK_DEBUGGING
+#define configGENERATE_RUN_TIME_STATS	1
+#define configUSE_STATS_FORMATTING_FUNCTIONS    1
 
-#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() Framework_Time_Init()
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() Framework_Time_GetTimeUs()
 #define portGET_RUN_TIME_COUNTER_VALUE() Framework_Time_GetTimeUs()
 
 // Co-routine definitions.

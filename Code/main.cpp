@@ -3,6 +3,7 @@
 #include "stm32f4xx_gpio.h"
 #include "stm32f4xx_rcc.h"
 
+#include "CLI.hpp"
 #include "Communication.hpp"
 #include "ControlInput.hpp"
 #include "FlightControl.hpp"
@@ -26,6 +27,8 @@
 #include "PPMReceiver.hpp"
 #include "GPS_UART.hpp"
 
+#include "Debug.hpp"
+
 //TODO-JWA: These definitely shouln't be defined here!
 template<>
 uint16_t Global<float>::no_globals = 0;
@@ -39,10 +42,8 @@ uint8_t 	EEPROM::table_counter = 0;
 
 int main(void){
 	WirelessUART wireless_uart;
+	Debug.set_driver(&wireless_uart);
 
-
-	wireless_uart.put((char*)"Initiating sensors..\n\r\0");
-	wireless_uart.transmit();
 
 	//Create drivers ----------------------------------------------------:
 	MPU9150 	mpu9150;
@@ -53,11 +54,8 @@ int main(void){
 	HC_SR40 	sonar;
 	BMP085 		barometer;
 
-	wireless_uart.put((char*)"Sensors initiated..\n\r\0");
-	wireless_uart.transmit();
-
-
 	//Create Application modules ------------------------------------------:
+
 	Communication 		communication("Communication", 			configMINIMAL_STACK_SIZE*10, 	1, 1000);
 	ControlInput 		control_input("ControlInput", 			configMINIMAL_STACK_SIZE*5, 	1, 1000);
 	FlightControl 		flight_control("FlightControl", 		configMINIMAL_STACK_SIZE*6, 	1, 1000);
@@ -67,8 +65,8 @@ int main(void){
 	SystemStatus 		system_status("SystemStatus", 			configMINIMAL_STACK_SIZE*10, 		1, 1000,
 									  &communication, &control_input, &flight_control, &flight_dynamics, &flight_navigation);
 
-	wireless_uart.put((char*)"Application Modules Created..\n\r\0");
-	wireless_uart.transmit();
+	CLI 				cli("CLI", configMINIMAL_STACK_SIZE*10, 	1, 1000,
+							&communication, &control_input, &flight_control, &flight_dynamics, &flight_navigation, &system_status);
 
 
 
@@ -86,7 +84,7 @@ int main(void){
 	flight_dynamics.set_gyroscope(&mpu9150);
 	flight_dynamics.set_magnetometer(&mpu9150);
 	flight_dynamics.set_leds(&leds);
-	flight_dynamics.set_debug(&wireless_uart);
+	flight_dynamics.set_debug(&gps_uart);
 
 	control_input.set_control_receiver(&control_receiver);
 

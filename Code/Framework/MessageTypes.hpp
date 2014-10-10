@@ -18,7 +18,9 @@ typedef enum{
 	CALIBRATE_GYROSCOPE,			//!<
 	CALIBRATE_ACCELEROMETER,		//!<
 	CALIBRATE_MAGNETOMETER,			//!<
-	CALIBRATE_CONTROLINPUT			//!<
+	CALIBRATE_CONTROLINPUT,			//!<
+	START_DEBUG_STREAM,				//!<
+	STOP_DEBUG_STREAM				//!<
 	/*Define more messages here for
 	 * your application*/
 }MessageType;
