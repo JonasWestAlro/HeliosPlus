@@ -1,4 +1,3 @@
-#pragma once
 #include "MPU9150.hpp"
 
 MPU9150::MPU9150(): i2c(SensorI2C::get_instance()){

@@ -56,11 +56,11 @@ void FlightControl::task(void){
 void FlightControl::handle_message(Message& msg){
 	Message response;
 
-	switch(msg.message_type){
+	switch(msg.type){
 		case REQUEST_MOTORS_REPORT:
-			response.message_type = MOTOR_REPORT_STATUS;
-			response.ptr  = (void*)&control_socket;
-			response.data[0] = STATUS_OK;
+			response.type = MOTOR_REPORT_STATUS;
+			response.set_pointer(&control_socket);
+			response.set_byte(STATUS_OK, 0);
 			messenger.send_to(msg.sender, &response);
 			break;
 		default:

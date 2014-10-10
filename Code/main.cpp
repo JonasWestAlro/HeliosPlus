@@ -41,7 +41,7 @@ int main(void){
 	WirelessUART wireless_uart;
 
 
-	wireless_uart.put("Initiating sensors..\n\r\0");
+	wireless_uart.put((char*)"Initiating sensors..\n\r\0");
 	wireless_uart.transmit();
 
 	//Create drivers ----------------------------------------------------:
@@ -53,7 +53,7 @@ int main(void){
 	HC_SR40 	sonar;
 	BMP085 		barometer;
 
-	wireless_uart.put("Sensors initiated..\n\r\0");
+	wireless_uart.put((char*)"Sensors initiated..\n\r\0");
 	wireless_uart.transmit();
 
 
@@ -67,7 +67,7 @@ int main(void){
 	SystemStatus 		system_status("SystemStatus", 			configMINIMAL_STACK_SIZE*10, 		1, 1000,
 									  &communication, &control_input, &flight_control, &flight_dynamics, &flight_navigation);
 
-	wireless_uart.put("Application Modules Created..\n\r\0");
+	wireless_uart.put((char*)"Application Modules Created..\n\r\0");
 	wireless_uart.transmit();
 
 

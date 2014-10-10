@@ -31,7 +31,7 @@ class MessageDistribution {
 			uint8_t i;
 			mutex.take();
 			for(i = 0; i < subscriberCount; i++) {
-				if (subscriberList[i].msg_type == msg.message_type) {
+				if (subscriberList[i].msg_type == msg.type) {
 					subscriberList[i].queue->send(&msg);
 				}
 			}

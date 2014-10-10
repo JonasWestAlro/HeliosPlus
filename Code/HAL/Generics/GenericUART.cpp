@@ -362,12 +362,8 @@ uint16_t GenericUART::put(uint8_t* data, uint16_t size)
 uint16_t GenericUART::put(char* data){
 	uint8_t i = 0;
 
-	while(1){
-		if(data[i] != '\0'){
-			send(data[i++]);
-		}else{
-			break;
-		}
+	while(data[i] != '\0'){
+		send(data[i++]);
 	}
 
 	return i;

@@ -38,7 +38,7 @@ void Communication::task(void){
 void Communication::handle_message(Message& msg){
 int i = 0;
 
-	switch(msg.message_type){
+	switch(msg.type){
 		case SHIFT_OF_CONTROL_ACK:
 			i++;
 			i++;

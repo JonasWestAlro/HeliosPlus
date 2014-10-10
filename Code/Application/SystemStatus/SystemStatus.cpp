@@ -41,9 +41,7 @@ void SystemStatus::task(void){
 }
 
 void SystemStatus::handle_message(Message& msg){
-	int i = 0;
-
-	switch(msg.message_type){
+	switch(msg.type){
 		case SENSOR_REPORT_STATUS:
 			handle_sensor_report(msg);
 			break;
@@ -90,7 +88,6 @@ void SystemStatus::handle_message(Message& msg){
  *
 */
 void SystemStatus::update_status(void){
-	uint8_t i;
 	static uint32_t last_request = 0;
 
 	if(Time.get_time_since_ms(last_request) > 300){
@@ -114,7 +111,6 @@ void SystemStatus::update_status(void){
 		default:
 			break;
 	};
-
 }
 
 
@@ -154,7 +150,7 @@ void SystemStatus::check_arm(void){
 void SystemStatus::handle_sensor_report(Message& msg){
 
 	uint32_t mavlink_sensors = msg.get_integer32();
-	STATUS status = (STATUS)msg.data[5];
+	STATUS status = (STATUS)msg.get_enum();
 
 	//Update the conditions table:
 	if(mavlink_sensors & MAV_SYS_STATUS_SENSOR_3D_GYRO)
@@ -172,7 +168,7 @@ void SystemStatus::handle_motor_report(Message& msg){
 
 void SystemStatus::handle_control_input_report(Message& msg){
 
-	APP_InterfaceBase* pipe_of_sender = static_cast<APP_InterfaceBase*>(msg.ptr);
+	APP_InterfaceBase* pipe_of_sender = static_cast<APP_InterfaceBase*>(msg.get_pointer());
 
 	//Check that this is the current input module:
 	if(flightcontrol_module->control_socket.get_pipe() == pipe_of_sender){
@@ -181,7 +177,7 @@ void SystemStatus::handle_control_input_report(Message& msg){
 }
 
 void SystemStatus::handle_shift_of_control(Message& msg){
-	APP_InterfaceBase* pipe_of_sender = static_cast<APP_InterfaceBase*>(msg.ptr);
+	APP_InterfaceBase* pipe_of_sender = static_cast<APP_InterfaceBase*>(msg.get_pointer());
 
 	if(msg.get_enum() == REQUEST_TAKE_CONTROL){
 		flightcontrol_module->control_socket.set_pipe(pipe_of_sender);
