@@ -11,7 +11,7 @@ typedef enum{
 }STATUS;
 
 //Forward declarations:
-//TODO-JWA: We should probably find a better way of linking it all together..
+//!TODO-JWA: We should probably find a better way of linking it all together..
 class Message;
 class Messenger;
 class MessageDistribution;
