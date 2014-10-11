@@ -38,6 +38,7 @@ class ApplicationModule;
 #include "APP_Control_I.hpp"
 #include "APP_Navigation_I.hpp"
 #include "APP_SystemStatus_I.hpp"
+#include "APP_SystemMode_I.hpp"
 
 #include "HAL_Accelerometer_I.hpp"
 #include "HAL_ControlReceiver_I.hpp"

@@ -2,17 +2,21 @@
 
 #include "Framework.hpp"
 
+class GlobalAbstract{
+public:
+	virtual ~GlobalAbstract(){}
+};
+
 template<typename T>
-class Global{
+class Global : public GlobalAbstract{
 public:
 	Global(T value, const char* name_):
 		name(name_){
 		data = value;
-
-		//TODO-JWA: This won't compile for some reason..
-		//global_table[no_globals] = this;
-		no_globals++;
+		add_global(this);
 	}
+
+	virtual ~Global(){}
 
 	void set(T value){
 		mutex.take();
@@ -41,15 +45,22 @@ public:
 		//Use portable EEPROM driver to load..
 		return true;
 	}
-
-	static uint16_t get_no_globals(){
-		return no_globals;
-	}
 private:
 	T data;
 	Mutex mutex;
 	const char* name;
-
-	static uint16_t no_globals;
-	static Global* global_table[FRAMEWORK_MAX_GLOBALS];
 };
+
+
+
+//!todo Put these in a namespace
+static uint16_t no_globals;
+static GlobalAbstract* global_table[FRAMEWORK_MAX_GLOBALS];
+
+static void add_global(GlobalAbstract* obj){
+	global_table[no_globals++] = obj;
+}
+
+static uint16_t get_no_globals(){
+	return no_globals;
+}

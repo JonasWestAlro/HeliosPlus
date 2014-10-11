@@ -2,7 +2,7 @@
 #include "Framework.hpp"
 #include "Quaternion.hpp"
 
-struct APP_Quaternion_I : APP_Interface<APP_Attitude_I>{
+struct APP_Quaternion_I : APP_Interface<APP_Quaternion_I>{
 	using APP_Interface::APP_Interface;
 
 	float w;
