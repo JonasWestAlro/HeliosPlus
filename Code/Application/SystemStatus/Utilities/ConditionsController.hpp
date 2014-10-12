@@ -16,7 +16,7 @@ struct FlightCondition{
 	uint32_t 		   	timestamp;
 };
 
-static const uint8_t no_conditions = 5;
+static const uint8_t no_conditions = 4;
 
 class ConditionsController{
 public:

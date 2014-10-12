@@ -338,3 +338,13 @@ void CLI::handle_print_arming_conditions(void){
 	external_print_request_timestamp = Time.get_timestamp();
 	waiting_for_external_print = true;
 }
+
+void CLI::handle_arm(void){
+	messenger.broadcast(ARM_REQUEST);
+	Debug.put("Trying to ARM...");
+}
+
+void CLI::handle_unarm(void){
+	messenger.broadcast(UNARM_REQUEST);
+	Debug.put("UNARMING...");
+}

@@ -11,6 +11,7 @@ class Communication : public ApplicationModule {
 		Communication(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
 
 		// Interfaces
+		APP_Control_I 	   control_socket;
 		APP_Attitude_I 	   attitude;
 		APP_Quaternion_I   quaternion;
 		APP_SystemMode_I   system_mode;

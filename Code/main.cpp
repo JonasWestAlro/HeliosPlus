@@ -63,11 +63,20 @@ int main(void){
 
 
 	//Bind Application Interfaces ------------------------------------------:
-	APP_Attitude_I attitude({ &flight_control.attitude,   //CONSUMER
-							  &flight_navigation.attitude_socket,//CONSUMER
-							  &communication.attitude});  //CONSUMER
+	APP_SystemStatus_I systemstatus({&system_status.system_status_socket,
+									 &communication.system_status,
+									 &control_input.system_status_socket,
+									 &flight_control.system_status_socket});
 
-	APP_Attitude_I attitude1({&communication.attitude});
+	APP_Attitude_I attitude({ &flight_dynamics.attitude_socket,   //PROVIDER
+							  &flight_navigation.attitude_socket, //CONSUMER
+							  &flight_control.attitude_socket});  //CONSUMER
+
+	APP_Control_I control({&control_input.control_socket,
+						   &flight_control.control_socket});
+
+	APP_Control_I control1({&communication.control_socket});
+
 
 
 	//Bind HAL Interfaces ------------------------------------------::

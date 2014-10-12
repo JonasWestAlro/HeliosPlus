@@ -49,7 +49,7 @@ void ControlInput::task(void){
 
 		control_socket.altitude = contrain(control_socket.altitude, 0, 300);
 	}else{
-	//THE CONTROL RECEIVER ISN'T OK!!
+		//THE CONTROL RECEIVER ISN'T OK!!
 		control_socket.reset();
 	}
 

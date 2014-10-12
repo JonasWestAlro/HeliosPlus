@@ -10,7 +10,6 @@
 class FlightControl : public ApplicationModule{
 	public:
 		FlightControl(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
-		APP_Attitude_I attitude;
 
 		APP_Control_I  		control_socket;
 		APP_SystemStatus_I  system_status_socket;
