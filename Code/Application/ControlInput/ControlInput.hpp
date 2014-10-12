@@ -23,6 +23,7 @@ class ControlInput : public ApplicationModule{
 		bool debugging_stream = false;
 		bool in_control = true;
 		bool calibrating = false;
+		uint32_t calibrate_timestamp;
 		STATUS status = STATUS_OK;
 
 		int16_t aux_states[2]	 	= {0};
@@ -38,6 +39,8 @@ class ControlInput : public ApplicationModule{
 		void check_arm(void);
 		void switch_arm_state(void);
 		void request_control(uint8_t Request);
+
+		void check_calibration();
 
 		void update_status(void);
 		void report_status(void);

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define NO_CLI_COMMANDS 4
+#define NO_CLI_COMMANDS 6
 
 class CLI;
 
@@ -32,6 +32,8 @@ class CLI : public ApplicationModule {
 			ApplicationModule* flightdynamics_,
 			ApplicationModule* flightnavigation_,
 			ApplicationModule* systemstatus_);
+
+			APP_SystemStatus_I system_status_socket;
 
 	protected:
 		void task(void);
@@ -63,14 +65,16 @@ class CLI : public ApplicationModule {
 		bool compare_next_word_to(const char* compare_command);
 
         CLI_Command cli_table[NO_CLI_COMMANDS] = {
+          { "help",		&CLI::handle_help },
           { "stream",	&CLI::handle_stream },
           { "print",	&CLI::handle_print },
+          { "calibrate", &CLI::handle_calibrate },
           { "arm",		&CLI::handle_arm },
           { "unarm",	&CLI::handle_unarm }
         };
 		void handle_buffer_full(){};
 
-
+		void handle_help(void);
 		void handle_stream(void);
 
 		void handle_print(void);
@@ -79,6 +83,9 @@ class CLI : public ApplicationModule {
 		void handle_print_frequency_stats(void);
 		void handle_print_duration_stats(void);
 		void handle_print_arming_conditions(void);
+
+		void handle_calibrate(void);
+		void handle_calibrate_process(char*);
 
 		void handle_arm(void);
 		void handle_unarm(void);

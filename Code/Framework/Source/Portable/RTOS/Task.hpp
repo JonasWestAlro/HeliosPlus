@@ -35,6 +35,12 @@ class Task {
 			vTaskDelayUntil(pxPreviousWakeTime, xTimeIncrement);
 		}
 
+		void schedule_out_ms(uint16_t ms){
+			//calculate number of ticks:
+			uint32_t no_ticks = (get_tick_frequency()/1000)*ms;
+			vTaskDelay((TickType_t)no_ticks);
+		}
+
 		inline uint32_t get_tick_frequency(){
 			return configTICK_RATE_HZ;
 		}

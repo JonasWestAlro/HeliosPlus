@@ -55,6 +55,7 @@ void ControlInput::task(void){
 
 	control_socket.publish();
 
+	check_calibration();
 	check_arm();
 	if(debugging_stream) handle_debug_stream();
 }
@@ -85,6 +86,8 @@ void ControlInput::handle_message(Message& msg){
 
 		case CALIBRATE_CONTROLINPUT:
 			control_receiver->start_calibration();
+			calibrate_timestamp = Time.get_timestamp();
+			calibrating = true;
 			break;
 		case START_DEBUG_STREAM:
 			debugging_stream = true;
@@ -99,16 +102,24 @@ void ControlInput::handle_message(Message& msg){
 }
 
 void ControlInput::update_status(void){
+	if(calibrating){
+		if(status != STATUS_CALIBRATING){
+			status = STATUS_CALIBRATING;
+			report_status();
+		}
+		return;
+	}
+
 	//Check that driver status is OK:
 	if(control_receiver->get_status() == STATUS_OK){
-		if(status == STATUS_NOTOK){
+		if(status != STATUS_NOTOK){
 			status = STATUS_OK;
 			report_status();
 		}
 	}else{
 		//Status is not OK!..
 		//Check for transistion:
-		if(status == STATUS_OK){
+		if(status != STATUS_OK){
 			status = STATUS_NOTOK;
 			report_status();
 		}
@@ -175,6 +186,15 @@ void ControlInput::report_status(void){
 	messenger.broadcast(Message(CONTROLINPUT_REPORT_STATUS, (uint8_t)status));
 }
 
+
+void ControlInput::check_calibration(){
+	if(calibrating){
+		if(Time.get_time_since_sec(calibrate_timestamp) > 10){
+			control_receiver->stop_calibration();
+			calibrating = false;
+		}
+	}
+}
 
 void ControlInput::handle_debug_stream(){
 	static uint32_t timestamp = 0;

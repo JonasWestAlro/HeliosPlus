@@ -58,6 +58,7 @@ void FlightDynamics::task(void){
 	attitude_quarternion_socket.publish();
 
 
+	check_calibrations();
 	update_status();
 	debug_led();
 
@@ -71,19 +72,22 @@ void FlightDynamics::handle_message(Message& msg){
 			break;
 
 		case CALIBRATE_GYROSCOPE:
-			/*Interface_Receive(this, APP_SYSTEMMODE_I, &LocalSystemMode);
-			if(!(LocalSystemMode.Mode & MAV_MODE_FLAG_SAFETY_ARMED) )
-			{
-				FlightDynamics_CalibrateGyroscope(CALIBRATE_START);
-			}*/
+			//Start calibration
+			gyroscope->start_gyro_calibration();
+			gyro_calibrating = true;
+			calibration_timestamp = Time.get_timestamp();
 			break;
 
 		case CALIBRATE_ACCELEROMETER:
-			/*Interface_Receive(this, APP_SYSTEMMODE_I, &LocalSystemMode);
-			if(!(LocalSystemMode.Mode & MAV_MODE_FLAG_SAFETY_ARMED) )
-			{
-				FlightDynamics_CalibrateAccelerometer(CALIBRATE_START);
-			}*/
+			accelerometer->start_acc_calibration();
+			acc_calibrating = true;
+			calibration_timestamp = Time.get_timestamp();
+			break;
+
+		case CALIBRATE_MAGNETOMETER:
+			magnetometer->start_mag_calibration();
+			mag_calibrating = true;
+			calibration_timestamp = Time.get_timestamp();
 			break;
 
 		case START_DEBUG_STREAM:
@@ -166,6 +170,29 @@ void FlightDynamics::update_status(void){
 	}
 
 	last_state = sensor_status;
+}
+
+void FlightDynamics::check_calibrations(){
+	if(acc_calibrating){
+		if(Time.get_time_since_sec(calibration_timestamp) > 10){
+			accelerometer->stop_acc_calibration();
+			acc_calibrating = false;
+		}
+	}
+
+	if(gyro_calibrating){
+		if(Time.get_time_since_sec(calibration_timestamp) > 10){
+			gyroscope->stop_gyro_calibration();
+			gyro_calibrating = false;
+		}
+	}
+
+	if(mag_calibrating){
+		if(Time.get_time_since_sec(calibration_timestamp) > 10){
+			magnetometer->stop_mag_calibration();
+			mag_calibrating = false;
+		}
+	}
 }
 
 void FlightDynamics::report_status(void){

@@ -66,7 +66,8 @@ int main(void){
 	APP_SystemStatus_I systemstatus({&system_status.system_status_socket,
 									 &communication.system_status,
 									 &control_input.system_status_socket,
-									 &flight_control.system_status_socket});
+									 &flight_control.system_status_socket,
+									 &cli.system_status_socket});
 
 	APP_Attitude_I attitude({ &flight_dynamics.attitude_socket,   //PROVIDER
 							  &flight_navigation.attitude_socket, //CONSUMER

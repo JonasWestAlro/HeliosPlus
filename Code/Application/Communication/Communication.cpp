@@ -34,10 +34,10 @@ void Communication::task(void)
 	attitude.receive();
 
 	//Testing message broadcast:
-	messenger.broadcast(CALIBRATE_GYROSCOPE);
+	//messenger.broadcast(CALIBRATE_GYROSCOPE);
 
 
-	messenger.broadcast(Message(CALIBRATE_ACCELEROMETER));
+	//messenger.broadcast(Message(CALIBRATE_ACCELEROMETER));
 
 
 	messenger.broadcast(Message(REQUEST_SHIFT_OF_CONTROL,

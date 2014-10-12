@@ -192,13 +192,46 @@ void  PPMReceiver::get_all_channels(ControlReceiverValues& result){
 	result = sorted_channel_values;
 }
 
-void 	 PPMReceiver::start_calibration(void){}
-void 	 PPMReceiver::stop_calibration(void){}
-void 	 PPMReceiver::get_calibration(ControlReceiverCalibration* new_calibration){}
-void 	 PPMReceiver::set_calibration(ControlReceiverCalibration* c){}
+void PPMReceiver::start_calibration(void){
+	uint8_t i;
+	for(i=0; i<6; i++){
+		temp_calibration.high[i] = 0;
+		temp_calibration.low[i] = 9999;
+	}
 
-void 	 PPMReceiver::update_status(){}
-void 	 PPMReceiver::calibrate(){};
+	calibrating = true;
+}
+
+void PPMReceiver::stop_calibration(void){
+	uint8_t i;
+	for(i=0; i<6; i++){
+		calibration.high[i] = temp_calibration.high[i];
+		calibration.low[i] = temp_calibration.low[i];
+	}
+
+	calibrating = false;
+}
+
+
+void PPMReceiver::get_calibration(ControlReceiverCalibration* c){
+	*c = calibration;
+}
+
+void PPMReceiver::set_calibration(ControlReceiverCalibration* c){
+	calibration = *c;
+}
+
+void 	 PPMReceiver::update_status(){
+
+}
+
+void 	 PPMReceiver::calibrate(){
+	uint8_t i;
+	for(i=0; i<6; i++){
+		if(channel_values[i] > temp_calibration.high[i]) temp_calibration.high[i] = channel_values[i];
+		if(channel_values[i] < temp_calibration.low[i]) temp_calibration.low[i] = channel_values[i];
+	}
+};
 
 float 	 PPMReceiver::get_normalized_channel(uint8_t channel){
 	float low = calibration.low[channel];

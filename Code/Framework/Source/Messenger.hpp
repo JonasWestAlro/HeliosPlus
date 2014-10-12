@@ -61,6 +61,14 @@ class Messenger{
 			MessageDistribution::getInstance().broadcast(msg);
 		}
 
+		void broadcast(MessageType type, uint8_t enum_value){
+			Message msg(type);
+			msg.sender 		= this;
+			msg.receiver 	= 0;
+			msg.set_enum(enum_value);
+			MessageDistribution::getInstance().broadcast(msg);
+		}
+
 	private:
 		MessageQueue msg_queue;
 };

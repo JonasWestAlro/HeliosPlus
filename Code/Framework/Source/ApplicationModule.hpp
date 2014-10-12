@@ -16,21 +16,34 @@ class ApplicationModule : public Task {
 		}
 
 		void run(void){
-			Message msg;
+
 			while(1){
+				//Log timestamp immediately so we can secure an absolute frequency.
 				last_wake_tick = get_tick();
 
-				while(messenger.try_receive(&msg)){
-					handle_message(msg);
-				}
+				//Process messages:
+				process_messages();
+
+				//Log different values for debugging:
 				measured_frequency = 1.0/Time.get_time_since_sec(measurement_timestamp);
-
 				measurement_timestamp = Time.get_timestamp();
+
+				//RUN THE MODULE TASK:
 				task();
-				measured_duration = Time.get_time_since_us(measurement_timestamp);
 
+				//Compute debugging values.
+				measured_duration = Time.get_time_since_us(measurement_timestamp);
 				measurement_timestamp = Time.get_timestamp();
+
+				//Schedule out..
 				delay_until(&last_wake_tick, ticks_to_delay);
+			}
+		}
+
+		void process_messages(){
+			Message msg;
+			while(messenger.try_receive(&msg)){
+				handle_message(msg);
 			}
 		}
 

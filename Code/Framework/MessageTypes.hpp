@@ -76,9 +76,23 @@ typedef enum{
 	};
 /*
  * ARM_REQUEST
- * 		(Is used to request the system to arm it self)
+ * 		(Is used to request the system to ARM it self)
  *
  * UNARM_REQUEST
+ *	    (Is used to request the system to UNARM it self)
+ *
+ * CALIBRATE_GYROSCOPE,
+ * CALIBRATE_ACCELEROMETER,
+ * CALIBRATE_MAGNETOMETER.
+ * CALIBRATE_CONTROLINPUT
+ * 		(These are used to start and stop calibrations, the enum is used to signal
+ * 		 whether it is a start calibration request or an "calibration done signal")
+ */
+	enum{
+		CALIBRATION_START = 0,
+		CALIBRATION_DONE
+	};
+/*
  *
  * CLI_REQUEST_PRINT
  * 		(Is used by the CLI to request a module to print something on the Debug channel)

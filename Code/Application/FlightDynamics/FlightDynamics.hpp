@@ -56,6 +56,7 @@ class FlightDynamics : public ApplicationModule{
 		bool acc_calibrating = false;
 		bool gyro_calibrating = false;
 		bool mag_calibrating = false;
+		uint32_t calibration_timestamp = 0;
 
 		struct EEPROM_Structure{
 			AccelerometerCalibration accelerometer_calibration;
@@ -66,6 +67,9 @@ class FlightDynamics : public ApplicationModule{
 		void update_sensor_data();
 		void report_status();
 		void update_status();
+
+		void check_calibrations();
+
 		void debug_led();
 		void handle_debug_stream();
 };
