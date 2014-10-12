@@ -70,7 +70,7 @@ class Message{
 			}
 		}
 
-		void set_byte(uint8_t data, uint8_t index){
+		void set_byte(uint8_t index, uint8_t data){
 			mydata.data[index] = data;
 		}
 
@@ -90,8 +90,8 @@ class Message{
 			return enum_data;
 		}
 
-		void set_enum(uint8_t enum_data){
-			enum_data = enum_data;
+		void set_enum(uint8_t enum_data_){
+			enum_data = enum_data_;
 		}
 
 	   /********************************************
@@ -100,6 +100,7 @@ class Message{
 		Messenger* 	 	sender;
 		Messenger* 	 	receiver;
 		MessageType	 	type;
+
 
 	private:
 		union mydata_t{

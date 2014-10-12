@@ -11,6 +11,7 @@ class Communication : public ApplicationModule {
 		Communication(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
 
 		// Interfaces
+		APP_Control_I 	   control_socket;
 		APP_Attitude_I 	   attitude;
 		APP_Quaternion_I   quaternion;
 		APP_SystemMode_I   system_mode;
@@ -22,6 +23,9 @@ class Communication : public ApplicationModule {
 		void task(void);
 		void handle_message(Message& msg);
 	private:
+		bool in_control = false;
+		STATUS status = STATUS_NOTOK;
+
 		// Functions
 		void handle_internal_message(void);
 		void request_control(uint8_t);

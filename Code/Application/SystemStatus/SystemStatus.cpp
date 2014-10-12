@@ -99,6 +99,7 @@ void SystemStatus::update_status(void){
 
 	if(Time.get_time_since_ms(last_request) > 300){
 		request_all_to_report();
+		last_request = Time.get_timestamp();
 	}
 
 	//First check if any flight-essentials are NOT OK!
@@ -185,8 +186,10 @@ void SystemStatus::update_leds(void){
 
 	if(system_status_socket.armed){
 		leds->set_LED(STATUS_LED_GREEN, LED_ON);
-		leds->set_LED(STATUS_LED_RED, LED_ON);
+		leds->set_LED(DEBUG_RED, LED_ON);
 		return;
+	}else{
+		leds->set_LED(DEBUG_RED, LED_OFF);
 	}
 
 	if(system_status_socket.mavlink_state == MAV_STATE_STANDBY){
@@ -234,11 +237,21 @@ void SystemStatus::print_arm_conditions(){
 	Debug.put("****************************************\n\r");
 
 	print_condition("Flight Dynamics:.......", COND_FLIGHTDYNAMICS);
-	print_condition("Motors:................", COND_FLIGHTDYNAMICS);
-	print_condition("Manual control input...", COND_FLIGHTDYNAMICS);
-	print_condition("Active control input...", COND_FLIGHTDYNAMICS);
+	print_condition("Motors:................", COND_MOTORS);
+	print_condition("Manual control input...", COND_MANUAL_CONTROLINPUT);
+	print_condition("Active control input...", COND_ACTIVE_CONTROLINPUT);
 
-
+	if(conditions_controller.get_status() == STATUS_OK){
+		if(system_status_socket.armed)
+			Debug.put("\n\r System is: ARMED already");
+		else
+			Debug.put("\n\r System is: Ready to be armed");
+	}else{
+		if(system_status_socket.armed)
+			Debug.put("\n\r System is: ARMED AND CRITICAL!");
+		else
+			Debug.put("\n\r System is: NOT OK, can't arm.");
+	}
 }
 
 void SystemStatus::print_condition(char* c, FlightConditionType condition){
@@ -251,6 +264,6 @@ void SystemStatus::print_condition(char* c, FlightConditionType condition){
 	}
 
 	Debug.put("\t\t ");
-	Debug.send_number((uint32_t)Time.get_time_since_us(conditions_controller.get_condition_timstamp(condition)));
-	Debug.put("\n\r");
+	Debug.send_number((uint32_t)Time.get_time_since_ms(conditions_controller.get_condition_timstamp(condition)));
+	Debug.put("ms ago\n\r");
 }

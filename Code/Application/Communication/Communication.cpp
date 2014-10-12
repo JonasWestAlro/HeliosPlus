@@ -6,6 +6,7 @@
 Communication::Communication(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size)
 : ApplicationModule(name, stackSize, priority, eeprom_size)
 {
+
 	set_frequency(50);
 }
 
@@ -45,16 +46,27 @@ void Communication::task(void)
 	//Testing globals:
 	Globals::angle_control_p.set(0.9);
 
+	//TODO-JWA: This status variable should show if this module can generate
+	//			a valid input at the moment.
+	status = STATUS_OK;
+
 }
 
-void Communication::handle_message(Message& msg)
-{
-	int i = 0;
-
+void Communication::handle_message(Message& msg){
+	Message response;
 	switch(msg.type){
+		case REQUEST_CONTROLINPUTS_REPORT:
+			response.type = CONTROLINPUT_REPORT_STATUS;
+			response.set_enum(status);
+			messenger.send_to(msg.sender, &response);
+			break;
 		case SHIFT_OF_CONTROL_ACK:
-			i++;
-			i++;
+			if((msg.get_byte(0) == REQUEST_TAKE_CONTROL) &&
+				msg.get_byte(1) == ACK 	){
+				in_control = true;
+			}else{
+				in_control = false;
+			}
 			break;
 		default:
 			break;

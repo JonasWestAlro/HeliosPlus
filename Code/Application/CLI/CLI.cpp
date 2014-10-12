@@ -166,7 +166,7 @@ void CLI::process_buffer(){
 
 bool CLI::compare_next_word_to(const char* compare_command){
 	uint8_t offset = compare_index;
-	uint8_t compare_command_length = (char*)memchr(compare_command, '\0', 255) - compare_command;
+	uint8_t compare_command_length = strlen(compare_command);
 
 	// Rest of buffer
 	uint8_t len = buffer_index - offset;
@@ -337,4 +337,14 @@ void CLI::handle_print_arming_conditions(void){
 
 	external_print_request_timestamp = Time.get_timestamp();
 	waiting_for_external_print = true;
+}
+
+void CLI::handle_arm(void){
+	messenger.broadcast(ARM_REQUEST);
+	Debug.put("Trying to ARM...");
+}
+
+void CLI::handle_unarm(void){
+	messenger.broadcast(UNARM_REQUEST);
+	Debug.put("UNARMING...");
 }

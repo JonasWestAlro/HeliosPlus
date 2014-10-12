@@ -2,8 +2,10 @@
 
 #include "Framework.hpp"
 #include "Debug.hpp"
+#include <stdio.h>
+#include <string.h>
 
-#define NO_CLI_COMMANDS 2
+#define NO_CLI_COMMANDS 4
 
 class CLI;
 
@@ -30,7 +32,6 @@ class CLI : public ApplicationModule {
 			ApplicationModule* flightdynamics_,
 			ApplicationModule* flightnavigation_,
 			ApplicationModule* systemstatus_);
-
 
 	protected:
 		void task(void);
@@ -64,15 +65,22 @@ class CLI : public ApplicationModule {
         CLI_Command cli_table[NO_CLI_COMMANDS] = {
           { "stream",	&CLI::handle_stream },
           { "print",	&CLI::handle_print },
+          { "arm",		&CLI::handle_arm },
+          { "unarm",	&CLI::handle_unarm }
         };
 		void handle_buffer_full(){};
 
 
 		void handle_stream(void);
+
 		void handle_print(void);
 		void handle_print_run_time_stats(void);
 		void handle_print_stack_stats(void);
 		void handle_print_frequency_stats(void);
 		void handle_print_duration_stats(void);
 		void handle_print_arming_conditions(void);
+
+		void handle_arm(void);
+		void handle_unarm(void);
+
 };
