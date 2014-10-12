@@ -22,6 +22,9 @@ class Communication : public ApplicationModule {
 		void task(void);
 		void handle_message(Message& msg);
 	private:
+		bool in_control = false;
+		STATUS status = STATUS_NOTOK;
+
 		// Functions
 		void handle_internal_message(void);
 		void request_control(uint8_t);

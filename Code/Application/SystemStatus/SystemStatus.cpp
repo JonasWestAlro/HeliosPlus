@@ -99,6 +99,7 @@ void SystemStatus::update_status(void){
 
 	if(Time.get_time_since_ms(last_request) > 300){
 		request_all_to_report();
+		last_request = Time.get_timestamp();
 	}
 
 	//First check if any flight-essentials are NOT OK!
@@ -234,10 +235,9 @@ void SystemStatus::print_arm_conditions(){
 	Debug.put("****************************************\n\r");
 
 	print_condition("Flight Dynamics:.......", COND_FLIGHTDYNAMICS);
-	print_condition("Motors:................", COND_FLIGHTDYNAMICS);
-	print_condition("Manual control input...", COND_FLIGHTDYNAMICS);
-	print_condition("Active control input...", COND_FLIGHTDYNAMICS);
-
+	print_condition("Motors:................", COND_MOTORS);
+	print_condition("Manual control input...", COND_MANUAL_CONTROLINPUT);
+	print_condition("Active control input...", COND_ACTIVE_CONTROLINPUT);
 
 }
 

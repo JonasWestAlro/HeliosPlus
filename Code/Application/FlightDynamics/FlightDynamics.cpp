@@ -174,6 +174,7 @@ void FlightDynamics::report_status(void){
 	message.sender = &messenger;
 	message.type   = FLIGHTDYNAMICS_REPORT_STATUS;
 	message.set_enum(sensor_status);
+	//message.set_enum(sensor_status);
 
 	messenger.broadcast(&message);
 }

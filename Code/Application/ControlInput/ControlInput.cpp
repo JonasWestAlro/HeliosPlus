@@ -68,7 +68,9 @@ void ControlInput::handle_message(Message& msg){
 	switch(msg.type){
 		case REQUEST_CONTROLINPUTS_REPORT:
 			respons.type = CONTROLINPUT_REPORT_STATUS;
-			respons.set_byte(status, 0);
+			respons.set_enum(status);
+			respons.set_byte(0, MANUAL_CONTROL_INPUT);
+			respons.set_pointer(static_cast<void*>(control_socket.get_pipe()));
 			messenger.send_to(msg.sender, &respons);
 			break;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Framework.hpp"
-#include <cstring>
+#include <string.h>
 
 #define PLM_RECEIVER_MAX_PULSE 2400
 #define PLM_RECEIVER_MIN_PULSE 800

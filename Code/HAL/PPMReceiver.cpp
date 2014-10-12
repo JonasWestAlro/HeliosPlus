@@ -25,8 +25,8 @@ static uint8_t standard_channel_mapping[6] = {
 };*/
 
 PPMReceiver::PPMReceiver(){
-		std::memcpy(&calibration, &standard_calibration, sizeof(ControlReceiverCalibration));
-		std::memcpy(channel_mapping, standard_channel_mapping, sizeof(standard_channel_mapping));
+		memcpy(&calibration, &standard_calibration, sizeof(ControlReceiverCalibration));
+		memcpy(channel_mapping, standard_channel_mapping, sizeof(standard_channel_mapping));
 
 		channel1.setup( GPM_MODE_CONTINOUS_RUNNING,
 

@@ -4,6 +4,8 @@ FlightControl::FlightControl(const char* name, uint32_t stackSize, uint8_t prior
 : ApplicationModule(name, stackSize, priority, eeprom_size)
 {
 
+	messenger.subscribe(REQUEST_MOTORS_REPORT);
+
 	distribution_controller = &quadcopter;
 	set_frequency(200);
 }
@@ -60,7 +62,7 @@ void FlightControl::handle_message(Message& msg){
 		case REQUEST_MOTORS_REPORT:
 			response.type = MOTOR_REPORT_STATUS;
 			response.set_pointer(&control_socket);
-			response.set_byte(STATUS_OK, 0);
+			response.set_enum(STATUS_OK);
 			messenger.send_to(msg.sender, &response);
 			break;
 		default:

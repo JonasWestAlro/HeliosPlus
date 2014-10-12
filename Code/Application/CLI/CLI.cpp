@@ -166,7 +166,7 @@ void CLI::process_buffer(){
 
 bool CLI::compare_next_word_to(const char* compare_command){
 	uint8_t offset = compare_index;
-	uint8_t compare_command_length = (char*)memchr(compare_command, '\0', 255) - compare_command;
+	uint8_t compare_command_length = strlen(compare_command);
 
 	// Rest of buffer
 	uint8_t len = buffer_index - offset;

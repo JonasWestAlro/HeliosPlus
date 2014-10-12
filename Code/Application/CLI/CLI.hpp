@@ -2,6 +2,8 @@
 
 #include "Framework.hpp"
 #include "Debug.hpp"
+#include <stdio.h>
+#include <string.h>
 
 #define NO_CLI_COMMANDS 2
 
@@ -30,7 +32,6 @@ class CLI : public ApplicationModule {
 			ApplicationModule* flightdynamics_,
 			ApplicationModule* flightnavigation_,
 			ApplicationModule* systemstatus_);
-
 
 	protected:
 		void task(void);
