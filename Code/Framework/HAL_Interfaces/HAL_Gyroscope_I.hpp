@@ -1,7 +1,6 @@
-
 #pragma once
 
-#include "Framework.hpp"
+#include "HAL_Interface.hpp"
 
 struct GyroscopeCalibration{
 	float offset_x;

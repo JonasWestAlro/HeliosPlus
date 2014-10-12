@@ -1,5 +1,5 @@
 #pragma once
-#include "Framework.hpp"
+#include "APP_Interface.hpp"
 
 struct APP_Attitude_I : APP_Interface<APP_Attitude_I>{
 	using APP_Interface::APP_Interface;

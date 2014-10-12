@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Framework.hpp"
+#include "HAL_Interface.hpp"
 
 class HAL_Communication_I : public HAL_Interface {
 	public:

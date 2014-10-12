@@ -1,14 +1,7 @@
 #pragma once
 
 //SETTINGS:
-#define FRAMEWORK_MAX_GLOBALS 				30
-#define FRAMEWORK_MAX_MESSAGE_SUBSCRIBERS	50
 
-typedef enum{
-	STATUS_NOTOK = 0,
-	STATUS_OK,
-	STATUS_CALIBRATING
-}STATUS;
 
 //Forward declarations:
 //!TODO-JWA: We should probably find a better way of linking it all together..
@@ -16,6 +9,13 @@ class Message;
 class Messenger;
 class MessageDistribution;
 class ApplicationModule;
+
+
+typedef enum{
+	STATUS_NOTOK = 0,
+	STATUS_OK,
+	STATUS_CALIBRATING
+}STATUS;
 
 //Includes:
 #include "RTOS.hpp"
@@ -54,5 +54,4 @@ class ApplicationModule;
 //Drivers:
 #include "GenericPulseMeasurement.hpp"
 #include "PPMReceiver.hpp"
-
 

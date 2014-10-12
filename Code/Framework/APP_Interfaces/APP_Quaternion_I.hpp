@@ -1,5 +1,5 @@
 #pragma once
-#include "Framework.hpp"
+#include "APP_Interface.hpp"
 #include "Quaternion.hpp"
 
 struct APP_Quaternion_I : APP_Interface<APP_Quaternion_I>{

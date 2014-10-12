@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Framework.hpp"
+#include "Message.hpp"
+#include "MessageQueue.hpp"
+#include "MessageTypes.hpp"
+#include "MessageDistribution.hpp"
 
 class Messenger{
 	public:

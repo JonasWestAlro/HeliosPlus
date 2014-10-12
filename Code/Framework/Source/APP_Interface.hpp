@@ -1,6 +1,8 @@
 #pragma once
 
+#include <stdint.h>
 #include <initializer_list>
+#include "Mutex.hpp"
 
 struct APP_InterfaceBase {
 	virtual uint16_t size() const =0;
@@ -76,8 +78,6 @@ struct APP_Interface : APP_InterfaceBase {
    }
 
 	virtual uint16_t size() const { return sizeof(T); }
-
-
 };
 
 

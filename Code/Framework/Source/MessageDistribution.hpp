@@ -1,6 +1,11 @@
 #pragma once
 
-#include "Framework.hpp"
+#include "Mutex.hpp"
+#include "MessageTypes.hpp"
+#include "MessageQueue.hpp"
+
+//!todo Make a Framework Configuration file just like in freeRTOS and put this define there
+#define FRAMEWORK_MAX_MESSAGE_SUBSCRIBERS	10
 
 class MessageDistribution {
 	public:

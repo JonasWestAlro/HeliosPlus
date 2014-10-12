@@ -1,9 +1,10 @@
 #pragma once
 
-template<typename T>
-class Global;
+#include "Mutex.hpp"
+#include <stdint.h>
 
-#include "Framework.hpp"
+//!todo Make a Framework Configuration file just like in freeRTOS and put this define there
+#define FRAMEWORK_MAX_GLOBALS 		30
 
 class GlobalAbstract{
 public:

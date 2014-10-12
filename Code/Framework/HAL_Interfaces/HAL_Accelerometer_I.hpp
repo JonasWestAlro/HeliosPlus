@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Framework.hpp"
+#include "HAL_Interface.hpp"
 
 struct AccelerometerCalibration{
 	float offset_x;
