@@ -1,5 +1,5 @@
 #pragma once
-#include "Framework.hpp"
+#include "APP_Interface.hpp"
 #include "mavlink.h"
 
 struct APP_SystemStatus_I : APP_Interface<APP_SystemStatus_I>{

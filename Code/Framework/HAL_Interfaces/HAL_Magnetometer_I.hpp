@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Framework.hpp"
+#include "HAL_Interface.hpp"
 
 typedef struct{
 	float offset_X;

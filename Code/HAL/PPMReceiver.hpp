@@ -1,7 +1,16 @@
 #pragma once
 
+#include <string.h>
+#include <stdint.h>
+#include "stm32f4xx_tim.h"
+#include "stm32f4xx_rcc.h"
+#include "stm32f4xx_gpio.h"
+#include "HAL_ControlReceiver_I.hpp"
+#include "GenericPulseMeasurement.hpp"
+#include "Timing.hpp"
+
+//!todo Only included for the enum called STATUS. Find a better place for the enum
 #include "Framework.hpp"
-#include <cstring>
 
 #define PLM_RECEIVER_MAX_PULSE 2400
 #define PLM_RECEIVER_MIN_PULSE 800
