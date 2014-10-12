@@ -8,6 +8,7 @@
 #include "FlightNavigation.hpp"
 
 #include "ConditionsController.hpp"
+#include "Debug.hpp"
 
 class SystemStatus : public ApplicationModule{
 	public:
@@ -48,12 +49,12 @@ class SystemStatus : public ApplicationModule{
 		void start_arm(void);
 		void check_arm(void);
 
-		void handle_sensor_report(Message& msg);
-		void handle_motor_report(Message& msg);
 		void handle_control_input_report(Message& msg);
 		void handle_shift_of_control(Message& msg);
 
 		void update_leds(void);
+		void print_arm_conditions();
+		void print_condition(char* c, FlightConditionType condition);
 
 };
 

@@ -30,7 +30,6 @@ void ControlInput::task(void){
 		control_socket.yaw 		= convert_joystick_to_degree(raw_values.yaw);
 		control_socket.throttle = convert_joystick_to_throttle(raw_values.throttle);
 
-		control_socket.roll 	= control_socket.roll*-1;
 
 		//Update switch and clicker:
 		aux_states[0]  =  raw_values.aux1;
@@ -57,6 +56,7 @@ void ControlInput::task(void){
 	control_socket.publish();
 
 	check_arm();
+	if(debugging_stream) handle_debug_stream();
 }
 
 /****************************************************************
@@ -84,7 +84,13 @@ void ControlInput::handle_message(Message& msg){
 		case CALIBRATE_CONTROLINPUT:
 			control_receiver->start_calibration();
 			break;
+		case START_DEBUG_STREAM:
+			debugging_stream = true;
+			break;
 
+		case STOP_DEBUG_STREAM:
+			debugging_stream = false;
+			break;
 		default:
 			break;
 	}
@@ -165,6 +171,21 @@ void ControlInput::request_control(uint8_t Request){
 
 void ControlInput::report_status(void){
 	messenger.broadcast(Message(CONTROLINPUT_REPORT_STATUS, (uint8_t)status));
+}
+
+
+void ControlInput::handle_debug_stream(){
+	static uint32_t timestamp = 0;
+
+	if(Time.get_time_since_ms(timestamp)>50){
+		Debug.send_and_transmit_floats({
+			control_socket.throttle,
+			control_socket.yaw,
+			control_socket.pitch,
+			control_socket.roll
+		});
+		timestamp = Time.get_timestamp();
+	}
 }
 
 #define JOYSTICK_MAX	1000.0

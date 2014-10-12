@@ -88,7 +88,7 @@ int main(void){
 
 	system_status.set_leds(&leds);
 
-	communication.set_driver(&wireless_uart);
+	communication.set_driver(&gps_uart);
 
 	//Check that EEPROM table is not changed:
 	//EEPROM::Synchronize()

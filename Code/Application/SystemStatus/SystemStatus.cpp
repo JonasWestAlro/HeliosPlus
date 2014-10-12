@@ -12,7 +12,7 @@ SystemStatus::SystemStatus(const char* name, uint32_t stackSize, uint8_t priorit
   flightnavigation_module(flightnavigation)
 {
 	// Initializer code goes here
-	messenger.subscribe(SENSOR_REPORT_STATUS);
+	messenger.subscribe(FLIGHTDYNAMICS_REPORT_STATUS);
 	messenger.subscribe(MOTOR_REPORT_STATUS);
 	messenger.subscribe(CONTROLINPUT_REPORT_STATUS);
 	messenger.subscribe(ARM_REQUEST);
@@ -42,12 +42,14 @@ void SystemStatus::task(void){
 
 void SystemStatus::handle_message(Message& msg){
 	switch(msg.type){
-		case SENSOR_REPORT_STATUS:
-			handle_sensor_report(msg);
+		case FLIGHTDYNAMICS_REPORT_STATUS:
+			conditions_controller.update_condition(
+								COND_FLIGHTDYNAMICS,
+								(STATUS)msg.get_enum());
 			break;
 
 		case MOTOR_REPORT_STATUS:
-			handle_motor_report(msg);
+			conditions_controller.update_condition(COND_MOTORS, (STATUS)msg.get_enum());
 			break;
 
 		case CONTROLINPUT_REPORT_STATUS:
@@ -66,6 +68,11 @@ void SystemStatus::handle_message(Message& msg){
 		case REQUEST_SHIFT_OF_CONTROL:
 			handle_shift_of_control(msg);
 			break;
+
+		case CLI_PRINT_REQUEST:
+			print_arm_conditions();
+			messenger.send_to(msg.sender, CLI_ACK_PRINT);
+
 		default:
 			break;
 	}
@@ -120,7 +127,7 @@ void SystemStatus::update_battery(void){
 }
 
 void SystemStatus::request_all_to_report(void){
-	messenger.broadcast(REQUEST_SENSORS_REPORT);
+	messenger.broadcast(REQUEST_FLIGHTDYNAMICS_REPORT);
 	messenger.broadcast(REQUEST_MOTORS_REPORT);
 	messenger.broadcast(REQUEST_CONTROLINPUTS_REPORT);
 }
@@ -147,32 +154,20 @@ void SystemStatus::check_arm(void){
 	}
 }
 
-void SystemStatus::handle_sensor_report(Message& msg){
-
-	uint32_t mavlink_sensors = msg.get_integer32();
-	STATUS status = (STATUS)msg.get_enum();
-
-	//Update the conditions table:
-	if(mavlink_sensors & MAV_SYS_STATUS_SENSOR_3D_GYRO)
-		conditions_controller.update_condition(COND_GYROSCOPE, status);
-	if(mavlink_sensors & MAV_SYS_STATUS_SENSOR_3D_ACCEL)
-		conditions_controller.update_condition(COND_ACCELEROMETER, status);
-	if(mavlink_sensors & MAV_SYS_STATUS_SENSOR_3D_MAG)
-		conditions_controller.update_condition(COND_MAGNETOMETER, status);
-}
-
-void SystemStatus::handle_motor_report(Message& msg){
-	//Update the conditions table:
-	conditions_controller.update_condition(COND_MOTORS, (STATUS)msg.get_enum());
-}
 
 void SystemStatus::handle_control_input_report(Message& msg){
 
+	//Check whether this is a Manual control input or not:
+	if(msg.get_byte(0) == MANUAL_CONTROL_INPUT){
+		conditions_controller.update_condition(COND_MANUAL_CONTROLINPUT, (STATUS)msg.get_enum());
+	}
+
+	//Now check if this is the active control input:
 	APP_InterfaceBase* pipe_of_sender = static_cast<APP_InterfaceBase*>(msg.get_pointer());
 
 	//Check that this is the current input module:
 	if(flightcontrol_module->control_socket.get_pipe() == pipe_of_sender){
-		conditions_controller.update_condition(COND_CONTROLINPUT, (STATUS)msg.get_enum());
+		conditions_controller.update_condition(COND_ACTIVE_CONTROLINPUT, (STATUS)msg.get_enum());
 	}
 }
 
@@ -231,4 +226,31 @@ void SystemStatus::update_leds(void){
 	//If we end up here we're either in emergency or critical!!
 	leds->set_LED(STATUS_LED_RED,   LED_ON);
 	leds->set_LED(STATUS_LED_GREEN, LED_OFF);
+}
+
+void SystemStatus::print_arm_conditions(){
+	Debug.put("****************************************\n\r");
+	Debug.put("             ARM CONDITIONS             \n\r");
+	Debug.put("****************************************\n\r");
+
+	print_condition("Flight Dynamics:.......", COND_FLIGHTDYNAMICS);
+	print_condition("Motors:................", COND_FLIGHTDYNAMICS);
+	print_condition("Manual control input...", COND_FLIGHTDYNAMICS);
+	print_condition("Active control input...", COND_FLIGHTDYNAMICS);
+
+
+}
+
+void SystemStatus::print_condition(char* c, FlightConditionType condition){
+	Debug.put(c);
+
+	if(conditions_controller.get_condition(condition) == STATUS_OK){
+		Debug.put(" OK");
+	}else{
+		Debug.put(" NOT OK");
+	}
+
+	Debug.put("\t\t ");
+	Debug.send_number((uint32_t)Time.get_time_since_us(conditions_controller.get_condition_timstamp(condition)));
+	Debug.put("\n\r");
 }

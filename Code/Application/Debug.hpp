@@ -1,11 +1,22 @@
 #pragma once
 
 #include "HAL_Communication_I.hpp"
-
+#include <initializer_list>
 class DebugClass{
 public:
 
 	void set_driver(HAL_Communication_I* com){communication = com;};
+
+	void send_and_transmit_floats(std::initializer_list<float> list){
+		 for( auto elem : list ){
+			 send_number(elem);
+			 send(',');
+		}
+
+		put("\n\r");
+		transmit();
+	}
+
 
 	void put_and_transmit(const char* debugstring){
 		if(communication != 0){

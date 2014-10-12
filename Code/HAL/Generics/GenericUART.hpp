@@ -52,7 +52,7 @@ class GenericUART : public HAL_Communication_I {
 		uint8_t  m_TransmitBuffer_1[RXBUFFERSIZE];
 		uint8_t  m_TransmitBuffer_2[RXBUFFERSIZE];
 		uint16_t m_NextRXByteToApplication;
-		uint16_t m_TransmitBufferCounter;
-		uint8_t  m_TransmitInProgress;
-		uint8_t  m_ActiveTransmitBuffer;
+		uint16_t m_TransmitBufferCounter = 0;
+		uint8_t  m_TransmitInProgress = false;
+		uint8_t  m_ActiveTransmitBuffer = 1;
 };

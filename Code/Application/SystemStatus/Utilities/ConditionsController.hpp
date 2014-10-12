@@ -2,12 +2,12 @@
 #include "Framework.hpp"
 
 enum FlightConditionType{
-	COND_ACCELEROMETER = 0, //Accelerometer has to be OK
-	COND_GYROSCOPE,			//Gyroscope has to be OK
-	COND_MAGNETOMETER,		//Magnetometer has to be OK
-	COND_MOTORS,			//Motors has to be OK
-	COND_CONTROLINPUT,		//The control that are connected to Motor module
-							//has to be OK
+	COND_FLIGHTDYNAMICS = 0, 	//Accelerometer has to be OK
+	COND_MOTORS,				//Motors has to be OK
+	COND_MANUAL_CONTROLINPUT,	//The manual joystick control that are connected to Motor module
+								//has to be OK
+	COND_ACTIVE_CONTROLINPUT	//The control that are connected to Motor module
+								//has to be OK
 };
 
 struct FlightCondition{
@@ -23,6 +23,14 @@ public:
 	void update_condition(FlightConditionType condition, STATUS status){
 		conditions[condition].status = status;
 		conditions[condition].timestamp = Time.get_timestamp();
+	}
+
+	STATUS get_condition(FlightConditionType condition){
+		return conditions[condition].status;
+	}
+
+	uint32_t get_condition_timstamp(FlightConditionType condition){
+		return conditions[condition].timestamp;
 	}
 
 	STATUS get_status(){
@@ -52,11 +60,10 @@ public:
 private:
 	FlightCondition conditions[5] = {
 		/*   CONDITION        		OK  	TIMESTAMP*/
-		{COND_ACCELEROMETER,   STATUS_NOTOK,    0},
-		{COND_GYROSCOPE, 	   STATUS_NOTOK,    0},
-		{COND_MAGNETOMETER,    STATUS_NOTOK,    0},
-		{COND_MOTORS, 		   STATUS_NOTOK,    0},
-		{COND_CONTROLINPUT,    STATUS_NOTOK,    0}
+		{COND_FLIGHTDYNAMICS,   	  STATUS_NOTOK,    0},
+		{COND_MOTORS, 		   		  STATUS_NOTOK,    0},
+		{COND_MANUAL_CONTROLINPUT,    STATUS_NOTOK,    0},
+		{COND_ACTIVE_CONTROLINPUT,    STATUS_NOTOK,    0}
 	};
 
 };

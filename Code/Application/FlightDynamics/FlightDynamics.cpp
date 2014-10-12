@@ -9,7 +9,7 @@ FlightDynamics::FlightDynamics(const char* name, uint32_t stackSize, uint8_t pri
 	//Subscribe to the calibrate gyroscope message type:
 	messenger.subscribe(CALIBRATE_GYROSCOPE);
 	messenger.subscribe(CALIBRATE_ACCELEROMETER);
-	messenger.subscribe(REQUEST_SENSORS_REPORT);
+	messenger.subscribe(REQUEST_FLIGHTDYNAMICS_REPORT);
 
 	pitch_filter.set_coeffs({0.0018, 0.0071, 0.0107, 0.0071, 0.0018,
 		 	 	 	 	 	 -2.7737, 3.019, -1.5048, 0.2879});
@@ -42,9 +42,9 @@ void FlightDynamics::task(void){
 	attitude_euler.to_degrees();
 
 	//Update the attitude (euler) interface/socket:
-	attitude_socket.pitch 			= attitude_euler.x;
+	attitude_socket.pitch 			= attitude_euler.x*-1;
 	attitude_socket.roll 			= attitude_euler.y;
-	attitude_socket.yaw 			= attitude_euler.z;
+	attitude_socket.yaw 			= attitude_euler.z*-1;
 
 	attitude_socket.pitch_velocity 	= pitch_filter.process(raw_gyro[0]);
 	attitude_socket.roll_velocity  	= roll_filter.process(raw_gyro[1]);
@@ -66,7 +66,7 @@ void FlightDynamics::task(void){
 
 void FlightDynamics::handle_message(Message& msg){
 	switch(msg.type){
-		case REQUEST_SENSORS_REPORT:
+		case REQUEST_FLIGHTDYNAMICS_REPORT:
 			report_status();
 			break;
 
@@ -172,13 +172,9 @@ void FlightDynamics::report_status(void){
 	Message message;
 
 	message.sender = &messenger;
-	message.type = SENSOR_REPORT_STATUS;
-
-	message.set_integer32( MAV_SYS_STATUS_SENSOR_3D_GYRO  |
-						   MAV_SYS_STATUS_SENSOR_3D_ACCEL |
-						   MAV_SYS_STATUS_SENSOR_3D_MAG);
-
+	message.type   = FLIGHTDYNAMICS_REPORT_STATUS;
 	message.set_enum(sensor_status);
+
 	messenger.broadcast(&message);
 }
 

@@ -43,7 +43,7 @@ class Messenger{
 		}
 
 		void broadcast(Message* msg){
-			msg->sender 	 = this;
+			msg->sender   = this;
 			msg->receiver = 0;
 			MessageDistribution::getInstance().broadcast(*msg);
 		}

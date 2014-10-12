@@ -2,6 +2,7 @@
 
 #include "Framework.hpp"
 #include "MavLink.h"
+#include "Debug.hpp"
 
 class ControlInput : public ApplicationModule{
 	public:
@@ -19,6 +20,7 @@ class ControlInput : public ApplicationModule{
 	private:
 		HAL_ControlReceiver_I* control_receiver;
 
+		bool debugging_stream = false;
 		bool in_control = true;
 		bool calibrating = false;
 		STATUS status = STATUS_OK;
@@ -39,6 +41,9 @@ class ControlInput : public ApplicationModule{
 
 		void update_status(void);
 		void report_status(void);
+
+		void handle_debug_stream();
+
 
 		float convert_joystick_to_degree(int16_t);
 		float convert_joystick_to_throttle(int16_t);

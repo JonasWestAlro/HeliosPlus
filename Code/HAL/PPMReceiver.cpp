@@ -7,13 +7,22 @@ static ControlReceiverCalibration standard_calibration = {
 };
 
 static uint8_t standard_channel_mapping[6] = {
-		/*CHANNEL_THROTTLE:*/ 0,
-		/*CHANNEL_ROLL:    */ 1,
-		/*CHANNEL_PITCH:   */ 2,
+		/*CHANNEL_THROTTLE:*/ 0, /*<--- these are the physical channels from the receiver*/
+		/*CHANNEL_ROLL:    */ 2,
+		/*CHANNEL_PITCH:   */ 1,
 		/*CHANNEL_YAW:     */ 3,
 		/*CHANNEL_AUX1:    */ 4,
 		/*CHANNEL_AUX2:    */ 5
 };
+/*
+static uint8_t standard_channel_mapping[6] = {
+		/*CHANNEL_THROTTLE: 0,
+		/*CHANNEL_ROLL:     1,
+		/*CHANNEL_PITCH:    2,
+		/*CHANNEL_YAW:      3,
+		/*CHANNEL_AUX1:     4,
+		/*CHANNEL_AUX2:     5
+};*/
 
 PPMReceiver::PPMReceiver(){
 		std::memcpy(&calibration, &standard_calibration, sizeof(ControlReceiverCalibration));
