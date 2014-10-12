@@ -9,7 +9,7 @@ class Quaternion{
 		float y;
 		float z;
 
-		Quaternion(): x(0.0f), y(0.0f), z(0.0f), w(1.0f){};
+		Quaternion(): w(1.0f), x(0.0f), y(0.0f), z(0.0f){};
 
 		explicit  Quaternion(const EulerAngle& a){
 			float cosX2 = cos(a.x / 2.0f);

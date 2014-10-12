@@ -1,23 +1,26 @@
 #pragma once
+/*! \file */
 
+
+//! MessageType
 typedef enum{
-	QUEUE_INVALID = 0,
-	REQUEST_SENSORS_REPORT,
-	REQUEST_MOTORS_REPORT,
-	REQUEST_CONTROLINPUTS_REPORT,
-	REQUEST_SHIFT_OF_CONTROL,
-	SHIFT_OF_CONTROL_ACK,
-	SENSOR_REPORT_STATUS,
-	MOTOR_REPORT_STATUS,
-	CONTROLINPUT_REPORT_STATUS,
-	ARM_REQUEST,
-	UNARM_REQUEST,
-	CALIBRATE_GYROSCOPE,
-	CALIBRATE_ACCELEROMETER,
-	CALIBRATE_MAGNETOMETER,
-	CALIBRATE_CONTROLINPUT,
-	START_DEBUG_STREAM,
-	STOP_DEBUG_STREAM
+	MESSAGE_INVALID = 0,
+	REQUEST_SENSORS_REPORT,			//!< Is used to request all sensors to report in
+	REQUEST_MOTORS_REPORT,			//!< Any module handling motors should report in functional
+	REQUEST_CONTROLINPUTS_REPORT,	//!< Any module handling controls should report in functional
+	REQUEST_SHIFT_OF_CONTROL,		//!< Used to shift control of drone to a new control input
+	SHIFT_OF_CONTROL_ACK,			//!< Used to notify an Input module about control!
+	SENSOR_REPORT_STATUS,			//!< Is used to report sensor status
+	MOTOR_REPORT_STATUS,			//!< This is used by motors handling modules to report their status
+	CONTROLINPUT_REPORT_STATUS,		//!< This should be used be modules providing control interfaces to report their status
+	ARM_REQUEST,					//!< Is used to request the system to arm it self
+	UNARM_REQUEST,					//!<
+	CALIBRATE_GYROSCOPE,			//!<
+	CALIBRATE_ACCELEROMETER,		//!<
+	CALIBRATE_MAGNETOMETER,			//!<
+	CALIBRATE_CONTROLINPUT,			//!<
+	START_DEBUG_STREAM,				//!<
+	STOP_DEBUG_STREAM				//!<
 	/*Define more messages here for
 	 * your application*/
 }MessageType;

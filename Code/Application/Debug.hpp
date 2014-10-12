@@ -7,20 +7,20 @@ public:
 
 	void set_driver(HAL_Communication_I* com){communication = com;};
 
-	void put_and_transmit(char* debugstring){
+	void put_and_transmit(const char* debugstring){
 		if(communication != 0){
 			communication->put(debugstring);
 			while(!communication->transmit());
 		}
 	}
 
-	void put(char* debugstring){
+	void put(const char* debugstring){
 		if(communication != 0){
 			communication->put(debugstring);
 		}
 	}
 
-	void put(char* debugstring, uint16_t size){
+	void put(const char* debugstring, uint16_t size){
 		if(communication != 0){
 			communication->put(debugstring, size);
 		}
@@ -33,30 +33,36 @@ public:
 	}
 
 	void send(uint8_t c){
-		communication->send(c);
+		if (communication != 0) {
+			communication->send(c);
+		}
 	}
 
 	void send_and_transmit(uint8_t c){
-		communication->send(c);
-		while(!communication->transmit());
+		if (communication != 0) {
+			communication->send(c);
+			while(!communication->transmit());
+		}
 	}
 
 	uint16_t data_available(void){
 		if(communication != 0){
 			return communication->data_available();
 		}
+		return false;
 	};
 
 	bool receive(uint8_t* c){
 		if(communication != 0){
 			if(communication->data_available()){
-				communication->receive(c);
+				return communication->receive(c);
 			}
 		}
+		return false;
 	}
 
-	bool send_number(uint32_t c){communication->send_number(c);};
-	bool send_number(float c){communication->send_number(c);};
+	bool send_number(uint32_t c){return communication->send_number(c);};
+	bool send_number(float c){return communication->send_number(c);};
 
 private:
 	HAL_Communication_I* communication = 0;

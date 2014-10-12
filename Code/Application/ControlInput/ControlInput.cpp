@@ -65,16 +65,16 @@ void ControlInput::task(void){
 void ControlInput::handle_message(Message& msg){
 	Message respons;
 
-	switch(msg.message_type){
+	switch(msg.type){
 		case REQUEST_CONTROLINPUTS_REPORT:
-			respons.message_type = CONTROLINPUT_REPORT_STATUS;
-			respons.data[0] = status;
+			respons.type = CONTROLINPUT_REPORT_STATUS;
+			respons.set_byte(status, 0);
 			messenger.send_to(msg.sender, &respons);
 			break;
 
 		case SHIFT_OF_CONTROL_ACK:
-			if((respons.data[0] == REQUEST_TAKE_CONTROL) &&
-				respons.data[1] == ACK 	){
+			if((msg.get_byte(0) == REQUEST_TAKE_CONTROL) &&
+				msg.get_byte(1) == ACK 	){
 				in_control = true;
 			}else{
 				in_control = false;
@@ -94,9 +94,9 @@ void ControlInput::update_status(void){
 	//Check that driver status is OK:
 	if(control_receiver->get_status() == STATUS_OK){
 		if(status == STATUS_NOTOK){
-				status = STATUS_OK;
-				report_status();
-		   }
+			status = STATUS_OK;
+			report_status();
+		}
 	}else{
 		//Status is not OK!..
 		//Check for transistion:

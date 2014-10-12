@@ -65,9 +65,7 @@ void FlightDynamics::task(void){
 }
 
 void FlightDynamics::handle_message(Message& msg){
-	int i = 0;
-
-	switch(msg.message_type){
+	switch(msg.type){
 		case REQUEST_SENSORS_REPORT:
 			report_status();
 			break;
@@ -174,13 +172,13 @@ void FlightDynamics::report_status(void){
 	Message message;
 
 	message.sender = &messenger;
-	message.message_type = SENSOR_REPORT_STATUS;
+	message.type = SENSOR_REPORT_STATUS;
 
 	message.set_integer32( MAV_SYS_STATUS_SENSOR_3D_GYRO  |
 						   MAV_SYS_STATUS_SENSOR_3D_ACCEL |
 						   MAV_SYS_STATUS_SENSOR_3D_MAG);
 
-	message.data[5] = sensor_status;
+	message.set_enum(sensor_status);
 	messenger.broadcast(&message);
 }
 
@@ -214,7 +212,7 @@ void FlightDynamics::handle_debug_stream(){
 
 		//This should align the magnetometer and and gyro/accelerometer axises:
 		//maybe should the extended kalman values always be swapped?
-		/*float temp = RawMag[X];
+		//float temp = RawMag[X];
 		RawMag[X] = RawMag[Y];
 		RawMag[Y] = temp;
 		RawMag[Z] *= -1;/

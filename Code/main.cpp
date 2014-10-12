@@ -29,21 +29,13 @@
 
 #include "Debug.hpp"
 
-//TODO-JWA: These definitely shouln't be defined here!
-template<>
-uint16_t Global<float>::no_globals = 0;
-template<>
-Global<float>* 	Global<float>::global_table[FRAMEWORK_MAX_GLOBALS];
-
 uint32_t 	EEPROM::counter = 1000;
 EEPROM* 	EEPROM::EEPROM_table[10];
 uint8_t 	EEPROM::table_counter = 0;
 
-
 int main(void){
 	WirelessUART wireless_uart;
 	Debug.set_driver(&wireless_uart);
-
 
 	//Create drivers ----------------------------------------------------:
 	MPU9150 	mpu9150;
@@ -55,7 +47,6 @@ int main(void){
 	BMP085 		barometer;
 
 	//Create Application modules ------------------------------------------:
-
 	Communication 		communication("Communication", 			configMINIMAL_STACK_SIZE*10, 	1, 1000);
 	ControlInput 		control_input("ControlInput", 			configMINIMAL_STACK_SIZE*5, 	1, 1000);
 	FlightControl 		flight_control("FlightControl", 		configMINIMAL_STACK_SIZE*6, 	1, 1000);
@@ -96,6 +87,8 @@ int main(void){
 	flight_navigation.set_sonar(&sonar);
 
 	system_status.set_leds(&leds);
+
+	communication.set_driver(&wireless_uart);
 
 	//Check that EEPROM table is not changed:
 	//EEPROM::Synchronize()

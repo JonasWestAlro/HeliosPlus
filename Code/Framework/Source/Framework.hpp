@@ -11,7 +11,7 @@ typedef enum{
 }STATUS;
 
 //Forward declarations:
-//TODO-JWA: We should probably find a better way of linking it all together..
+//!TODO-JWA: We should probably find a better way of linking it all together..
 class Message;
 class Messenger;
 class MessageDistribution;
@@ -38,6 +38,7 @@ class ApplicationModule;
 #include "APP_Control_I.hpp"
 #include "APP_Navigation_I.hpp"
 #include "APP_SystemStatus_I.hpp"
+#include "APP_SystemMode_I.hpp"
 
 #include "HAL_Accelerometer_I.hpp"
 #include "HAL_ControlReceiver_I.hpp"

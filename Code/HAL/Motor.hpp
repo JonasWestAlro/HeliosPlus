@@ -95,7 +95,7 @@ class Motor : public HAL_Motor_I {
 			TIM_Cmd(TIM5, ENABLE);
 
 			uint8_t i = 0;
-			for(i;i<8;i++){
+			for(i=0;i<8;i++){
 				*(CCR_Regs[i])=OCOFFSET;
 			}
 
@@ -104,7 +104,7 @@ class Motor : public HAL_Motor_I {
 	    virtual void set_motor_speed(MOTOR motor, uint16_t speed){
 
 	    	uint8_t i = 0;
-	    	for(i;i<8;i++){
+	    	for(i=0;i<8;i++){
 	    		if(motor & 1<<i)
 	    		{
 	    			if(speed >= MINSPEED && speed <= MAXSPEED ){

@@ -331,7 +331,7 @@ GenericUART::GenericUART(GENERIC_UART_TYPE UART, uint32_t BaudRate)
 
 /**
   * @brief  	Get the number of bytes that has been received
-  * @param[in]  uart 	The uart device to use
+  *
   * @return		The number of bytes available
   */
 uint16_t GenericUART::data_available(void)
@@ -343,39 +343,38 @@ uint16_t GenericUART::data_available(void)
 
 /** @brief  	Send multiple bytes of data to the TX buffer.
   * 			Call #GenUART_Transmit to transmit data
-  * @param[in]  uart 	The uart device to use
   * @param[in]  data 	Pointer to the data
   * @param[in]  size 	Number of bytes to send
   * @retval 	0		Failure
   * @retval		1		Success
   */
-uint16_t GenericUART::put(char* data, uint16_t size)
+bool GenericUART::put(const char* data, uint16_t size)
 {
-   uint16_t i;
+	uint16_t i;
 	for(i=0; i<size; i++){
 		if(!this->send(data[i])) return false;
 	}
 	return true;
-
-}
-
-uint16_t GenericUART::put(char* data){
-	uint8_t i = 0;
-
-	while(1){
-		if(data[i] != '\0'){
-			send(data[i++]);
-		}else{
-			break;
-		}
-	}
-
-	return i;
 }
 
 /** @brief  	Send one byte of data to the TX buffer.
   * 			Call #GenUART_Transmit to transmit data
-  * @param[in]  uart 	The uart device to use
+  * @param[in]  data* 	Data to send. Should be 0 terminated
+  * @retval 	0		Failure
+  * @retval		1		Success
+  */
+bool GenericUART::put(const char* data){
+	uint8_t i = 0;
+
+	while(data[i] != '\0'){
+		if (send(data[i++]) == false) return false;
+	}
+
+	return true;
+}
+
+/** @brief  	Send one byte of data to the TX buffer.
+  * 			Call #GenUART_Transmit to transmit data
   * @param[in]  data 	Data to send
   * @retval 	0		Failure
   * @retval		1		Success
@@ -415,11 +414,10 @@ bool GenericUART::send_number(float number){
 }
 
 /** @brief  	Transmit the data that has been placed in the TX buffer
-  * @param[in]  uart 	The uart device to use
   * @retval 	0		Failure
   * @retval		1		Success
   */
-uint16_t GenericUART::transmit(void)
+bool GenericUART::transmit(void)
 {
 	//Check if there are anything in the buffer:
 	if(m_TransmitBufferCounter > 0){
