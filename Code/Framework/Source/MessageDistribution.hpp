@@ -5,7 +5,7 @@
 #include "MessageQueue.hpp"
 
 //!todo Make a Framework Configuration file just like in freeRTOS and put this define there
-#define FRAMEWORK_MAX_MESSAGE_SUBSCRIBERS	10
+#define FRAMEWORK_MAX_MESSAGE_SUBSCRIBERS	50
 
 class MessageDistribution {
 	public:

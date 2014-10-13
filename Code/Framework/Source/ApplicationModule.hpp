@@ -9,7 +9,7 @@ class ApplicationModule : public Task {
 	public:
 		ApplicationModule(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0)
 		: Task(name, stackSize, priority),
-		  eeprom(name, eeprom_size),
+		  eeprom(name, eeprom_size, default_eeprom_handler),
 		  messenger()
 		{
 
@@ -79,9 +79,15 @@ class ApplicationModule : public Task {
 			return &messenger;
 		}
 
+		static void set_defualt_eeprom_handler(EepromHandler* handler){
+			default_eeprom_handler = handler;
+		}
+
 	protected:
-		EEPROM eeprom;
-		Messenger messenger;
+		static EepromHandler* default_eeprom_handler;
+
+		EepromSpace eeprom;
+		Messenger 	messenger;
 
 		uint16_t frequency = 10;
 

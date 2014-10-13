@@ -29,22 +29,31 @@
 
 #include "Debug.hpp"
 
-uint32_t 	EEPROM::counter = 1000;
-EEPROM* 	EEPROM::EEPROM_table[10];
-uint8_t 	EEPROM::table_counter = 0;
+EepromHandler* ApplicationModule::default_eeprom_handler;
+
+void test_sensors();
 
 int main(void){
+	//test_sensors();
+
 	WirelessUART wireless_uart;
 	Debug.set_driver(&wireless_uart);
 
 	//Create drivers ----------------------------------------------------:
-	MPU9150 	mpu9150;
-	HeliosLED 	leds;
-	PPMReceiver control_receiver;
-	Motor 		motors;
-	GPS_UART 	gps_uart;
-	HC_SR40 	sonar;
-	BMP085 		barometer;
+	MPU9150 	  mpu9150;
+	HeliosLED 	  leds;
+	PPMReceiver   control_receiver;
+	Motor 		  motors;
+	GPS_UART 	  gps_uart;
+	HC_SR40 	  sonar;
+	BMP085 		  barometer;
+	EEPROM_24LC64 eeprom;
+
+
+	//Create EEPROM Table:
+	EepromHandler eeprom_handler(&eeprom);
+	ApplicationModule::set_defualt_eeprom_handler(&eeprom_handler);
+
 
 	//Create Application modules ------------------------------------------:
 	Communication 		communication("Communication", 			configMINIMAL_STACK_SIZE*10, 	1, 1000);
@@ -101,7 +110,7 @@ int main(void){
 	communication.set_driver(&gps_uart);
 
 	//Check that EEPROM table is not changed:
-	//EEPROM::Synchronize()
+	eeprom_handler.synchronize();
 
 	//Start Scheduler:
 	schedulerStart();
@@ -123,8 +132,14 @@ void test_sensors(){
 	uint8_t in_buffer[10] = {1,2,3,4,5,6,7,8,9,10};
 	uint8_t out_buffer[10] = {0};
 
-	//eeprom.write(0, 10, in_buffer);
+	eeprom.write(0, 10, in_buffer);
 	eeprom.read(0, 10, out_buffer);
+
+	leds.set_LED(DEBUG_BLUE1, LED_OFF);
+	if(out_buffer[0] == 1){
+		leds.set_LED(DEBUG_BLUE1, LED_ON);
+	}
+	while(1);
 
 	while(1){
 		mpu9150.get_acc_data(x,y,z);

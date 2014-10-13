@@ -73,6 +73,53 @@ class EEPROM_24LC64 : public HAL_Eeprom_I{
 	}
 
 
+	//TODO-JWA: This can be optimized, it's a very fast "copy-past" implementation!
+	virtual uint8_t erase_all(){
+		uint16_t registeradress = 0;
+		uint16_t n = 60000;
+		uint8_t buffer[4] = {0};
+
+		uint16_t numOfpages;
+		uint8_t firstSize, lastSize;
+		uint8_t i;
+
+		firstSize = 32 - (registeradress % 32);
+
+		if(firstSize < n){
+			lastSize = (n - firstSize) % 32;
+			numOfpages = (n - firstSize) / 32;
+		}
+		else {
+			numOfpages = 0;
+			firstSize = n;
+			lastSize = 0;
+		}
+
+		// Write first page
+		if(firstSize != 0) {
+			if(!i2c.write_register16(EEPROM_ADDRESS, registeradress, firstSize, buffer)) return 0;
+			registeradress += firstSize;
+			Time.delay_ms(5);
+		}
+
+		// Write pages
+		for(i = 0; i<numOfpages; i++){
+			if(!i2c.write_register16(EEPROM_ADDRESS, registeradress, 32, buffer)) return 0;
+			registeradress += 32;
+
+			//TODO-JWA: Is this really necessary?
+			Time.delay_ms(5);
+		}
+
+		// Write last page
+		if(lastSize != 0) {
+			if(!i2c.write_register16(EEPROM_ADDRESS, registeradress, lastSize, buffer)) return 0;
+		}
+
+		return 1;
+	}
+
+
 	private:
 		GenericI2C& i2c;
 

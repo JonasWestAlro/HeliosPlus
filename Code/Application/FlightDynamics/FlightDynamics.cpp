@@ -27,6 +27,8 @@ FlightDynamics::FlightDynamics(const char* name, uint32_t stackSize, uint8_t pri
 
 void FlightDynamics::task(void){
 
+	serialize_size = eeprom.serialize(tempbuffer);
+
 	//Download Sensor data from sensors:
 	update_sensor_data();
 

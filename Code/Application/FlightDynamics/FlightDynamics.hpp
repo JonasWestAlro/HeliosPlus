@@ -27,6 +27,9 @@ class FlightDynamics : public ApplicationModule{
 	private:
 		bool debugging_stream = false;
 
+		uint8_t tempbuffer[400] = {0};
+		uint8_t serialize_size = 0;
+
 		//HAL Interfaces:
 		HAL_Accelerometer_I* accelerometer;
 		HAL_Gyroscope_I* 	 gyroscope;
