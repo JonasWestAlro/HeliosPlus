@@ -1,3 +1,14 @@
+/**************************************************************************//**
+ * @file     Mutex.hpp
+ * @brief    Wrapper for freeRTOS mutex
+ * @version  V1.0
+ * @date     13. October 2014
+ *
+ * @note
+ * This file is a part of the framework develop for Helios Flightcontroller
+ *
+ ******************************************************************************/
+
 #pragma once
 
 #include "FreeRTOS.h"
