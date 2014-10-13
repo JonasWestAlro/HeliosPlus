@@ -56,7 +56,7 @@ class EEPROM_24LC64 : public HAL_Eeprom_I{
 			registeradress += 32;
 			buffer += 32;
 
-			//TODO-JWA: Is this really necessary?
+			//!TODO-JWA: Is this really necessary?
 			Time.delay_ms(5);
 		}
 
@@ -73,7 +73,7 @@ class EEPROM_24LC64 : public HAL_Eeprom_I{
 	}
 
 
-	//TODO-JWA: This can be optimized, it's a very fast "copy-past" implementation!
+	//!TODO-JWA: This can be optimized, it's a very fast "copy-past" implementation!
 	virtual uint8_t erase_all(){
 		uint16_t registeradress = 0;
 		uint16_t n = 60000;
@@ -107,7 +107,7 @@ class EEPROM_24LC64 : public HAL_Eeprom_I{
 			if(!i2c.write_register16(EEPROM_ADDRESS, registeradress, 32, buffer)) return 0;
 			registeradress += 32;
 
-			//TODO-JWA: Is this really necessary?
+			//!TODO-JWA: Is this really necessary?
 			Time.delay_ms(5);
 		}
 

@@ -5,6 +5,7 @@
 
 class Mutex{
 	public:
+		//! Constructor
 		Mutex(void){
 			m_MutexHandle = xSemaphoreCreateMutex();
 			if (m_MutexHandle == NULL) {
@@ -12,46 +13,55 @@ class Mutex{
 			}
 		}
 
+		//! Copy Constructor
 		Mutex(const Mutex& mutex){
 			m_MutexHandle = mutex.m_MutexHandle;
 		}
 
+		//! Destructor
 		~Mutex(void){
 			//vSemaphoreDelete(m_MutexHandle);
 		}
 
-		// Block until mutex is taken
+		//! Copy assignment
+		Mutex& operator=( Mutex& other)
+		{
+			if(this != &other){
+				m_MutexHandle = other.get_handle();
+			}
+		    return *this;
+		}
+
+		//! Take a mutex and block until it is taken
 		void take(void){
 			xSemaphoreTake(m_MutexHandle, portMAX_DELAY);
 		}
 
-		// Return true if Mutex was taken
-		// Return false if not
+
+		/** @brief  	Try take mutex. Return immediately
+		  * @retval 	True		If mutex was taken
+		  * @retval		False		If mutex was NOT taken
+		  */
 		bool try_take(void){
 			return xSemaphoreTake(m_MutexHandle, 0);
 		}
 
-
-		/* @return pdTRUE if the semaphore was released.  pdFALSE if an error occurred.
-		 * Semaphores are implemented using queues.  An error can occur if there is
-		 * no space on the queue to post a message - indicating that the
-		 * semaphore was not first obtained correctly.
-		 */
+		/** @brief  	Try take mutex. Return immediately
+		  * @retval 	True		If mutex was released
+		  * @retval		False		If mutex was NOT released. Will happen if the mutex was not already taken.
+		  */
 		bool release(void){
 			return xSemaphoreGive(m_MutexHandle);
 		}
 
-		Mutex& operator=( Mutex& other) // copy assignment
-		{
-		    m_MutexHandle = other.get_handle();
-		    return *this;
-		}
-
+		/** @brief  	Get the Mutex Handle
+		  * @return		See #SemaphoreHandle_t
+		  */
 		SemaphoreHandle_t get_handle(){
 			return m_MutexHandle;
 		}
 
 	private:
-		SemaphoreHandle_t  m_MutexHandle;
+		SemaphoreHandle_t  m_MutexHandle;	//!< Mutex Handle
 };
 
