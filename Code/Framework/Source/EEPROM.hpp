@@ -8,7 +8,29 @@ class EepromSpace;
 
 static const uint16_t EEPROM_TABLE_MAX_SIZE = 400;
 
-//The purpose of the EepromTable is to manage the different EEPROMs (in the application modules).
+/***
+ * EEPROM OVERVIEW
+ *
+ * The EEPROM structure is divided into "EepromSpaces". Each space can be considered
+ * as a virtual address-space within the eeprom. Therefore every space has an offset,
+ * a size and a string ID. For example every ApplicationModule has an EepromSpace
+ * through which it can save its values.
+ *
+ * Furthermore we have to be able to clean up the EEPROM if a new eeprom allocation
+ * structure is introduced. For example if we introduce a new ApplicationModule or similar.
+ * This is the purpose of the EepromHandler. Every physical eeprom should be assigned
+ * to an EepromHandler, and every EepromSpace should be assigned to a Handler.
+ * The handler will then keep track of the different spaces on the specific eeprom,
+ * and save a table containing information about the registered spaces.
+ * On bootup this table is compared to find out if the eeprom content is valid or not.
+ *
+ * TODO-JWA: Write a better and more elaborate description than the above.
+ ***/
+
+//The purpose of the EepromHandler is to manage EEPROMs.
+//Every physical eeprom should be attached to an eeprom handler.
+//The EepromHandler should and decide whether the content on eeprom is indeed valid,
+//for the defined EEPROM spaces.
 class EepromHandler {
 public:
 	EepromHandler(){
@@ -108,18 +130,12 @@ public:
 	}
 
 	bool save(void* data, uint32_t size){
-		//TODO-JWA: Implement this function..
-
-		 handler->get_driver()->write(0,0,0);
-
+		//handler->get_driver()->write(offset, size, data);
 		return true;
 	}
 
 	bool load(void* data, uint32_t size){
-		//TODO-JWA: Implement this function..
-
-		handler->get_driver()->read(0,0,0);
-
+		//handler->get_driver()->read(offset, size, data);
 		return true;
 	}
 
@@ -147,5 +163,4 @@ private:
 	uint32_t 		size;
 	const char* 	id;
 };
-
 

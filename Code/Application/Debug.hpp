@@ -17,6 +17,15 @@ public:
 		transmit();
 	}
 
+	void send_and_transmit_uint32(std::initializer_list<uint32_t> list){
+		 for( auto elem : list ){
+			 send_number(elem);
+			 send(',');
+		}
+
+		put("\n\r");
+		transmit();
+	}
 
 	void put_and_transmit(const char* debugstring){
 		if(communication != 0){

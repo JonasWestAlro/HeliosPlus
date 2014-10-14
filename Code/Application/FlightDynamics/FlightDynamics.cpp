@@ -22,7 +22,7 @@ FlightDynamics::FlightDynamics(const char* name, uint32_t stackSize, uint8_t pri
 
 	attitude_socket.reset();
 
-	set_frequency(200);
+	set_frequency(400);
 }
 
 void FlightDynamics::task(void){
@@ -48,9 +48,9 @@ void FlightDynamics::task(void){
 	attitude_socket.roll 			= attitude_euler.y;
 	attitude_socket.yaw 			= attitude_euler.z*-1;
 
-	attitude_socket.pitch_velocity 	= pitch_filter.process(raw_gyro[0]);
+	attitude_socket.pitch_velocity 	= pitch_filter.process(raw_gyro[0])*-1;
 	attitude_socket.roll_velocity  	= roll_filter.process(raw_gyro[1]);
-	attitude_socket.yaw_velocity 	= yaw_filter.process(raw_gyro[2]);
+	attitude_socket.yaw_velocity 	= yaw_filter.process(raw_gyro[2]*-1);
 
 	//Update the quarternion interface/socket:
 	attitude_quarternion_socket = attitude_quaternion;
@@ -212,15 +212,15 @@ void FlightDynamics::handle_debug_stream(){
 	static uint32_t timestamp = 0;
 
 	if(Time.get_time_since_ms(timestamp)>50){
-		Debug.send_number(attitude_socket.pitch);
-		Debug.send(',');
-		Debug.send_number(attitude_socket.roll);
-		Debug.send(',');
-		Debug.send_number(attitude_socket.yaw);
+		Debug.send_and_transmit_floats({
+			attitude_socket.pitch,
+			attitude_socket.roll,
+			attitude_socket.yaw,
+			attitude_socket.pitch_velocity,
+			attitude_socket.roll_velocity,
+			attitude_socket.yaw_velocity
+		});
 
-		Debug.send('\n');
-		Debug.send('\r');
-		Debug.transmit();
 		timestamp = Time.get_timestamp();
 	}
 }

@@ -6,6 +6,7 @@
 
 #include "MotorDistributionController.hpp"
 #include "Quadcopter.hpp"
+#include "Debug.hpp"
 
 class FlightControl : public ApplicationModule{
 	public:
@@ -23,6 +24,8 @@ class FlightControl : public ApplicationModule{
 		void handle_message(Message& msg);
 
 	private:
+		bool debugging_stream = false;
+
 		HAL_Motor_I* motors;
 
 		AttitudeController attitude_controller;
@@ -33,9 +36,12 @@ class FlightControl : public ApplicationModule{
 
 
 		float throttle = 0;
+		float pitch_command = 0;
+		float roll_command = 0;
+		float yaw_command = 0;
 
 		void check_armed();
 		void check_control_mode(){}
-
+		void handle_debug_stream();
 };
 

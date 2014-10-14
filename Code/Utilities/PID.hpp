@@ -51,7 +51,7 @@ public:
 		last_error = current_value;
 
 
-		return p_term - i_term + d_term;
+		return p_term + i_term + d_term;
 	}
 
 	void  	reset_integrator(){

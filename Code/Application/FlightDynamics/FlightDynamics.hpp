@@ -63,6 +63,8 @@ class FlightDynamics : public ApplicationModule{
 
 		struct EEPROM_Structure{
 			AccelerometerCalibration accelerometer_calibration;
+			GyroscopeCalibration 	 gyroscope_calibration;
+			MagnetometerCalibration	 magnetometer_calibration;
 		};
 
 		EEPROM_Structure eeprom_structure;

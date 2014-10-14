@@ -50,10 +50,12 @@ int main(void){
 	EEPROM_24LC64 eeprom;
 
 
-	//Create EEPROM Table:
+	//Create EEPROM handler:
 	EepromHandler eeprom_handler(&eeprom);
 	ApplicationModule::set_defualt_eeprom_handler(&eeprom_handler);
 
+	//Create eeprom space for globals:
+	EepromSpace globals_eeprom_space("GLOBALS", 1000, &eeprom_handler);
 
 	//Create Application modules ------------------------------------------:
 	Communication 		communication("Communication", 			configMINIMAL_STACK_SIZE*10, 	1, 1000);

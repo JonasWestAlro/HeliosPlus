@@ -7,6 +7,8 @@ ControlInput::ControlInput(const char* name, uint32_t stackSize, uint8_t priorit
 	messenger.subscribe(REQUEST_CONTROLINPUTS_REPORT);
 	messenger.subscribe(CALIBRATE_CONTROLINPUT);
 
+	control_socket.control_mode = CONTROLMODE_MANUAL_THROTTLE;
+
 	set_frequency(50);
 }
 

@@ -2,10 +2,12 @@
 
 #include "Framework.hpp"
 #include "Debug.hpp"
+#include "Globals.hpp"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>     /* atof */
 
-#define NO_CLI_COMMANDS 6
+#define NO_CLI_COMMANDS 7
 
 class CLI;
 
@@ -63,6 +65,7 @@ class CLI : public ApplicationModule {
 
 		void process_buffer();
 		bool compare_next_word_to(const char* compare_command);
+		bool get_next_word_as_number(float&);
 
         CLI_Command cli_table[NO_CLI_COMMANDS] = {
           { "help",		&CLI::handle_help },
@@ -70,7 +73,8 @@ class CLI : public ApplicationModule {
           { "print",	&CLI::handle_print },
           { "calibrate", &CLI::handle_calibrate },
           { "arm",		&CLI::handle_arm },
-          { "unarm",	&CLI::handle_unarm }
+          { "unarm",	&CLI::handle_unarm },
+          { "set",		&CLI::handle_set }
         };
 		void handle_buffer_full(){};
 
@@ -83,11 +87,15 @@ class CLI : public ApplicationModule {
 		void handle_print_frequency_stats(void);
 		void handle_print_duration_stats(void);
 		void handle_print_arming_conditions(void);
+		void handle_print_parameters(void);
 
 		void handle_calibrate(void);
 		void handle_calibrate_process(char*);
 
 		void handle_arm(void);
 		void handle_unarm(void);
+
+		void handle_set(void);
+		void handle_set_parameter(void);
 
 };

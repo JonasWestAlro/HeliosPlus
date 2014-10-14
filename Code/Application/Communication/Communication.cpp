@@ -43,9 +43,6 @@ void Communication::task(void)
 	messenger.broadcast(Message(REQUEST_SHIFT_OF_CONTROL,
 								(uint8_t)REQUEST_TAKE_CONTROL));
 
-	//Testing globals:
-	Globals::angle_control_p.set(0.9);
-
 	//TODO-JWA: This status variable should show if this module can generate
 	//			a valid input at the moment.
 	status = STATUS_OK;
@@ -183,7 +180,7 @@ void Communication::transmit_attitude_quaternion(void)
 void Communication::transmit_params_list(void)
 {
 	uint8_t i;
-	for (i = 0; i < get_no_globals(); ++i) {
+	for (i = 0; i < Globals::get_no_globals(); ++i) {
 		this->transmit_param(i);
 	}
 }

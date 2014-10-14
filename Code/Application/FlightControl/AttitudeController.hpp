@@ -11,27 +11,19 @@ class AttitudeController{
 
 		void update(APP_Attitude_I& attitude, APP_Control_I& control){
 
+			if(control.throttle < 10){
+				reset();
+			}
 
-			if(i_term_reset){
-					if(control.throttle > 400){
-						pid_pitch_angle.set_ki(angle_ki);
-						pid_roll_angle.set_ki(angle_ki);
-						pid_pitch_rate.set_ki(velocity_ki);
-						pid_roll_rate.set_ki(velocity_ki);
-						pid_yaw_rate.set_ki(yaw_ki);
-					}
-				}
+			//Run Attitude PID algorithms:
+			//Compute the angular velocity needed to correct the angle error:
+			setpoint_pitch_velocity  = pid_pitch_angle.update(attitude.pitch, control.pitch);
+			setpoint_roll_velocity 	 = pid_roll_angle.update(attitude.roll, control.roll);
 
-				//Run Attitude PID algorithms:
-				//Compute the angular velocity needed to correct the angle error:
-				setpoint_pitch_velocity  = pid_pitch_angle.update(attitude.pitch, control.pitch);
-				setpoint_roll_velocity 	 = pid_roll_angle.update(attitude.roll, control.roll);
-
-
-				//Compute the motor difference needed to achieve this angular velocity:
-				pitch_cmd = pid_pitch_rate.update(-attitude.pitch_velocity, setpoint_pitch_velocity);
-				roll_cmd  = pid_roll_rate.update(-attitude.roll_velocity, setpoint_roll_velocity);
-				yaw_cmd   = pid_yaw_rate.update(-attitude.yaw_velocity, control.yaw*6.0);
+			//Compute the motor difference needed to achieve this angular velocity:
+			pitch_cmd = pid_pitch_rate.update(attitude.pitch_velocity, setpoint_pitch_velocity);
+			roll_cmd  = pid_roll_rate.update(attitude.roll_velocity, setpoint_roll_velocity);
+			yaw_cmd   = pid_yaw_rate.update(attitude.yaw_velocity, control.yaw*6.0);
 
 		}
 
@@ -57,41 +49,28 @@ class AttitudeController{
 			pid_pitch_rate.reset_integrator();
 			pid_roll_rate.reset_integrator();
 			pid_yaw_rate.reset_integrator();
-
-			pid_pitch_angle.set_ki(0);
-			pid_roll_angle.set_ki(0);
-			pid_pitch_rate.set_ki(0);
-			pid_roll_rate.set_ki(0);
-			pid_yaw_rate.set_ki(0);
-
-			i_term_reset = true;
 		}
 
-		void reset_constants(){
+		void reinitialize_constants(){
 			float pid_p = Globals::angle_control_p.get();
 			float pid_i = Globals::angle_control_i.get();
 			float pid_d = Globals::angle_control_d.get();
 
-			pid_pitch_angle.set_constants(pid_p, 0.0, pid_d, 1000.0);
-			pid_roll_angle.set_constants(pid_p, 0.0, pid_d, 1000.0);
-
-			//This will be setup at a later time (when we are in the air!)
-			angle_ki = pid_i;
+			pid_pitch_angle.set_constants(pid_p, pid_i, pid_d, 1000.0);
+			pid_roll_angle.set_constants(pid_p, pid_i, pid_d, 1000.0);
 
 			pid_p = Globals::rate_control_p.get();
 			pid_i = Globals::rate_control_i.get();
 			pid_d = Globals::rate_control_d.get();
 
-			pid_pitch_rate.set_constants(pid_p, 0.0, pid_d, 1000.0);
-			pid_roll_rate.set_constants(pid_p, 0.0, pid_d, 1000.0);
-			velocity_ki = pid_i;
+			pid_pitch_rate.set_constants(pid_p, pid_i, pid_d, 1000.0);
+			pid_roll_rate.set_constants(pid_p, pid_i, pid_d, 1000.0);
 
 			pid_p = Globals::yaw_control_p.get();
 			pid_i = Globals::yaw_control_i.get();
 			pid_d = Globals::yaw_control_d.get();
 
-			pid_yaw_rate.set_constants(pid_p, 0.0, pid_d, 1000.0);
-			yaw_ki = pid_i;
+			pid_yaw_rate.set_constants(pid_p, pid_i, pid_d, 1000.0);
 		}
 
 	private:

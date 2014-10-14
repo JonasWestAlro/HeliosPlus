@@ -96,32 +96,36 @@ void CLI::task(void){
 					handle_print_duration_stats();
 					Debug.put("\n\n\rFlightController>");
 					Debug.transmit();
+					break;
 				}
-				break;
+
 			case '2':
 				if(buffer_index == 0){
 					Debug.put("\n\r");
 					handle_print_frequency_stats();
 					Debug.put("\n\n\rFlightController>");
 					Debug.transmit();
+					break;
 				}
-				break;
+
 			case '3':
 				if(buffer_index == 0){
 					Debug.put("\n\r");
 					handle_print_stack_stats();
 					Debug.put("\n\n\rFlightController>");
 					Debug.transmit();
+					break;
 				}
-				break;
+
 			case '4':
 				if(buffer_index == 0){
 					Debug.put("\n\r");
 					handle_print_run_time_stats();
 					Debug.put("\n\n\rFlightController>");
 					Debug.transmit();
+					break;
 				}
-				break;
+
 
 			default:
 				Debug.send_and_transmit(c);
@@ -183,11 +187,31 @@ bool CLI::compare_next_word_to(const char* compare_command){
 	if(len == compare_command_length &&
 	   memcmp(compare_command, &input_buffer[offset], compare_command_length) == 0){
 		// Next time we have to compare from this index
-		compare_index = compare_command_length + 1;
+		compare_index += compare_command_length + 1;
 		return true;
 	}else{
 		return false;
 	}
+}
+
+bool CLI::get_next_word_as_number(float& number){
+	uint8_t offset = compare_index;
+
+	// Rest of buffer
+	uint8_t len = buffer_index - offset;
+
+	// Do we have a space before '\0' ?
+	uint8_t* ptr = (uint8_t*)memchr(&input_buffer[offset], ' ', len);
+
+	// We have a space. Only compare next word
+	// This will also guarantee that trailing spaces wont be checked
+	if(ptr != 0){
+		len = ptr - &input_buffer[offset];
+	}
+
+	number = atof((char*)(input_buffer+offset));
+	compare_index += len;
+	return 1;
 }
 
 void CLI::handle_help(void){
@@ -245,6 +269,9 @@ void CLI::handle_print(void){
 	else if(compare_next_word_to("arm_conditions")){
 		handle_print_arming_conditions();
 	}
+	else if(compare_next_word_to("parameters")){
+		handle_print_parameters();
+	}
 	else{
 		Debug.put("Usage: print <name>\n\r\n\r");
 		Debug.put("Name:\n\r");
@@ -253,6 +280,7 @@ void CLI::handle_print(void){
 		Debug.put("\t- frequency_stats\n\r");
 		Debug.put("\t- duration_stats\n\r");
 		Debug.put("\t- arm_conditions\n\r");
+		Debug.put("\t- parameters\n\r");
 	}
 }
 
@@ -342,6 +370,25 @@ void CLI::handle_print_duration_stats(void){
 	Debug.put("\n\r");
 }
 
+void CLI::handle_print_parameters(void){
+	char numberbuffer[10] = {0};
+
+	Debug.put("****************************************\n\r");
+	Debug.put("          	  PARAMETERS               \n\r");
+	Debug.put("****************************************\n\r");
+
+	GlobalAbstract** globals_table = Globals::get_globals_table();
+
+	for(uint8_t i = 0; i<Globals::get_no_globals(); i++){
+		Debug.put(globals_table[i]->get_id());
+		Debug.put("\t\t\t");
+
+		globals_table[i]->print(numberbuffer);
+		Debug.put(numberbuffer);
+		Debug.put("\n\r");
+	}
+}
+
 void CLI::handle_calibrate(void){
 	if(compare_next_word_to("gyroscope")){
 		messenger.broadcast(CALIBRATE_GYROSCOPE, CALIBRATION_START);
@@ -425,4 +472,43 @@ void CLI::handle_arm(void){
 void CLI::handle_unarm(void){
 	messenger.broadcast(UNARM_REQUEST);
 	Debug.put("UNARMING...");
+}
+
+void CLI::handle_set(void){
+	if(compare_next_word_to("parameter")){
+		handle_set_parameter();
+	}
+	else{
+		Debug.put("Usage: set <attribute type><attribute>\n\r\n\r");
+		Debug.put("attribute type:\n\r");
+		Debug.put("\t- parameter\n\r");
+	}
+}
+
+void CLI::handle_set_parameter(void){
+	bool success = false;
+
+	//Find out which parameter..
+	GlobalAbstract** globals_table = Globals::get_globals_table();
+
+	for(uint8_t i = 0; i<Globals::get_no_globals(); i++){
+		if(compare_next_word_to(globals_table[i]->get_id())){
+			float new_parameter;
+			if(get_next_word_as_number(new_parameter)){
+				static_cast<Global<float>*>(globals_table[i])->set(new_parameter);
+
+				Debug.put(globals_table[i]->get_id());
+				Debug.put(" is now set to: ");
+				Debug.send_number(new_parameter);
+				Debug.put("\n\r");
+				success = true;
+				break;
+			}
+		}
+	}
+
+	if(!success){
+		Debug.put("Error.. Not able to find the specified parameter :(");
+	}
+
 }
