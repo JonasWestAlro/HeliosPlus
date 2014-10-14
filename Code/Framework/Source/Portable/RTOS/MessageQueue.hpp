@@ -1,4 +1,15 @@
 #pragma once
+/**************************************************************************//**
+ * @file     MessageQueue.hpp
+ * @brief
+ * @version  V1.0
+ * @date     13. October 2014
+ *
+ * @note
+ * This file is a part of the framework develop for Helios Flightcontroller
+ *
+ ******************************************************************************/
+
 
 #include "FreeRTOS.h"
 #include "task.h"

@@ -1,16 +1,5 @@
 #pragma once
 
-//SETTINGS:
-
-
-//Forward declarations:
-//!TODO-JWA: We should probably find a better way of linking it all together..
-class Message;
-class Messenger;
-class MessageDistribution;
-class ApplicationModule;
-
-
 typedef enum{
 	STATUS_NOTOK = 0,
 	STATUS_OK,
@@ -29,7 +18,6 @@ typedef enum{
 #include "Global.hpp"
 #include "HAL_Interface.hpp"
 #include "Timing.hpp"
-
 #include "Globals.hpp"
 
 //Interfaces:

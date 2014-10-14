@@ -1,8 +1,17 @@
 #pragma once
+/**************************************************************************//**
+ * @file     Timing.hpp
+ * @brief
+ * @version  V1.0
+ * @date     13. October 2014
+ *
+ * @note
+ * This file is a part of the framework develop for Helios Flightcontroller
+ *
+ ******************************************************************************/
+
 #include "stm32f4xx_tim.h"
 #include "stm32f4xx_rcc.h"
-
-
 
 class Timing{
 public:
