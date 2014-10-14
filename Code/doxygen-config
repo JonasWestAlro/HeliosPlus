@@ -792,18 +792,10 @@ RECURSIVE              = YES
 EXCLUDE              =  cmsis
 EXCLUDE              += cmsis_boot
 EXCLUDE              += cmsis_lib
-EXCLUDE              += Application/Utilities/DSP_Lib
 EXCLUDE              += Helios
 EXCLUDE              += syscalls
-EXCLUDE              += HAL\USB
-EXCLUDE              += HAL\USB\usb_conf\*
-EXCLUDE              += HAL\USB\usb_lib\*
-EXCLUDE              += HAL\MPU9150\Inv_MPUxxxx.c
-EXCLUDE              += HAL\MPU9150\Inv_MPUxxxx.h
-EXCLUDE              += HAL\MPU9150\inv_mpu_dmp_motion_driver.c
-EXCLUDE              += HAL\MPU9150\inv_mpu_dmp_motion_driver.h
-EXCLUDE				 += Utilities\DSP_Lib\*
-EXCLUDE				 += Utilities\MAVLink\*
+EXCLUDE				 += Utilities\DSP_Lib
+EXCLUDE				 += Utilities\MAVLink
 
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
