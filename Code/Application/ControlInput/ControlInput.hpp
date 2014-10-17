@@ -34,8 +34,8 @@ class ControlInput : public ApplicationModule{
 
 		void handle_internal_message(void);
 		void process_altitude_setpoint();
-		void handle_switch(float state);
-		void handle_clicker(float state);
+		void handle_aux1(float state);
+		void handle_aux2(float state);
 		void check_arm(void);
 		void switch_arm_state(void);
 		void request_control(uint8_t Request);
@@ -46,7 +46,6 @@ class ControlInput : public ApplicationModule{
 		void report_status(void);
 
 		void handle_debug_stream();
-
 
 		float convert_joystick_to_degree(int16_t);
 		float convert_joystick_to_throttle(int16_t);

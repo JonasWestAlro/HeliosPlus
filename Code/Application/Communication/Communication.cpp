@@ -57,14 +57,14 @@ void Communication::handle_message(Message& msg){
 			response.set_enum(status);
 			messenger.send_to(msg.sender, &response);
 			break;
-		case SHIFT_OF_CONTROL_ACK:
-			if((msg.get_byte(0) == REQUEST_TAKE_CONTROL) &&
-				msg.get_byte(1) == ACK 	){
+		case SHIFT_OF_CONTROL_REPORT:
+			if(msg.get_enum() == YOU_HAVE_CONTROL){
 				in_control = true;
 			}else{
 				in_control = false;
 			}
 			break;
+
 		default:
 			break;
 	}

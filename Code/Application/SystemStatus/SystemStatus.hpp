@@ -27,6 +27,8 @@ class SystemStatus : public ApplicationModule{
 		void handle_message(Message& msg);
 
 	private:
+		Messenger* current_input_controller;
+
 		//Drivers:
 		HAL_HeliosLED_I* leds;
 

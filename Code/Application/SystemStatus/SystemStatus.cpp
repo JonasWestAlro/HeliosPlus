@@ -23,6 +23,8 @@ SystemStatus::SystemStatus(const char* name, uint32_t stackSize, uint8_t priorit
 	system_status_socket.armed 		  = false;
 	system_status_socket.system_error = false;
 
+	current_input_controller = controlinput->get_messenger();
+
 	set_frequency(100);
 }
 
@@ -157,14 +159,13 @@ void SystemStatus::check_arm(void){
 
 
 void SystemStatus::handle_control_input_report(Message& msg){
+	APP_InterfaceBase* pipe_of_sender = static_cast<APP_InterfaceBase*>(msg.get_pointer());
 
-	//Check whether this is a Manual control input or not:
-	if(msg.get_byte(0) == MANUAL_CONTROL_INPUT){
+	//Check whether this is a the control input module
+	//(the manuel joystick has to be present in order to arm):
+	if(pipe_of_sender == controlinput_module->control_socket.get_pipe()){
 		conditions_controller.update_condition(COND_MANUAL_CONTROLINPUT, (STATUS)msg.get_enum());
 	}
-
-	//Now check if this is the active control input:
-	APP_InterfaceBase* pipe_of_sender = static_cast<APP_InterfaceBase*>(msg.get_pointer());
 
 	//Check that this is the current input module:
 	if(flightcontrol_module->control_socket.get_pipe() == pipe_of_sender){
@@ -173,10 +174,23 @@ void SystemStatus::handle_control_input_report(Message& msg){
 }
 
 void SystemStatus::handle_shift_of_control(Message& msg){
+	Message out_message(SHIFT_OF_CONTROL_REPORT);
+
 	APP_InterfaceBase* pipe_of_sender = static_cast<APP_InterfaceBase*>(msg.get_pointer());
 
 	if(msg.get_enum() == REQUEST_TAKE_CONTROL){
+		//First inform current input module:
+		out_message.set_enum(YOU_DO_NOT_HAVE_CONTROL);
+		messenger.send_to(current_input_controller, out_message);
+
+		//Setup new input controller:
 		flightcontrol_module->control_socket.set_pipe(pipe_of_sender);
+
+		//Inform new controller about the shift of control:
+		out_message.set_enum(YOU_HAVE_CONTROL);
+		messenger.send_to(msg.sender, out_message);
+
+		current_input_controller = msg.sender;
 	}
 }
 

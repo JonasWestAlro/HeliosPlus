@@ -47,6 +47,10 @@ class ApplicationModule : public Task {
 			}
 		}
 
+		void schedule_out(){
+			delay(ticks_to_delay);
+		}
+
 		void set_frequency(uint16_t frequency_){
 			frequency = frequency_;
 

@@ -6,8 +6,11 @@ ControlInput::ControlInput(const char* name, uint32_t stackSize, uint8_t priorit
 {
 	messenger.subscribe(REQUEST_CONTROLINPUTS_REPORT);
 	messenger.subscribe(CALIBRATE_CONTROLINPUT);
+	messenger.subscribe(SHIFT_OF_CONTROL_REPORT);
 
 	control_socket.control_mode = CONTROLMODE_MANUAL_THROTTLE;
+
+
 
 	set_frequency(50);
 }
@@ -37,8 +40,8 @@ void ControlInput::task(void){
 		aux_states[0]  =  raw_values.aux1;
 		aux_states[1]  =  raw_values.aux2;
 
-		if(aux_states[0] != last_aux_states[0])   handle_clicker(aux_states[0]);
-		if(aux_states[1] != last_aux_states[1])  handle_switch(aux_states[1]);
+		if(aux_states[0] != last_aux_states[0])   handle_aux1(aux_states[0]);
+		if(aux_states[1] != last_aux_states[1])  handle_aux2(aux_states[1]);
 
 		last_aux_states[0] = aux_states[0];
 		last_aux_states[1] = aux_states[1];
@@ -77,9 +80,8 @@ void ControlInput::handle_message(Message& msg){
 			messenger.send_to(msg.sender, &respons);
 			break;
 
-		case SHIFT_OF_CONTROL_ACK:
-			if((msg.get_byte(0) == REQUEST_TAKE_CONTROL) &&
-				msg.get_byte(1) == ACK 	){
+		case SHIFT_OF_CONTROL_REPORT:
+			if(msg.get_enum() == YOU_HAVE_CONTROL){
 				in_control = true;
 			}else{
 				in_control = false;
@@ -138,14 +140,16 @@ void ControlInput::process_altitude_setpoint(){
 	}
 }
 
-void ControlInput::handle_switch(float state)
-{
+void ControlInput::handle_aux1(float state){
 
 }
 
-void ControlInput::handle_clicker(float state)
-{
-
+void ControlInput::handle_aux2(float state){
+	//Request control:
+	Message msg(REQUEST_SHIFT_OF_CONTROL);
+	msg.set_enum(REQUEST_TAKE_CONTROL);
+	msg.set_pointer(static_cast<void*>(control_socket.get_pipe()));
+	messenger.broadcast(msg);
 }
 
 void ControlInput::check_arm(void){

@@ -45,6 +45,10 @@ class Task {
 			vTaskDelayUntil(pxPreviousWakeTime, xTimeIncrement);
 		}
 
+		inline void delay(const TickType_t xTimeIncrement){
+			vTaskDelay(xTimeIncrement);
+		}
+
 		void schedule_out_ms(uint16_t ms){
 			//calculate number of ticks:
 			uint32_t no_ticks = (get_tick_frequency()/1000)*ms;

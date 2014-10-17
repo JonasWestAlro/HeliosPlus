@@ -18,7 +18,7 @@ typedef enum{
 	REQUEST_MOTORS_REPORT,			//!< Any module handling motors should report in functional
 	REQUEST_CONTROLINPUTS_REPORT,	//!< Any module handling controls should report in functional
 	REQUEST_SHIFT_OF_CONTROL,		//!< Used to shift control of drone to a new control input
-	SHIFT_OF_CONTROL_ACK,			//!< Used to notify an Input module about control!
+	SHIFT_OF_CONTROL_REPORT,			//!< Used to notify an Input module about control!
 	FLIGHTDYNAMICS_REPORT_STATUS,			//!< Is used to report sensor status
 	MOTOR_REPORT_STATUS,			//!< This is used by motors handling modules to report their status
 	CONTROLINPUT_REPORT_STATUS,		//!< This should be used be modules providing control interfaces to report their status
@@ -56,11 +56,12 @@ typedef enum{
 		 REQUEST_LEAVE_CONTROL = 1};
 
  /*
- * SHIFT_OF_CONTROL_ACK
+ * SHIFT_OF_CONTROL_REPORT
  * 		(Used to notify an Input module about control!)
- * 		Message[0]: 1 = TAKE CONTROL .. 0 = LEAVE CONTROL
- * 		Message[1]: 1 = ACK .. 0 = NACK
  */
+	enum{YOU_HAVE_CONTROL = 0,
+		 YOU_DO_NOT_HAVE_CONTROL = 1};
+
 	enum{ACK = 0,
 		 NACK = 1};
 

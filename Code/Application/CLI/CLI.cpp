@@ -20,6 +20,9 @@ CLI::CLI(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom
 	flightnavigation 	=  flightnavigation_;
 	systemstatus 		=  systemstatus_;
 
+	messenger.subscribe(REQUEST_CONTROLINPUTS_REPORT);
+	messenger.subscribe(SHIFT_OF_CONTROL_REPORT);
+
 	set_frequency(50);
 }
 
@@ -139,14 +142,32 @@ void CLI::task(void){
 }
 
 void CLI::handle_message(Message& msg){
+	Message respons;
+
 	switch(msg.type){
-			case CLI_ACK_PRINT:
-				waiting_for_external_print = false;
-				Debug.put("\n\n\rFlightController>");
-				Debug.transmit();
-				break;
-			default:
-				break;
+		case REQUEST_CONTROLINPUTS_REPORT:
+			respons.type = CONTROLINPUT_REPORT_STATUS;
+			respons.set_enum(status);
+			respons.set_byte(0, MANUAL_CONTROL_INPUT);
+			respons.set_pointer(static_cast<void*>(control_socket.get_pipe()));
+			messenger.send_to(msg.sender, &respons);
+			break;
+
+		case SHIFT_OF_CONTROL_REPORT:
+			if(msg.get_enum() == YOU_HAVE_CONTROL){
+				in_control = true;
+			}else{
+				in_control = false;
+			}
+			break;
+
+		case CLI_ACK_PRINT:
+			waiting_for_external_print = false;
+			Debug.put("\n\n\rFlightController>");
+			Debug.transmit();
+			break;
+		default:
+			break;
 		}
 }
 
@@ -214,6 +235,33 @@ bool CLI::get_next_word_as_number(float& number){
 	return 1;
 }
 
+
+uint8_t CLI::wait_for_input(char* local_input_buffer, uint8_t max_lenght){
+	uint8_t lenght = 0;
+	uint8_t c;
+
+	while(1){
+		while(Debug.data_available()){
+				Debug.receive(&c);
+			switch(c){
+			case CARRIAGE_RETURN:
+				//We're done..
+				return lenght;
+				break;
+			default:
+				if(lenght < max_lenght){
+					local_input_buffer[lenght++] = c;
+					Debug.send_and_transmit(c);
+				}
+				break;
+			}
+
+		}
+
+		schedule_out();
+	}
+}
+
 void CLI::handle_help(void){
 	Debug.put("****************************************\n\r");
 	Debug.put("        HELIOS FLIGHTCONTROLLER CLI     \n\r");
@@ -221,6 +269,9 @@ void CLI::handle_help(void){
 	Debug.put("Welcome, the following commands can be used:\n\n\r");
 	Debug.put("\t- stream <module> \n\r");
 	Debug.put("\t- print <attribute(s)>\n\r");
+	Debug.put("\t- calibrate <sensor>\n\r");
+	Debug.put("\t- set <attribute type><attribute><value>\n\r");
+	Debug.put("\t- flymode \n\r");
 	Debug.put("\t- arm \n\r");
 	Debug.put("\t- unarm\n\r");
 }
@@ -479,7 +530,7 @@ void CLI::handle_set(void){
 		handle_set_parameter();
 	}
 	else{
-		Debug.put("Usage: set <attribute type><attribute>\n\r\n\r");
+		Debug.put("Usage: set <attribute type><attribute><value>\n\r\n\r");
 		Debug.put("attribute type:\n\r");
 		Debug.put("\t- parameter\n\r");
 	}
@@ -511,4 +562,154 @@ void CLI::handle_set_parameter(void){
 		Debug.put("Error.. Not able to find the specified parameter :(");
 	}
 
+}
+
+void CLI::handle_flymode(void){
+	char local_input_buffer[4] = {0};
+	uint8_t input_buffer_counter = 0;
+	char c;
+
+	Debug.put("Entering flymode...\n\r");
+	Debug.put("WARNING: THE PROPELLERS SHOULD NOT BE MOUNTED WHEN ENTERING FLYMODE.\n\r");
+	Debug.put("         IN THIS MODE THE MOTORS OUTPUT WILL BE CONTROLABLE FROM THIS CLI\n\r");
+	Debug.put("\n\r");
+	Debug.put("Are you sure you want to enter this mode? (write yes or no): ");
+	Debug.transmit();
+
+	//Wait for the input to be done:
+	wait_for_input(local_input_buffer, 3);
+
+	//check if we've got a yes:
+	if(!strcmp(local_input_buffer, "yes")){
+		//run the flymode_program:
+		handle_flymode_program();
+	}else{
+		Debug.put("\n\r Aborting...");
+		return;
+	}
+
+}
+
+
+void CLI::handle_flymode_program(void){
+	uint8_t c;
+
+	control_socket.reset();
+
+	Debug.put_and_transmit("\n\rRequesting control over gain...\n\r");
+
+	//Request control:
+	Message msg(REQUEST_SHIFT_OF_CONTROL);
+	msg.set_enum(REQUEST_TAKE_CONTROL);
+	msg.set_pointer(static_cast<void*>(control_socket.get_pipe()));
+	messenger.broadcast(msg);
+
+	//Wait till we are granted control:
+	uint32_t timestamp = Time.get_timestamp();
+	while(1){
+		process_messages();
+		if(in_control) break;
+
+		if(Time.get_time_since_ms(timestamp) > 500){
+			Debug.put("CLI was unable to gain control over drone.. aborting..");
+			return;
+		}
+
+		schedule_out();
+	}
+
+	Debug.put("Control granted to CLI...\n\r");
+
+	Debug.put("\n\rUse \"E\" and \"R\" for throttle down and up respectivelyn\n\r");
+	Debug.put("Use \"W\" and \"S\" for pitch\n\r");
+	Debug.put("Use \"A\" and \"D\" for roll\n\r");
+	Debug.put("Use \"Q\" to arm and disarm\n\n\r");
+
+	Debug.put("THROTTLE: \t PITCH: \t ROLL:\n\r");
+	Debug.transmit();
+
+	status = STATUS_OK;
+
+	while(1){
+		process_messages();
+		while(Debug.data_available()){
+			Debug.receive(&c);
+			switch(c){
+				case CARRIAGE_RETURN:
+					status = STATUS_NOTOK;
+					return;
+					break;
+
+				case 'r':
+					if(control_socket.throttle < 750){
+						control_socket.throttle += 5;
+					}
+
+					break;
+
+				case 'e':
+					if(control_socket.throttle > 5){
+						control_socket.throttle -= 5;
+					}else{
+						control_socket.throttle = 0;
+					}
+					break;
+
+				case 'w':
+					if(control_socket.pitch < 35){
+						control_socket.pitch += 1;
+					}
+					break;
+
+				case 's':
+					if(control_socket.pitch > -35){
+						control_socket.pitch -= 1;
+					}else{
+						control_socket.pitch = 0;
+					}
+					break;
+
+				case 'a':
+					if(control_socket.roll > -35){
+						control_socket.roll -= 1;
+					}else{
+						control_socket.roll = 0;
+					}
+					break;
+
+				case 'd':
+					if(control_socket.roll < 35){
+						control_socket.roll += 1;
+					}
+						break;
+
+				case 'q':
+					system_status_socket.receive();
+					if(!system_status_socket.armed){
+						messenger.broadcast(ARM_REQUEST);
+					}else{
+						messenger.broadcast(UNARM_REQUEST);
+					}
+					break;
+
+				default:
+					break;
+			}
+
+			handle_flymode_print_controls();
+			control_socket.publish();
+			Debug.transmit();
+		}
+		schedule_out();
+	}
+
+}
+
+void CLI::handle_flymode_print_controls(void){
+	Debug.send('\r');
+	Debug.send_number(control_socket.throttle);
+	Debug.send('\t');
+	Debug.send_number(control_socket.pitch);
+	Debug.send('\t');
+	Debug.send_number(control_socket.roll);
 }

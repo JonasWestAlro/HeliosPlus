@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>     /* atof */
 
-#define NO_CLI_COMMANDS 7
+#define NO_CLI_COMMANDS 8
 
 class CLI;
 
@@ -36,6 +36,7 @@ class CLI : public ApplicationModule {
 			ApplicationModule* systemstatus_);
 
 			APP_SystemStatus_I system_status_socket;
+			APP_Control_I 	   control_socket;
 
 	protected:
 		void task(void);
@@ -48,7 +49,6 @@ class CLI : public ApplicationModule {
 		ApplicationModule* flightnavigation;
 		ApplicationModule* communications;
 		ApplicationModule* systemstatus;
-
 
 		uint8_t input_buffer[256] = {0};
 		uint8_t last_input_buffer[256]   = {0};
@@ -63,9 +63,13 @@ class CLI : public ApplicationModule {
 
 		char run_time_stats[40*10];
 
+		STATUS status = STATUS_NOTOK;
+		bool in_control = false;
+
 		void process_buffer();
 		bool compare_next_word_to(const char* compare_command);
 		bool get_next_word_as_number(float&);
+		uint8_t wait_for_input(char* compare, uint8_t max_lenght);
 
         CLI_Command cli_table[NO_CLI_COMMANDS] = {
           { "help",		&CLI::handle_help },
@@ -74,7 +78,8 @@ class CLI : public ApplicationModule {
           { "calibrate", &CLI::handle_calibrate },
           { "arm",		&CLI::handle_arm },
           { "unarm",	&CLI::handle_unarm },
-          { "set",		&CLI::handle_set }
+          { "set",		&CLI::handle_set },
+          { "flymode",	&CLI::handle_flymode }
         };
 		void handle_buffer_full(){};
 
@@ -97,5 +102,9 @@ class CLI : public ApplicationModule {
 
 		void handle_set(void);
 		void handle_set_parameter(void);
+
+		void handle_flymode(void);
+		void handle_flymode_program(void);
+		void handle_flymode_print_controls(void);
 
 };

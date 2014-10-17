@@ -29,12 +29,53 @@
 
 #include "Debug.hpp"
 
+#include "eefs_filesys.h"
+
 EepromHandler* ApplicationModule::default_eeprom_handler;
 
 void test_sensors();
 
+uint8_t eeprom_simulation[10000] = {0};
+int32_t filedescriptor = 0;
+int32_t filedescriptor1 = 0;
+
+EEFS_FileAllocationTableHeader_t header = {
+		0,
+		EEFS_FILESYS_MAGIC,
+		1,
+		100,
+		9000,
+		0
+};
+
+char buffer_in[18] = "THIS IS MY FILE!!";
+char buffer_out[18] = {0};
+int8_t result = 0;
+
+void test_filesystem(){
+	memcpy(eeprom_simulation, &header, sizeof(EEFS_FileAllocationTableHeader_t));
+
+	result = EEFS_InitFS("/EEDEV0", (uint32_t)&eeprom_simulation);
+	result = EEFS_Mount("/EEDEV0", "/EEFS0");
+
+	filedescriptor = EEFS_Creat("/EEFS0/My_file", EEFS_ATTRIBUTE_NONE);
+	EEFS_Write(filedescriptor, buffer_in, 18);
+	EEFS_Close(filedescriptor);
+
+	Time.delay_ms(1000);
+
+	filedescriptor1 =  EEFS_Open("/EEFS0/My_file", O_RDWR);
+	EEFS_Read(filedescriptor1, buffer_out, 18);
+
+	while(1){
+		int i = 0;
+		i++;
+	}
+}
+
 int main(void){
 	//test_sensors();
+	//test_filesystem();
 
 	WirelessUART wireless_uart;
 	Debug.set_driver(&wireless_uart);
@@ -89,7 +130,7 @@ int main(void){
 
 	APP_Control_I control1({&communication.control_socket});
 
-
+	APP_Control_I control2({&cli.control_socket});
 
 	//Bind HAL Interfaces ------------------------------------------::
 	flight_dynamics.set_accelerometer(&mpu9150);
@@ -112,7 +153,7 @@ int main(void){
 	communication.set_driver(&gps_uart);
 
 	//Check that EEPROM table is not changed:
-	eeprom_handler.synchronize();
+	//eeprom_handler.synchronize();
 
 	//Start Scheduler:
 	schedulerStart();
