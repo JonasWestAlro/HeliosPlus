@@ -1,22 +1,23 @@
 #include "MPU9150.hpp"
 
-MPU9150::MPU9150(): i2c(SensorI2C::get_instance()){
+MPU9150::MPU9150():
+	i2c(SensorI2C::get_instance()){
 
-	uint8_t data;
-	//i2c.read_register8(MPU9150_ADDRESS, MPU9150_RA_WHO_AM_I, 1, &data);
+		uint8_t data;
+		//i2c.read_register8(MPU9150_ADDRESS, MPU9150_RA_WHO_AM_I, 1, &data);
 
-	while(1){
-		if(setup() == 0){
-			break;
-		}else{
-			i2c.restart();
-			setup();
-			break;
+		while(1){
+			if(setup() == 0){
+				break;
+			}else{
+				i2c.restart();
+				setup();
+				break;
+			}
 		}
-	}
 
-	//i2c.set_clock_speed(400000);
-	//i2c.restart();
+		//i2c.set_clock_speed(400000);
+		//i2c.restart();
 }
 
 bool MPU9150::is_alive(){

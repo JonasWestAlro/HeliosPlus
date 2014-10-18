@@ -32,7 +32,7 @@
 
 /* Default number of spare bytes added to the end of a slot when a 
    new file is created by calling the EEFS_LibCreat function */
-#define EEFS_DEFAULT_CREAT_SPARE_BYTES      512
+#define EEFS_DEFAULT_CREAT_SPARE_BYTES      0
 
 #endif 
 

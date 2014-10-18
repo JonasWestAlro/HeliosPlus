@@ -488,12 +488,12 @@ class MPU9150 : public HAL_Accelerometer_I, public HAL_Gyroscope_I, public HAL_M
 	    //Accelerometer variables:
 	    float last_acc_values[3] = {0};
 	    uint32_t acc_timestamp = 0;
-	    AccelerometerCalibration acc_calibration = {0,0,0};
+	    AccelerometerCalibration acc_calibration;
 
 	    //Gyroscope variables:
 	    float last_gyro_values[3] = {0};
 	    uint32_t gyro_timestamp = 0;
-	    GyroscopeCalibration gyro_calibration = {-1.9110218, 2.9754722, -1.9962144};
+	    GyroscopeCalibration gyro_calibration;
 
 	    //Calibrating variables:
 	    bool gyro_calibrating = false;

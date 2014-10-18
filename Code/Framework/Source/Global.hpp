@@ -14,22 +14,30 @@
 #include "Mutex.hpp"
 #include <stdint.h>
 #include "PrintHelper.hpp"
+#include "SerializeHelper.hpp"
+#include "Storable.hpp"
+#include "Filesystem.hpp"
 
 //!todo Make a Framework Configuration file just like in freeRTOS and put this define there
 #define FRAMEWORK_MAX_GLOBALS 		30
 
+
+
 class GlobalAbstract;
 
 namespace Globals{
+	extern FileSystem filesystem;
+	void init();
 	uint8_t add_global(GlobalAbstract* obj);
 	uint16_t get_no_globals();
 	GlobalAbstract** get_globals_table();
 }
 
-class GlobalAbstract{
+class GlobalAbstract : public Storable {
 public:
 	GlobalAbstract(const char* name_):
-		name(name_){
+		name(name_),
+		Storable(&Globals::filesystem, const_cast<char*>(name_)){
 		index_in_global_table = Globals::add_global(this);
 	}
 
@@ -74,26 +82,37 @@ public:
 		return temp;
 	}
 
-	bool save(){
-		//Use portable EEPROM driver to save..
-		return true;
-	}
-
-	bool load(){
-		//Use portable EEPROM driver to load..
-		return true;
-	}
-
 	static void save_all(){
+		uint8_t i = 0;
+		uint8_t buffer[8];
 
+		for(i=0; i<Globals::get_no_globals(); i++){
+			Globals::get_globals_table()[i]->save(buffer);
+		}
 	}
 
 	static void load_all(){
-		//We have to check if the global table saved in the eeprom is
-		//is same as the current local one, becuase if it ain't it means
-		//that there has been introduced new globals or similar, and we don't
-		//know how
+		uint8_t i = 0;
+		uint8_t buffer[8];
+
+		for(i=0; i<Globals::get_no_globals(); i++){
+			if(Globals::get_globals_table()[i]->load(buffer) == FILE_CREATED){
+				Globals::get_globals_table()[i]->save(buffer);
+			}
+		}
 	}
+
+	//Storable interface:
+	virtual uint32_t serialize(uint8_t* buffer){
+		SerializeHelper::serialize(buffer, data);
+	};
+
+	virtual void deserialize(uint8_t* buffer){
+		SerializeHelper::deserialize(buffer, data);
+	};
+
+	virtual uint32_t get_size(){return sizeof(T);}
+
 
 private:
 	T data;

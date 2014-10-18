@@ -3,6 +3,7 @@
 #include "Global.hpp"
 #include "Serializable.hpp"
 #include "HAL_Eeprom_I.hpp"
+#include "SerializeHelper.hpp"
 
 class EepromSpace;
 
@@ -51,17 +52,7 @@ public:
 	}
 
 	uint32_t serialize(uint8_t* buffer){
-		uint8_t* buffer_start = buffer;
 
-		//We'll first serialize the number of table entries:
-		buffer += Serialize::serialize_uint8(buffer, table_counter);
-
-		//Now serialize each table entry:
-		for(uint8_t i = 0; i<table_counter; i++){
-			buffer += EEPROM_table[i]->serialize(buffer);
-		}
-
-		return (uint32_t)(buffer-buffer_start);
 	}
 
 	void deserialize(uint8_t* buffer){
@@ -69,12 +60,12 @@ public:
 	}
 
 	bool synchronize(){
-		//In this function we'll check if the saved EEPROM table is the same as the current.
+		/*//In this function we'll check if the saved EEPROM table is the same as the current.
 		//If it isn't we'll delete everything and start over.
 
 		//Compute the current eeprom_table:
 		uint8_t eeprom_table_buffer[EEPROM_TABLE_MAX_SIZE] = {0};
-		uint32_t eeprom_table_size = serialize(eeprom_table_buffer);
+		//uint32_t eeprom_table_size = SerializeHelper(eeprom_table_buffer);
 
 		//Load the stored table from EEPROM:
 		uint8_t eeprom_table_stored_buffer[EEPROM_TABLE_MAX_SIZE] = {0};
@@ -97,7 +88,7 @@ public:
 			}
 
 			return false;
-		}
+		}*/
 	}
 
 	void set_eeprom(HAL_Eeprom_I* eeprom_driver){
@@ -143,13 +134,13 @@ public:
 
 	//These are for the Serializable_I interface:---------------
 	virtual uint32_t serialize(uint8_t* buffer){
-		uint8_t* buffer_start = buffer;
+		/*uint8_t* buffer_start = buffer;
 
-		buffer += Serialize::serialize_uint32(buffer, offset);
-		buffer += Serialize::serialize_uint32(buffer, size);
-		buffer += Serialize::serialize_string(buffer, id);
+		buffer += SerializeHelper::SerializeHelper_uint32(buffer, offset);
+		buffer += SerializeHelper::SerializeHelper_uint32(buffer, size);
+		buffer += SerializeHelper::SerializeHelper_string(buffer, id);
 
-		return (uint32_t)(buffer-buffer_start);
+		return (uint32_t)(buffer-buffer_start);*/
 	}
 
 	virtual void deserialize(uint8_t* buffer){

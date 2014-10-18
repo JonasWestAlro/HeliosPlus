@@ -1,33 +1,47 @@
 #include "FlightDynamics.hpp"
 
 
+
 FlightDynamics::FlightDynamics(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size)
 : ApplicationModule(name, stackSize, priority, eeprom_size),
   attitude_quaternion(EulerAngle(0,0,0))
 {
-	// Initializer code goes here
-	//Subscribe to the calibrate gyroscope message type:
+	//Subscribe relevant messages:
 	messenger.subscribe(CALIBRATE_GYROSCOPE);
 	messenger.subscribe(CALIBRATE_ACCELEROMETER);
 	messenger.subscribe(REQUEST_FLIGHTDYNAMICS_REPORT);
 
-	pitch_filter.set_coeffs({0.0018, 0.0071, 0.0107, 0.0071, 0.0018,
-		 	 	 	 	 	 -2.7737, 3.019, -1.5048, 0.2879});
-	roll_filter.set_coeffs({0.0018, 0.0071, 0.0107, 0.0071, 0.0018,
-		 	 	 	 	 	 -2.7737, 3.019, -1.5048, 0.2879});
-	yaw_filter.set_coeffs({0.0018, 0.0071, 0.0107, 0.0071, 0.0018,
-		 	 	 	 	 	 -2.7737, 3.019, -1.5048, 0.2879});
+	//Setup IIR filters for gyroscope readings:
+	pitch_filter.set_coeffs({0.0018, 0.0071, 0.0107, 0.0071, 0.0018, -2.7737, 3.019, -1.5048, 0.2879});
+	roll_filter.set_coeffs({0.0018, 0.0071, 0.0107, 0.0071, 0.0018, -2.7737, 3.019, -1.5048, 0.2879});
+	yaw_filter.set_coeffs({0.0018, 0.0071, 0.0107, 0.0071, 0.0018, -2.7737, 3.019, -1.5048, 0.2879});
 
-	eeprom.load(&eeprom_structure, sizeof(EEPROM_Structure));
-
+	//Reset the current attitude estimate:
 	attitude_socket.reset();
 
+	//Set the thread frequency to 400hz:
 	set_frequency(400);
 }
 
-void FlightDynamics::task(void){
+void FlightDynamics::init(void){
+	//Setup storage filenames:
+	gyroscope_calibration.make_storable(&filesystem, "gyro_calibration");
+	accelerometer_calibration.make_storable(&filesystem, "acc_calibration");
 
-	serialize_size = eeprom.serialize(tempbuffer);
+	//Load sensor calibrations from storage:
+	gyroscope_calibration.load(temp_buffer);
+	accelerometer_calibration.load(temp_buffer);
+
+	//Set sensors calibrations:
+	gyroscope_calibration.offset_x = -1.9110218f;
+	gyroscope_calibration.offset_y = 2.9754722f;
+	gyroscope_calibration.offset_z = -1.9962144;
+
+	gyroscope->set_gyro_calibration(gyroscope_calibration);
+	accelerometer->set_acc_calibration(accelerometer_calibration);
+}
+
+void FlightDynamics::task(void){
 
 	//Download Sensor data from sensors:
 	update_sensor_data();
@@ -178,6 +192,9 @@ void FlightDynamics::check_calibrations(){
 	if(acc_calibrating){
 		if(Time.get_time_since_sec(calibration_timestamp) > 10){
 			accelerometer->stop_acc_calibration();
+			accelerometer->get_acc_calibration(accelerometer_calibration);
+			accelerometer_calibration.save(temp_buffer);
+
 			acc_calibrating = false;
 		}
 	}
@@ -185,6 +202,8 @@ void FlightDynamics::check_calibrations(){
 	if(gyro_calibrating){
 		if(Time.get_time_since_sec(calibration_timestamp) > 10){
 			gyroscope->stop_gyro_calibration();
+			gyroscope->get_gyro_calibration(gyroscope_calibration);
+			gyroscope_calibration.save(temp_buffer);
 			gyro_calibrating = false;
 		}
 	}

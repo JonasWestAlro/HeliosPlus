@@ -54,15 +54,16 @@ extern "C" {
 
 #include "common_types.h"
 #include "eefs_fileapi.h"
+#include "eefs_macros.h"
 
 /*
  * Macro Definitions
  */
 
-#define EEFS_MAX_VOLUMES                2
-#define EEFS_MAX_MOUNTPOINT_SIZE        16
-#define EEFS_MAX_DEVICES                2
-#define EEFS_MAX_DEVICENAME_SIZE        16
+#define EEFS_MAX_VOLUMES                10
+#define EEFS_MAX_MOUNTPOINT_SIZE        24
+#define EEFS_MAX_DEVICES                10
+#define EEFS_MAX_DEVICENAME_SIZE        24
 #define EEFS_MAX_PATH_SIZE              64
 
 /*
@@ -150,6 +151,8 @@ EEFS_DirectoryEntry_t          *EEFS_ReadDir(EEFS_DirectoryDescriptor_t *Directo
 /* Close file system for reading the file directory. */
 int32                           EEFS_CloseDir(EEFS_DirectoryDescriptor_t *DirectoryDescriptor);
 
+
+EEFS_Device_t           *EEFS_GetDevicePtr(uint8 i);
 #ifdef __cplusplus
 }
 #endif

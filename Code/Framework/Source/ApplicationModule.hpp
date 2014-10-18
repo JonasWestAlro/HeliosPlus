@@ -4,19 +4,20 @@
 #include "Messenger.hpp"
 #include "Task.hpp"
 #include "Timing.hpp"
+#include "Filesystem.hpp"
 
 class ApplicationModule : public Task {
 	public:
 		ApplicationModule(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0)
 		: Task(name, stackSize, priority),
-		  eeprom(name, eeprom_size, default_eeprom_handler),
-		  messenger()
+		  messenger(),
+		  filesystem((char*)name, eeprom_size)
 		{
 
 		}
 
 		void run(void){
-
+			init();
 			while(1){
 				//Log timestamp immediately so we can secure an absolute frequency.
 				last_wake_tick = get_tick();
@@ -77,21 +78,16 @@ class ApplicationModule : public Task {
 		}
 
 		virtual void task() = 0;
+		virtual void init(){};
 		virtual void handle_message(Message& msg) = 0;
 
 		Messenger* get_messenger(){
 			return &messenger;
 		}
 
-		static void set_defualt_eeprom_handler(EepromHandler* handler){
-			default_eeprom_handler = handler;
-		}
-
 	protected:
-		static EepromHandler* default_eeprom_handler;
-
-		EepromSpace eeprom;
-		Messenger 	messenger;
+		FileSystem 		 filesystem;
+		Messenger 		 messenger;
 
 		uint16_t frequency = 10;
 

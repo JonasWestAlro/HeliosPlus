@@ -44,7 +44,7 @@ EEFS_Volume_t            EEFS_VolumeTable[EEFS_MAX_VOLUMES];
 
 int32                    EEFS_SplitPath(char *InputPath, EEFS_SplitPath_t *SplitPath);
 EEFS_Device_t           *EEFS_FindDevice(char *DeviceName);
-EEFS_Device_t           *EEFS_GetDevice(void);
+uint8 					 EEFS_GetDevice(void);
 int32                    EEFS_FreeDevice(EEFS_Device_t *Device);
 EEFS_Volume_t           *EEFS_FindVolume(char *MountPoint);
 EEFS_Volume_t           *EEFS_GetVolume(void);
@@ -75,12 +75,17 @@ int32 EEFS_InitFS(char *DeviceName, uint32 BaseAddress)
             }
 
             /* allocate and configure a new device */
-            if ((Device = EEFS_GetDevice()) != NULL) {
+            int8 DeviceIndex = 0;
+            if ((DeviceIndex = EEFS_GetDevice()) >= 0) {
+            	Device = EEFS_GetDevicePtr(DeviceIndex);
                 Device->BaseAddress = BaseAddress;
                 strncpy(Device->DeviceName, DeviceName, EEFS_MAX_DEVICENAME_SIZE);
                 if ((ReturnCode = EEFS_LibInitFS(&Device->InodeTable, Device->BaseAddress)) != EEFS_SUCCESS) {
                     EEFS_FreeDevice(Device);
-                    ReturnCode = EEFS_ERROR;
+                    //ReturnCode = EEFS_ERROR;
+                }else{
+                	//Success! return the device index:
+                	ReturnCode = DeviceIndex;
                 }
             }
             else { /* can't allocate new device */
@@ -208,7 +213,7 @@ int32 EEFS_Open(char *Path, uint32 Flags)
                     ReturnCode = FileDescriptor;
                 }
                 else { /* error opening file */
-                    ReturnCode = EEFS_ERROR;
+                    ReturnCode = FileDescriptor;
                 }
             }
             else { /* device not found */
@@ -605,16 +610,21 @@ EEFS_Device_t *EEFS_FindDevice(char *DeviceName)
 }
 
 /* Allocates a free entry in the DeviceTable. */
-EEFS_Device_t *EEFS_GetDevice(void)
-{
+uint8 EEFS_GetDevice(void){
     uint32      i;
     for (i=0; i < EEFS_MAX_DEVICES; i++) {
         if (EEFS_DeviceTable[i].InUse == FALSE) {
             EEFS_DeviceTable[i].InUse = TRUE;
-            return(&EEFS_DeviceTable[i]);
+            return(i);
         }
     }
-    return(NULL);
+
+    return -1;
+}
+
+/* Allocates a free entry in the DeviceTable. */
+EEFS_Device_t *EEFS_GetDevicePtr(uint8 i){
+    return &EEFS_DeviceTable[i];
 }
 
 /* Returns a entry to the DeviceTable. */

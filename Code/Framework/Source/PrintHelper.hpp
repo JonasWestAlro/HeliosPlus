@@ -17,7 +17,6 @@ public:
 
 	static uint16_t print(char* buffer, float value){
 	    uint8_t i = 0;
-		char data[10] = {0};
 	    uint8_t len = snprintf(buffer, 10, "%f", value);
 
 	    return len;

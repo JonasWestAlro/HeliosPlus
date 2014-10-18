@@ -8,6 +8,13 @@
 #include "mavlink.h"
 #include "Debug.hpp"
 
+#include "Storable.hpp"
+
+struct FilenameTableEntry{
+	Storable* storable;
+	const char* filename;
+};
+
 class FlightDynamics : public ApplicationModule{
 	public:
 		FlightDynamics(const char* name, uint32_t stackSize, uint8_t priority, uint32_t eeprom_size = 0);
@@ -22,9 +29,11 @@ class FlightDynamics : public ApplicationModule{
 		APP_Quaternion_I attitude_quarternion_socket;
 	protected:
 		void task(void);
+		void init(void);
 		void handle_message(Message& msg);
 
 	private:
+
 		bool debugging_stream = false;
 
 		uint8_t tempbuffer[400] = {0};
@@ -61,13 +70,11 @@ class FlightDynamics : public ApplicationModule{
 		bool mag_calibrating = false;
 		uint32_t calibration_timestamp = 0;
 
-		struct EEPROM_Structure{
-			AccelerometerCalibration accelerometer_calibration;
-			GyroscopeCalibration 	 gyroscope_calibration;
-			MagnetometerCalibration	 magnetometer_calibration;
-		};
+		uint8_t temp_buffer[6*32];
+		GyroscopeCalibration 	 gyroscope_calibration;
+		AccelerometerCalibration accelerometer_calibration;
+		MagnetometerCalibration	 magnetometer_calibration;
 
-		EEPROM_Structure eeprom_structure;
 
 		void update_sensor_data();
 		void report_status();
