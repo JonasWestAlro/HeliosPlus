@@ -26,7 +26,7 @@
 class GlobalAbstract;
 
 namespace Globals{
-	extern FileSystem filesystem;
+	//extern FileSystem filesystem;
 	void init();
 	uint8_t add_global(GlobalAbstract* obj);
 	uint16_t get_no_globals();
@@ -37,7 +37,8 @@ class GlobalAbstract : public Storable {
 public:
 	GlobalAbstract(const char* name_):
 		name(name_),
-		Storable(&Globals::filesystem, const_cast<char*>(name_)){
+		//&Globals::filesystem
+		Storable(0, const_cast<char*>(name_)){
 		index_in_global_table = Globals::add_global(this);
 	}
 

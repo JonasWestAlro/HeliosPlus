@@ -1,7 +1,7 @@
 #include "Global.hpp"
 
 namespace Globals{
-	FileSystem filesystem("/GLOBALS", 5000);
+	//FileSystem filesystem("/GLOBALS", 5000);
 
 	static uint16_t no_globals;
 	static GlobalAbstract* global_table[FRAMEWORK_MAX_GLOBALS];

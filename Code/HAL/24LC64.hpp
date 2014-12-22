@@ -68,8 +68,51 @@ class EEPROM_24LC64 : public HAL_Eeprom_I{
 		return 1;
 	}
 
-	virtual uint8_t read(uint16_t register_adress, uint8_t n, uint8_t* result){
-		return i2c.read_register16(EEPROM_ADDRESS, register_adress, n, result);
+	virtual uint8_t read(uint16_t registeradress, uint8_t n, uint8_t* buffer){
+		uint16_t numOfpages;
+		uint8_t firstSize, lastSize;
+		uint8_t i;
+
+		firstSize = 32 - (registeradress % 32);
+
+		if(firstSize < n){
+			lastSize = (n - firstSize) % 32;
+			numOfpages = (n - firstSize) / 32;
+		}
+		else {
+			numOfpages = 0;
+			firstSize = n;
+			lastSize = 0;
+		}
+
+		// Read first page
+		if(firstSize != 0) {
+			if(lastSize != 0){
+				Time.delay_ms(5);
+			}
+			if(!i2c.read_register16(EEPROM_ADDRESS, registeradress, firstSize, buffer)) return 0;
+			registeradress += firstSize;
+			buffer += firstSize;
+		}
+
+		// Read pages
+		for(i = 0; i<numOfpages; i++){
+			if(!i2c.read_register16(EEPROM_ADDRESS, registeradress, 32, buffer)) return 0;
+			registeradress += 32;
+			buffer += 32;
+
+			//!TODO-JWA: Is this really necessary?
+			Time.delay_ms(5);
+		}
+
+		// Write last page
+		if(lastSize != 0) {
+			if(!i2c.read_register16(EEPROM_ADDRESS, registeradress, lastSize, buffer)) return 0;
+		}
+
+		return 1;
+
+		//return i2c.read_register16(EEPROM_ADDRESS, register_adress, n, result);
 	}
 
 

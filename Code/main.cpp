@@ -33,6 +33,7 @@
 
 
 void test_sensors();
+void test_eeprom(uint8_t numbers_at_the_time, uint8_t number_of_times);
 
 uint8_t eeprom_simulation[10000] = {0};
 int32_t filedescriptor = 0;
@@ -73,11 +74,14 @@ void test_filesystem(){
 }
 
 int main(void){
-	//test_sensors();
+
 	//test_filesystem();
+	//test_sensors();
 
 	WirelessUART wireless_uart;
 	Debug.set_driver(&wireless_uart);
+
+	//test_eeprom(100, 100);
 
 	//Create drivers ----------------------------------------------------:
 	MPU9150 	  mpu9150;
@@ -149,28 +153,87 @@ int main(void){
 	while(1);
 }
 
+
+void test_eeprom(uint8_t numbers_at_the_time, uint8_t number_of_times){
+
+	MPU9150 mpu9150;
+	HeliosLED leds;
+	HC_SR40 sonar;
+	EEPROM_24LC64 eeprom;
+
+	uint8_t success = 1;
+	uint8_t read_failed = 0;
+	uint8_t write_failed = 0;
+	uint8_t in_buffer[100];
+	uint8_t out_buffer[100] = {0};
+
+	uint8_t c;
+	uint8_t i;
+
+	for(i=0; i<numbers_at_the_time; i++){
+		in_buffer[i] = i;
+	}
+
+	while(1){
+		for(i=0; i<number_of_times; i++){
+			for(uint8_t t = 0; t<numbers_at_the_time; t++){
+				out_buffer[t] = 0;
+			}
+			read_failed  = 0;
+			write_failed = 0;
+
+			if(!eeprom.write(numbers_at_the_time*i, numbers_at_the_time, in_buffer)){
+				write_failed = 1;
+			}
+
+			if(!eeprom.read(numbers_at_the_time*i, numbers_at_the_time, out_buffer)){
+				read_failed = 1;
+			}
+
+			success = 1;
+			for(uint8_t t = 0; t<numbers_at_the_time; t++){
+				if(in_buffer[t] == out_buffer[t]){
+					//OK!
+				}else{
+					success = 0;
+					break;
+				}
+			}
+
+
+			Debug.send_number((uint32_t)i);
+			Debug.send('.');
+			Debug.put(" checking ");
+			Debug.send_number((uint32_t)numbers_at_the_time*i);
+			Debug.put(" -> ");
+			Debug.send_number((uint32_t)numbers_at_the_time*i+numbers_at_the_time);
+			if(success && !write_failed && !read_failed){
+				Debug.put_and_transmit(" --- OK\n\r");
+			}else{
+				Debug.put(" is NOT OK .... ");
+				if(write_failed) Debug.put(" Write failed.. ");
+				if(read_failed) Debug.put(" Read failed... ");
+				Debug.put_and_transmit("\n\r");
+			}
+		}
+
+		while(!Debug.data_available());
+		Debug.receive(&c);
+		Debug.put_and_transmit("\n\n\r");
+		Debug.put_and_transmit("RUNNING NEW TEST...\n\r");
+	}
+}
+
+
 void test_sensors(){
 
 	MPU9150 mpu9150;
 	HeliosLED leds;
-	EEPROM_24LC64 eeprom;
 	HC_SR40 sonar;
 
 	float x = 0, y = 0, z = 0;
 	float gx = 0, gy = 0, gz = 0, gy_last = 0;
 	float altitude = 0;
-
-	uint8_t in_buffer[10] = {1,2,3,4,5,6,7,8,9,10};
-	uint8_t out_buffer[10] = {0};
-
-	eeprom.write(0, 10, in_buffer);
-	eeprom.read(0, 10, out_buffer);
-
-	leds.set_LED(DEBUG_BLUE1, LED_OFF);
-	if(out_buffer[0] == 1){
-		leds.set_LED(DEBUG_BLUE1, LED_ON);
-	}
-	while(1);
 
 	while(1){
 		mpu9150.get_acc_data(x,y,z);
