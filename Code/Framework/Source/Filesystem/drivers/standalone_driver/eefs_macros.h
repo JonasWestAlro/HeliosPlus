@@ -27,11 +27,15 @@
 /*
  * System Dependent Lower Level Functions
  */
+#include "Filesystem_eeprom.h"
 
 /* These macros define the lower level EEPROM interface functions.  Defaults to memcpy(Dest, Src, Length) */
-#define EEFS_LIB_EEPROM_WRITE(Dest, Src, Length) memcpy(Dest, Src, Length)
-#define EEFS_LIB_EEPROM_READ(Dest, Src, Length)  memcpy(Dest, Src, Length)
+//#define EEFS_LIB_EEPROM_WRITE(Dest, Src, Length) memcpy(Dest, Src, Length)
+//#define EEFS_LIB_EEPROM_READ(Dest, Src, Length)  memcpy(Dest, Src, Length)
+#define EEFS_LIB_EEPROM_WRITE(Dest, Src, Length) eeprom_write(Dest, Src, Length)
+#define EEFS_LIB_EEPROM_READ(Dest, Src, Length)  eeprom_read(Dest, Src, Length)
 #define EEFS_LIB_EEPROM_FLUSH
+
 
 //GlobalFileSystemHandler::get_instance().get_driver->write(Dest, Length, Src)
 

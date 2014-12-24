@@ -1,12 +1,21 @@
 #include "Global.hpp"
 
 namespace Globals{
-	//FileSystem filesystem("/GLOBALS", 5000);
+	//This is the pointer to the filesystem, in which the globals
+	//should be saved. It has to be created in the main, after timers and eeprom
+	//has been initialized.
+	FileSystem* filesystem;
 
 	static uint16_t no_globals;
 	static GlobalAbstract* global_table[FRAMEWORK_MAX_GLOBALS];
 
-	void init(){
+	void init(FileSystem* filesystem_){
+		filesystem = filesystem_;
+
+		for(uint8_t i=0; i<Globals::get_no_globals(); i++){
+			Globals::get_globals_table()[i]->set_filesystem(filesystem);
+		}
+
 		Global<float>::load_all();
 	}
 

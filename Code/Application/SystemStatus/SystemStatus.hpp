@@ -43,6 +43,7 @@ class SystemStatus : public ApplicationModule{
 
 		bool arm_in_progress = false;
 		uint32_t arm_timestamp = 0;
+		STATUS eeprom_status = STATUS_OK;
 
 		void update_status(void);
 		void update_battery(void);
@@ -53,6 +54,7 @@ class SystemStatus : public ApplicationModule{
 
 		void handle_control_input_report(Message& msg);
 		void handle_shift_of_control(Message& msg);
+		void handle_eeprom_not_ok();
 
 		void update_leds(void);
 		void print_arm_conditions();

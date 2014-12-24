@@ -84,6 +84,7 @@ public:
 	bool send_number(uint32_t c){return communication->send_number(c);};
 	bool send_number(float c){return communication->send_number(c);};
 
+
 private:
 	HAL_Communication_I* communication = 0;
 

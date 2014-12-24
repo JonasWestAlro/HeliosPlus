@@ -31,7 +31,9 @@ typedef enum{
 	START_DEBUG_STREAM,				//!<
 	STOP_DEBUG_STREAM,				//!<
 	CLI_PRINT_REQUEST,				//!<
-	CLI_ACK_PRINT
+	CLI_ACK_PRINT,
+	EEPROM_LOAD_ERROR,
+	EEPROM_SAVE_ERROR
 	/*Define more messages here for
 	 * your application*/
 }MessageType;

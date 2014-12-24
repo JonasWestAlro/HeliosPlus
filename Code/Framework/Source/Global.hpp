@@ -26,8 +26,8 @@
 class GlobalAbstract;
 
 namespace Globals{
-	//extern FileSystem filesystem;
-	void init();
+	extern FileSystem* filesystem;
+	void init(FileSystem*);
 	uint8_t add_global(GlobalAbstract* obj);
 	uint16_t get_no_globals();
 	GlobalAbstract** get_globals_table();
@@ -95,9 +95,19 @@ public:
 	static void load_all(){
 		uint8_t i = 0;
 		uint8_t buffer[8];
+		uint8_t new_files_created = 0;
 
 		for(i=0; i<Globals::get_no_globals(); i++){
 			if(Globals::get_globals_table()[i]->load(buffer) == FILE_CREATED){
+				if(!new_files_created){
+					Debug.put_and_transmit("\n\n\rGLOBAL NOT FOUND.. Creating new.\n\rPress anything to continue..");
+					while(!Debug.data_available());
+					new_files_created = 1;
+				}
+
+				Debug.put("\n\rCreated new file: ");
+				Debug.put(Globals::get_globals_table()[i]->get_id());
+				Debug.transmit();
 				Globals::get_globals_table()[i]->save(buffer);
 			}
 		}

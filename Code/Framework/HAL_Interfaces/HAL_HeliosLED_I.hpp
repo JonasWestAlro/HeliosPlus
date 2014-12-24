@@ -20,4 +20,9 @@ class HAL_HeliosLED_I : public HAL_Interface {
 	public:
 	virtual void set_LED(HELIOS_LED, LED_STATE) = 0;
 	virtual LED_STATE get_LED(HELIOS_LED) = 0;
+
+	void all_on(){
+		set_LED(STATUS_LED_RED, LED_ON);
+	}
+
 };

@@ -29,13 +29,13 @@ void FlightDynamics::init(void){
 	accelerometer_calibration.make_storable(&filesystem, "acc_calibration");
 
 	//Load sensor calibrations from storage:
-	gyroscope_calibration.load(temp_buffer);
-	accelerometer_calibration.load(temp_buffer);
+	uint8_t load_result1 = gyroscope_calibration.load(temp_buffer);
+	uint8_t load_result2 = accelerometer_calibration.load(temp_buffer);
 
-	//Set sensors calibrations:
-	gyroscope_calibration.offset_x = -1.9110218f;
-	gyroscope_calibration.offset_y = 2.9754722f;
-	gyroscope_calibration.offset_z = -1.9962144;
+	//Check that we loaded the variables correctly:
+	if(load_result1 != FILE_LOADED || load_result2 != FILE_LOADED){
+		messenger.broadcast(EEPROM_LOAD_ERROR);
+	}
 
 	gyroscope->set_gyro_calibration(gyroscope_calibration);
 	accelerometer->set_acc_calibration(accelerometer_calibration);
@@ -203,7 +203,12 @@ void FlightDynamics::check_calibrations(){
 		if(Time.get_time_since_sec(calibration_timestamp) > 10){
 			gyroscope->stop_gyro_calibration();
 			gyroscope->get_gyro_calibration(gyroscope_calibration);
-			gyroscope_calibration.save(temp_buffer);
+
+			uint8_t result = gyroscope_calibration.save(temp_buffer);
+			if(result != FILE_SAVED){
+				messenger.broadcast(EEPROM_SAVE_ERROR);
+			}
+
 			gyro_calibrating = false;
 		}
 	}

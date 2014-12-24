@@ -705,6 +705,44 @@ void CLI::handle_flymode_program(void){
 
 }
 
+void CLI::handle_erase_eeprom(){
+	Debug.put_and_transmit("\n\n\rErasing EEPROM...");
+	uint8_t buffer[32] = {0};
+
+	portENTER_CRITICAL();
+	for(uint16_t i = 0; i<1000; i++){
+		eeprom->write(i*32, 32, buffer);
+		Debug.put("\n\rErased: ");
+		Debug.send_number((uint32_t)i+1);
+		Debug.send('/');
+		Debug.send_number((uint32_t)1000);
+		Debug.put(" pages...");
+		Debug.transmit();
+	}
+	portEXIT_CRITICAL();
+}
+
+void CLI::handle_save(){
+
+	//Find global:
+	for(uint8_t i=0; i<Globals::get_no_globals(); i++){
+
+		if(compare_next_word_to(Globals::get_globals_table()[i]->get_id())){
+			Debug.put("\n\rSaving ");
+			Debug.put(Globals::get_globals_table()[i]->get_id());
+			Debug.put_and_transmit("...");
+
+			Globals::get_globals_table()[i]->save(eeprom_buffer);
+
+			Debug.put_and_transmit("DONE!");
+			return;
+		}
+
+	}
+
+	Debug.put_and_transmit("Couldn't find the specified parameter :(");
+}
+
 void CLI::handle_flymode_print_controls(void){
 	Debug.send('\r');
 	Debug.send_number(control_socket.throttle);

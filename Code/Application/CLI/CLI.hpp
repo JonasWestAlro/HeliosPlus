@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>     /* atof */
 
-#define NO_CLI_COMMANDS 8
+#define NO_CLI_COMMANDS 10
 
 class CLI;
 
@@ -38,11 +38,17 @@ class CLI : public ApplicationModule {
 			APP_SystemStatus_I system_status_socket;
 			APP_Control_I 	   control_socket;
 
+			void set_eeprom(HAL_Eeprom_I* eeprom_){
+				eeprom = eeprom_;
+			}
 	protected:
 		void task(void);
 		void handle_message(Message& msg);
 
 	private:
+		//Drivers:
+		HAL_Eeprom_I* eeprom;
+
 		ApplicationModule* flightdynamics;
 		ApplicationModule* controlinput;
 		ApplicationModule* flightcontrol;
@@ -55,6 +61,9 @@ class CLI : public ApplicationModule {
 		uint8_t buffer_index = 0;
 		uint8_t last_buffer_index = 0;
 		uint8_t compare_index = 0;
+
+		//eeprom buffer:
+		uint8_t eeprom_buffer[200];
 
 		uint32_t external_print_request_timestamp = 0;
 		bool waiting_for_external_print = false;
@@ -79,7 +88,9 @@ class CLI : public ApplicationModule {
           { "arm",		&CLI::handle_arm },
           { "unarm",	&CLI::handle_unarm },
           { "set",		&CLI::handle_set },
-          { "flymode",	&CLI::handle_flymode }
+          { "flymode",	&CLI::handle_flymode },
+          { "erase", 	&CLI::handle_erase_eeprom},
+          { "save", 	&CLI::handle_save}
         };
 		void handle_buffer_full(){};
 
@@ -107,4 +118,6 @@ class CLI : public ApplicationModule {
 		void handle_flymode_program(void);
 		void handle_flymode_print_controls(void);
 
+		void handle_erase_eeprom();
+		void handle_save();
 };

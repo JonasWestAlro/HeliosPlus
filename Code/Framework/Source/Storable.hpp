@@ -22,6 +22,10 @@ public:
 
 	char* get_filename(){return filename;}
 
+	virtual void set_filesystem(FileSystem* filesystem_){
+		filesystem = filesystem_;
+	}
+
 	virtual uint8_t save(uint8_t* buffer){
 		if(filesystem == 0) return false;
 

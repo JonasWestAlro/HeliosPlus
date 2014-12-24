@@ -18,7 +18,8 @@ SystemStatus::SystemStatus(const char* name, uint32_t stackSize, uint8_t priorit
 	messenger.subscribe(ARM_REQUEST);
 	messenger.subscribe(UNARM_REQUEST);
 	messenger.subscribe(REQUEST_SHIFT_OF_CONTROL);
-
+	messenger.subscribe(EEPROM_LOAD_ERROR);
+	messenger.subscribe(EEPROM_SAVE_ERROR);
 
 	system_status_socket.armed 		  = false;
 	system_status_socket.system_error = false;
@@ -74,6 +75,14 @@ void SystemStatus::handle_message(Message& msg){
 		case CLI_PRINT_REQUEST:
 			print_arm_conditions();
 			messenger.send_to(msg.sender, CLI_ACK_PRINT);
+
+		case EEPROM_SAVE_ERROR:
+			eeprom_status = STATUS_NOTOK;
+			break;
+
+		case EEPROM_LOAD_ERROR:
+			eeprom_status = STATUS_NOTOK;
+			break;
 
 		default:
 			break;
@@ -198,6 +207,11 @@ void SystemStatus::update_leds(void){
 	static uint32_t timestamp = 0;
 	static uint8_t 	blink_state = 0;
 
+	if(eeprom_status == STATUS_NOTOK){
+		handle_eeprom_not_ok();
+		return;
+	}
+
 	if(system_status_socket.armed){
 		leds->set_LED(STATUS_LED_GREEN, LED_ON);
 		leds->set_LED(DEBUG_RED, LED_ON);
@@ -243,6 +257,25 @@ void SystemStatus::update_leds(void){
 	//If we end up here we're either in emergency or critical!!
 	leds->set_LED(STATUS_LED_RED,   LED_ON);
 	leds->set_LED(STATUS_LED_GREEN, LED_OFF);
+}
+
+void SystemStatus::handle_eeprom_not_ok(){
+	static uint32_t timestamp = 0;
+	static bool state = 0;
+
+	if(Time.get_time_since_ms(timestamp) > 200){
+		if(state){
+			leds->set_LED(STATUS_LED_RED,   LED_ON);
+			leds->set_LED(STATUS_LED_GREEN, LED_ON);
+			state = false;
+		}else{
+			leds->set_LED(STATUS_LED_RED,   LED_OFF);
+			leds->set_LED(STATUS_LED_GREEN, LED_OFF);
+			state = true;
+		}
+
+		timestamp = Time.get_timestamp();
+	}
 }
 
 void SystemStatus::print_arm_conditions(){
